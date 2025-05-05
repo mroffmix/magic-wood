@@ -1,0 +1,132 @@
+<script setup lang="ts">
+const areas = [
+  {
+    name: "Bach",
+    path: "M1.11298 378.305V282.775V190.553L57.2761 173.483V69.6919V3.3493L370.001 1.979L367.514 378.305H1.11298Z",
+    fill: "#3C3FF3",
+    x: 831.11,
+    y: 396.98,
+    width: 371,
+    height: 380,
+  },
+  {
+    name: "Beach",
+    path: "M0.998535 12.7051V107.041V125.658L471.113 125.305V29.7752H388.796L365.11 16.5615L351.622 26.4669H314.741L310.61 16.5615H243.72L181.508 23.4326L118.18 1.40979L73.5858 3.07373L68.9072 1.40979H61.4684L54.3036 4.99219H10.2579L0.998535 12.7051Z",
+    fill: "#D9D9D9",
+    x: 361,
+    y: 649.41,
+    width: 473,
+    height: 127,
+  },
+  {
+    name: "Haupt 1",
+    path: "M356.694 2.74567L355.049 143.692H341.836L338.821 147.353H258.442H209.444L204.1 152.012V163.62L189.927 166.4L184.348 192.416H164.615V211.229L140.694 224.462H81.0067L77.9725 221.878H67.9105H47.2579L25.7832 232.605L1.41837 163.757L21.731 158.178L25.7832 139.287L62.9774 132.671L64.2693 68.0703L112.798 22.7326H223.656L241.431 1.00342L312.374 2.74567H356.694Z",
+    fill: "#FCF4A6",
+    x: 324.42,
+    y: 322,
+    width: 358,
+    height: 234,
+  },
+  {
+    name: "Haupt 2",
+    path: "M1.74393 21.4944H75.7994L156.706 19.7326L175.167 39.8762H196.994L239.082 16.6788L255.741 18.2644L303.467 1.39005H328.798V19.7326L280.269 65.0703L278.977 129.671L241.783 136.287L237.731 155.178L217.418 160.757L208.759 136.287H153.144L148.465 131.061H1.74393V21.4944Z",
+    fill: "#A37D5B",
+    x: 108.74,
+    y: 325.39,
+    width: 330,
+    height: 162,
+  },
+  {
+    name: "Haupt 3",
+    path: "M1.79944 4.17955H35.9202L254.798 1.26276V16.943V115.39H229.467L181.741 132.264L165.082 130.679L122.994 153.876H101.167L82.7065 133.733L1.79944 135.494V4.17955Z",
+    fill: "#B9D7FB",
+    x: 182.8,
+    y: 211.26,
+    width: 256,
+    height: 155,
+  },
+  {
+    name: "Kamel",
+    path: "M361.999 301.041L5.13051 287.769L1 1.06058H109.744H256.465L261.144 6.28735H316.759L325.418 30.7572L349.783 99.6055L371.258 88.8779H391.91L390.54 198.718L371.258 198.992L361.999 206.705V301.041Z",
+    fill: "#F3D4ED",
+    x: 0,
+    y: 455.06,
+    width: 393,
+    height: 303,
+  },
+  {
+    name: "Mitte",
+    path: "M33.4684 186.41L26.3036 189.992L1.54016 189.718L2.91046 79.878H12.9725L16.0067 82.4619H75.6935L99.6152 69.2287V50.4162H119.348L124.927 24.3999L139.1 21.6201V10.0117L144.444 5.3526H193.442H273.821L276.836 1.69193H290.049H499.276V105.483L443.113 122.553V214.775H360.796L337.11 201.562L323.622 211.467H286.741L282.61 201.562H215.72L153.508 208.433L90.1797 186.41L45.5858 188.074L40.9072 186.41H33.4684Z",
+    fill: "#09F024",
+    x: 389.54,
+    y: 464.69,
+    width: 501,
+    height: 216,
+  },
+  {
+    name: "Swiss",
+    path: "M201.374 3.92995V140.746L130.431 139.003L112.656 160.733H1.79791V142.39V43.943H37.8175V1.44382L138.614 3.92995H201.374Z",
+    fill: "#DED89A",
+    x: 435.8,
+    y: 184.44,
+    width: 203,
+    height: 162,
+  },
+  {
+    name: "Oben",
+    path: "M390.614 1V187.93L289.818 185.444V227.943H253.798V212.263L34.9202 215.18V1H390.614Z",
+    fill: "#C1A2C1",
+    x: 182.8,
+    y: 0,
+    width: 392,
+    height: 229,
+  },
+];
+</script>
+
+<template>
+  <div class="min-h-screen bg-white flex items-center justify-center">
+    <div class="relative w-full h-full">
+      <svg
+        v-for="(area, index) in areas"
+        :key="index"
+        :width="area.width"
+        :height="area.height"
+        :opacity="0.2"
+        stroke="#F90D0D" stroke-width="1" stroke-linejoin="round" stroke-dasharray="2 5"
+        :viewBox="`0 0 ${area.width} ${area.height}`"
+        xmlns="http://www.w3.org/2000/svg"
+        class="absolute"
+        :style="{ transform: `translate(${area.x}px, ${area.y}px)` }"
+      >
+        <path
+          :d="area.path"
+          :fill="area.fill"
+          class="shared-path-style"
+        />
+      </svg>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.relative {
+  position: relative; /* Ensure the parent container is positioned relative */
+}
+.absolute {
+  position: absolute; /* Allow SVGs to be positioned using x and y */
+}
+.shared-path-style {
+  fill-opacity: 0.2;
+  stroke: #F90D0D;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-dasharray: 5 5;
+}
+</style>
+
+<style>
+body {
+  background-color: white; /* Ensure the entire page has a white background */
+}
+</style>
