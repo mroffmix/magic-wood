@@ -1,0 +1,188 @@
+Bach / Bruno / 1
+Bach / La Dance / 3
+Bach / Bamboo / 5
+Bach / Supositorium / 6
+Bach / Midget / 9
+Bach / Apple Crumble / 10
+Bach / Conan / 11
+Bach / Traversatta / 16
+Bach / Astronautenfieber / 17
+Bach / Rumpelstilzchen / 19
+Bach / Sap Mantle / 20
+Bach / Viva la Vida / 21
+Bach / A bag of roosters / 22
+Bach / Rotzkiebel / 23 
+Bach / Protektor / 24
+Bach / Klein aber fein / 25
+Bach / Morgenlatte / 26
+Bach / Bodycount / 27
+Bach / Bosna / 28 
+Bach / Smoking Squirrel / 29
+Bach / Uitettu Manne / 30
+Bach / Madman / 31
+Bach / Höhenrausch / 34
+Bach / Hasch mich / 35
+Bach / Oh Birgit / 39
+Bach / Bierbauch / 40
+Bach / One summer in Paradise / 41
+Bach / Smash / 44
+Bach / Superhorny / 45
+Mitte / U-Boot / 6 
+Mitte / Minisex / 9 
+Mitte / New age travellers / 11
+Mitte / Low Flow / 13 
+Mitte / High Noon / 14 
+Mitte / Calanda Bräu / 15 
+Mitte / Linserboulder / 16 
+Mitte / Seven of Nine / 18 
+Mitte / Electric Boogie / 19 
+Mitte / Schöne Welt / 20
+Mitte / White snake / 22
+Mitte / Forgotten years / 23
+Mitte / Piranha / 24 / 115
+Mitte / Darkness cave / 27 
+Mitte / Sündenfall / 29 
+Mitte / Freiwild / 31 
+Mitte / Gollum / 32 
+Mitte / Mastermind / 34
+Mitte / Muschitanz / 36 
+Mitte / Grillaume / 39 
+Mitte / Barbarella / 40 
+Mitte / Blown Away / 41 
+Mitte / Mikeboulder / 45
+Mitte / Subsector Moria / 45b 
+Mitte / Subsector Moria / 45c 
+Mitte / Abrundtief / 46
+Mitte / Jedi Jack / 47
+Mitte / Bodhi Cave / 48a 
+Mitte / Engerling / 50
+Mitte / Jenny / 51
+Mitte / Gulliver Kante / 52
+Mitte / Dharma / 53
+Mitte / Mobi Dick / 56
+Mitte / Flatlander / 60
+Mitte / Bright side of life / 65
+Mitte / Dinos don't Dynos / 68
+Mitte / Riders on the Storm / 70
+Mitte / Diesel Power / 71
+Mitte / Golden Feet / 72
+Mitte / Serial Thrilla / 73
+Mitte / Highlander / 74
+Mitte / Die Schöne / 75
+Mitte / Intermezzo / 76
+Mitte / Adi Dassler / 77
+Beach / Italian Corner / 1
+Beach / Gaja / 4
+Beach / Angel Heart / 5
+Beach / Nona / 6
+Beach / Abraxas / 7
+Beach / Esperanto / 8
+Beach / Practice of the Wild / 10
+Beach / Nimmersatt / 11
+Beach / Riverbed / 13
+Beach / Campfireblock / 13a
+Beach / Muchacha / 14
+Beach / Baby Girl / 16
+Beach / Microcosmos / 25
+Beach / Beach block / 27
+Beach / Beach mantle / 28
+Beach / The Slice / 29
+Beach / Samurai tango / 35
+Beach / Exclusive / 37
+Kamel / Horrible / 1 
+Kamel / Heieiei / 2 
+Kamel / Torpedo / 5 
+Kamel / Alter Schwede / 6 
+Kamel / Jurassic Parc / 7 
+Kamel / Sexy as hell / 9 
+Kamel / Blue Sky of mine / 10 
+Kamel / The Corner / 11 
+Kamel / Scrubs / 12 
+Kamel / Höhlenhangel / 14 
+Kamel / Okkultischt / 15 
+Kamel / Panzerknacker / 16 
+Kamel / Fettes Schweinchen / 17 
+Kamel / Kanonärohr / 86 / 18 
+Kamel / Coccyx / 19 
+Kamel / The Gift / 21 
+Kamel / Jacks Arête / 22 
+Kamel / Big Cheese / 65 / 23 
+Kamel / Kashmir / 25 
+Kamel / Headhunter / 26 
+Kamel / Bulldog / 28 
+Kamel / Muttertag / 30
+Kamel / Batman / 30 
+Kamel / No Exit / 31 
+Kamel / Klisch Klasch / 32 
+Kamel / Acume Pronto / 33 
+Kamel / Red Roses / 34 
+Kamel / Gummibär / 35 
+Kamel / Jack / 36 
+Kamel / Merlin / 39 
+Kamel / Millefeux / 40 
+Kamel / Blindfisch / 44 
+Kamel / La Verda / 46 
+Kamel / Erdbeerkante / 47 
+Kamel / Angry Samoa / 49 
+Kamel / Mentale Blockade / 51 
+Haupt 1 / Hasch / 1 
+Haupt 1 / Marihuanacorner / 2 
+Haupt 1 / Spankstick / 3 
+Haupt 1 / Chickenhead / 4 
+Haupt 1 / Kristallo / 5 
+Haupt 1 / Kompressor / 6 
+Haupt 1 / Spiderman / 7 
+Haupt 1 / Hip-Hop / 10 
+Haupt 1 / End of Darkness / 11 
+Haupt 1 / Foxy / 13 
+Haupt 1 / Airborn / 14 
+Haupt 1 / Vergissmeinnicht / 15 
+Haupt 1 / Toni / 17 
+Haupt 1 / Joyride / 18 
+Haupt 1 / Jepee! / 19 
+Haupt 1 / Lame pun / 20 
+Haupt 1 / King Kong / 22 
+Haupt 1 / Chiquita / 23 
+Haupt 1 / Babynahrung / 24 
+Haupt 1 / Pokerface / 25 
+Haupt 1 / Menage à troi / 26 
+Haupt 1 / Gardening / 28 
+Haupt 1 / Space Cowboy / 29 
+Haupt 1 / Binarius furbus / 31 
+Haupt 1 / Octopussy / 32 
+Haupt 1 / Basler Leckerli / 33 
+Haupt 1 / So far so good / 34 
+Haupt 1 / Knallpot / 35 
+Haupt 1 / Spot the Spotter / 36 
+Haupt 1 / Timberman / 37 
+Haupt 1 / Froschmaul / 41 
+Haupt 1 / Lolo Ferrari / 42 
+Haupt 1 / Mut zur Verzweiflung / 43 
+Haupt 1 / Fantasia / 45 
+Haupt 1 / Bodyblade / 47 
+Haupt 1 / Sofasurfer / 49 
+Haupt 2 / Jack Block / 2 
+Haupt 2 / Hageltrauma / 4 
+Haupt 2 / Joe / 5 
+Haupt 2 / Moos Block / 6 
+Haupt 2 / Deepthroat / 7 
+Haupt 2 / Fetter Fisch / 8 
+Haupt 2 / Gorilla / 12 
+Haupt 2 / Golden Ei / 13 
+Haupt 2 / Traumfänger / 16 
+Haupt 2 / Rail-Road / 17 
+Haupt 2 / Sick Suck / 18 
+Haupt 2 / James Bong / 19 
+Haupt 2 / Kalorienmonster / 20 
+Haupt 2 / Punching Tree / 21 
+Haupt 2 / Sabi Angoise / 24 
+Haupt 2 / Dopeshow / 25 
+Haupt 2 / Softball / 26 
+Haupt 2 / Moonraker / 28 
+Haupt 2 / Block Business / 30 
+Haupt 2 / Dildomanie / 31 
+Haupt 2 / Hexenschuss / 32 
+Haupt 2 / Man of the Cow / 34 
+Haupt 2 / Tobizontral / 35 
+Haupt 2 / Stinkefinger / 36 
+Haupt 2 / Sweety / 37 

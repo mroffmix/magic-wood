@@ -1,0 +1,20 @@
+Нужно взять файл src/route-data/routes.json и src/route-data/mapping.json 
+перебрвать routes.json
+и для каждого элемента в routes.json добавить поле blockNumber
+
+{
+    "id": "724132506",
+    "area": "Bach",
+    "block": "Oh Birgit",
+    "name": "Helena",
+    "difficulty": "4B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724132506",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+
+  eсли в mapping.json есть соответствие area и name с area и block то взять blockNumber из маpping.json
+  если нет то взять block из routes.json
+  создать новый файл filled_routes.json в котором будет добавлено поле blockNumber

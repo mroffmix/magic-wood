@@ -1,0 +1,5181 @@
+[
+  {
+    "id": "964115886",
+    "area": "Beach",
+    "block": "Nona",
+    "name": "Dances with wolves",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964115886",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964114176",
+    "area": "Beach",
+    "block": "Nona",
+    "name": "Zork",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964114176",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584200546",
+    "area": "Beach",
+    "block": "Nona",
+    "name": "Rat Traverse",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584200546",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964114065",
+    "area": "Beach",
+    "block": "Nona",
+    "name": "Torra con Porra",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964114065",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "964113942",
+    "area": "Beach",
+    "block": "Nona",
+    "name": "Nona",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964113942",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964112148",
+    "area": "Beach",
+    "block": "Angel Heart",
+    "name": "Engelchen",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964112148",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584159782",
+    "area": "Beach",
+    "block": "Angel Heart",
+    "name": "Quantum",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584159782",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584158114",
+    "area": "Beach",
+    "block": "Angel Heart",
+    "name": "Chaos Theorie",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584158114",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584156293",
+    "area": "Beach",
+    "block": "Angel Heart",
+    "name": "d",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584156293",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584152144",
+    "area": "Beach",
+    "block": "Angel Heart",
+    "name": "c",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584152144",
+    "tgs": [
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964112025",
+    "area": "Beach",
+    "block": "Angel Heart",
+    "name": "Angel Heart",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964112025",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964111902",
+    "area": "Beach",
+    "block": "Angel Heart",
+    "name": "Fallen Angel",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964111902",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584140357",
+    "area": "Beach",
+    "block": "Gaja",
+    "name": "Ballett für Cowboys",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584140357",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964110663",
+    "area": "Beach",
+    "block": "Gaja",
+    "name": "Gaja",
+    "difficulty": "IFAS:D",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964110663",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "964105224",
+    "area": "Beach",
+    "block": "Italian Corner",
+    "name": "h",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964105224",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584029786",
+    "area": "Beach",
+    "block": "Italian Corner",
+    "name": "Goose",
+    "difficulty": "7B+/C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584029786",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964105101",
+    "area": "Beach",
+    "block": "Italian Corner",
+    "name": "Papa Jango",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964105101",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "964104978",
+    "area": "Beach",
+    "block": "Italian Corner",
+    "name": "Iron Butterfly",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964104978",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "964104855",
+    "area": "Beach",
+    "block": "Italian Corner",
+    "name": "Mauros Line",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964104855",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964104729",
+    "area": "Beach",
+    "block": "Italian Corner",
+    "name": "Italien Corner",
+    "difficulty": "IFAS:D",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964104729",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584016040",
+    "area": "Beach",
+    "block": "Italian Corner",
+    "name": "La Ballerina",
+    "difficulty": "7C/C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584016040",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964104606",
+    "area": "Beach",
+    "block": "Italian Corner",
+    "name": "Il Ballerino",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964104606",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "8583988560",
+    "area": "Beach",
+    "block": "Italian Corner",
+    "name": "Black Swan",
+    "difficulty": "7C+/8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8583988560",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8549588169",
+    "area": "Mitte",
+    "block": "Adi Dassler",
+    "name": "Lazy Sloth",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8549588169",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964066092",
+    "area": "Mitte",
+    "block": "Adi Dassler",
+    "name": "Mein Leben in Deinen Händen",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964066092",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964065963",
+    "area": "Mitte",
+    "block": "Adi Dassler",
+    "name": "Adi Dassler",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964065963",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8549585871",
+    "area": "Mitte",
+    "block": "Adi Dassler",
+    "name": "Der König von Uruk",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8549585871",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8549582376",
+    "area": "Mitte",
+    "block": "Adi Dassler",
+    "name": "Adi Hustler",
+    "difficulty": "7C/C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8549582376",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "964065840",
+    "area": "Mitte",
+    "block": "Adi Dassler",
+    "name": "Mormon sperm shake",
+    "difficulty": "7B/B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964065840",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964065714",
+    "area": "Mitte",
+    "block": "Adi Dassler",
+    "name": "Runtime",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964065714",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8549541837",
+    "area": "Mitte",
+    "block": "Intermezzo",
+    "name": "Mezzomix",
+    "difficulty": "5C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8549541837",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "3786576525",
+    "area": "Mitte",
+    "block": "Intermezzo",
+    "name": "Intermezzo left",
+    "difficulty": "7C+/8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/3786576525",
+    "tgs": [],
+    "starscount": 2
+  },
+  {
+    "id": "729973584",
+    "area": "Mitte",
+    "block": "Intermezzo",
+    "name": "Intermezzo",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729973584",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "729973443",
+    "area": "Mitte",
+    "block": "Intermezzo",
+    "name": "La Gran Evasion",
+    "difficulty": "7C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729973443",
+    "tgs": [
+      "#sd",
+      "#morpho",
+      "#jump"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729973320",
+    "area": "Mitte",
+    "block": "Intermezzo",
+    "name": "La Danza del Sol",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729973320",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8549526744",
+    "area": "Mitte",
+    "block": "Intermezzo",
+    "name": "Left Dance",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8549526744",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8357365419",
+    "area": "Mitte",
+    "block": "Die Schöne",
+    "name": "Best Line Ever",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8357365419",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8357365629",
+    "area": "Mitte",
+    "block": "Die Schöne",
+    "name": "Je weniger schöne",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8357365629",
+    "tgs": [],
+    "starscount": 1
+  },
+  {
+    "id": "8357365524",
+    "area": "Mitte",
+    "block": "Die Schöne",
+    "name": "Die Schöne Var.",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8357365524",
+    "tgs": [],
+    "starscount": 3
+  },
+  {
+    "id": "725298927",
+    "area": "Mitte",
+    "block": "Die Schöne",
+    "name": "Die Schöne",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/725298927",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "8549476701",
+    "area": "Mitte",
+    "block": "Die Schöne",
+    "name": "Hintermezzo",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8549476701",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8549472255",
+    "area": "Mitte",
+    "block": "Die Schöne",
+    "name": "Brad Pit",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8549472255",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964062258",
+    "area": "Mitte",
+    "block": "Highlander",
+    "name": "Highlander",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964062258",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "964062135",
+    "area": "Mitte",
+    "block": "Highlander",
+    "name": "Radek Corner",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964062135",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964062012",
+    "area": "Mitte",
+    "block": "Highlander",
+    "name": "Hulkopop",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964062012",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "964061892",
+    "area": "Mitte",
+    "block": "Highlander",
+    "name": "On a Plain",
+    "difficulty": "IFAS:F",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964061892",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964060551",
+    "area": "Mitte",
+    "block": "Serial Thrilla",
+    "name": "Serial Thrilla",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964060551",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8549287665",
+    "area": "Mitte",
+    "block": "Serial Thrilla",
+    "name": "Electric Ladyland",
+    "difficulty": "7A+/B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8549287665",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "964060440",
+    "area": "Mitte",
+    "block": "Serial Thrilla",
+    "name": "The Spell",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964060440",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "964059066",
+    "area": "Mitte",
+    "block": "Golden Feet",
+    "name": "Silverfeet",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964059066",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964058943",
+    "area": "Mitte",
+    "block": "Golden Feet",
+    "name": "Golden Feet",
+    "difficulty": "7C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964058943",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964057530",
+    "area": "Mitte",
+    "block": "Diesel Power",
+    "name": "Diesel Power SD",
+    "difficulty": "8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964057530",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964057419",
+    "area": "Mitte",
+    "block": "Diesel Power",
+    "name": "Diesel Power",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964057419",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "964055214",
+    "area": "Mitte",
+    "block": "Riders on the Storm",
+    "name": "Rythmo",
+    "difficulty": "7C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964055214",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "8549032305",
+    "area": "Mitte",
+    "block": "Riders on the Storm",
+    "name": "Appenzeller Biberli",
+    "difficulty": "8A+/B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8549032305",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964055085",
+    "area": "Mitte",
+    "block": "Riders on the Storm",
+    "name": "Rythmo Brachial",
+    "difficulty": "8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964055085",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8548983906",
+    "area": "Mitte",
+    "block": "Riders on the Storm",
+    "name": "Obviosly",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8548983906",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8548980798",
+    "area": "Mitte",
+    "block": "Riders on the Storm",
+    "name": "Pumpee Tow",
+    "difficulty": "{US} FR:8b",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8548980798",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8548976946",
+    "area": "Mitte",
+    "block": "Riders on the Storm",
+    "name": "Kindhard",
+    "difficulty": "8B/B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8548976946",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964054956",
+    "area": "Mitte",
+    "block": "Riders on the Storm",
+    "name": "Riders on the Storm",
+    "difficulty": "8B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964054956",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "8548968438",
+    "area": "Mitte",
+    "block": "Riders on the Storm",
+    "name": "Small Mofo",
+    "difficulty": "7C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8548968438",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8548966254",
+    "area": "Mitte",
+    "block": "Riders on the Storm",
+    "name": "Big Mofo",
+    "difficulty": "8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8548966254",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8548964751",
+    "area": "Mitte",
+    "block": "Riders on the Storm",
+    "name": "Slaptor sit",
+    "difficulty": "7C/C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8548964751",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964054872",
+    "area": "Mitte",
+    "block": "Riders on the Storm",
+    "name": "Slaptor",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964054872",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8548878834",
+    "area": "Mitte",
+    "block": "Dinos don't Dynos",
+    "name": "Anarchaeopteryx",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8548878834",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "3811024503",
+    "area": "Mitte",
+    "block": "Dinos don't Dynos",
+    "name": "Enter Jurassic Park",
+    "difficulty": "6A+/B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/3811024503",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "6569289354",
+    "area": "Mitte",
+    "block": "Dinos don't Dynos",
+    "name": "The Power of Now Direct",
+    "difficulty": "8C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/6569289354",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "3469574529",
+    "area": "Mitte",
+    "block": "Dinos don't Dynos",
+    "name": "Power of Now",
+    "difficulty": "8B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/3469574529",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "964052451",
+    "area": "Mitte",
+    "block": "Dinos don't Dynos",
+    "name": "Dinos don't Dynos",
+    "difficulty": "7B/B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964052451",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "964047648",
+    "area": "Mitte",
+    "block": "Bright side of life",
+    "name": "Rumpelpilzchen",
+    "difficulty": "5A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964047648",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "964047525",
+    "area": "Mitte",
+    "block": "Bright side of life",
+    "name": "Life of Brian",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964047525",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964047429",
+    "area": "Mitte",
+    "block": "Bright side of life",
+    "name": "Dead of Brian",
+    "difficulty": "IFAS:TD",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964047429",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964047306",
+    "area": "Mitte",
+    "block": "Bright side of life",
+    "name": "Bright side of life",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964047306",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8542192794",
+    "area": "Mitte",
+    "block": "Bright side of life",
+    "name": "Dorian Gray",
+    "difficulty": "8A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8542192794",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964047186",
+    "area": "Mitte",
+    "block": "Bright side of life",
+    "name": "Mars Attack",
+    "difficulty": "IFAS:TD",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964047186",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964047063",
+    "area": "Mitte",
+    "block": "Bright side of life",
+    "name": "King of Birds",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964047063",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8542062033",
+    "area": "Mitte",
+    "block": "Flatlander",
+    "name": "Subway",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8542062033",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "964041417",
+    "area": "Mitte",
+    "block": "Flatlander",
+    "name": "Obsession",
+    "difficulty": "8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964041417",
+    "tgs": [
+      "#expo",
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964041177",
+    "area": "Mitte",
+    "block": "Flatlander",
+    "name": "Flatlander",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964041177",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "964041069",
+    "area": "Mitte",
+    "block": "Flatlander",
+    "name": "Sip(k)not",
+    "difficulty": "IFAS:TD",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964041069",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "964041297",
+    "area": "Mitte",
+    "block": "Flatlander",
+    "name": "Johnny Dawes",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964041297",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "963876204",
+    "area": "Mitte",
+    "block": "Mobi Dick",
+    "name": "The Bravehard",
+    "difficulty": "7C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/963876204",
+    "tgs": [
+      "#expo",
+      "#trav"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "963876084",
+    "area": "Mitte",
+    "block": "Mobi Dick",
+    "name": "The Brave",
+    "difficulty": "IFAS:TD",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/963876084",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "963875955",
+    "area": "Mitte",
+    "block": "Mobi Dick",
+    "name": "Mobi Dick",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/963875955",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "963873936",
+    "area": "Mitte",
+    "block": "Mobi Dick",
+    "name": "Flat Eric",
+    "difficulty": "IFAS:F",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/963873936",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "963873840",
+    "area": "Mitte",
+    "block": "Mobi Dick",
+    "name": "Vom Regen in die Traufe",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/963873840",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "963870780",
+    "area": "Mitte",
+    "block": "Dharma",
+    "name": "Maya",
+    "difficulty": "IFAS:TD",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/963870780",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "963870657",
+    "area": "Mitte",
+    "block": "Dharma",
+    "name": "Dharma",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/963870657",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "963870522",
+    "area": "Mitte",
+    "block": "Dharma",
+    "name": "ZZ-Top",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/963870522",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "963867117",
+    "area": "Mitte",
+    "block": "Gulliver Kante",
+    "name": "Reise nach Liliput",
+    "difficulty": "3B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/963867117",
+    "tgs": [],
+    "starscount": 2
+  },
+  {
+    "id": "963867006",
+    "area": "Mitte",
+    "block": "Gulliver Kante",
+    "name": "Lilliput",
+    "difficulty": "2B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/963867006",
+    "tgs": [],
+    "starscount": 2
+  },
+  {
+    "id": "963866883",
+    "area": "Mitte",
+    "block": "Gulliver Kante",
+    "name": "Laputa",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/963866883",
+    "tgs": [
+      "#trav"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "963866760",
+    "area": "Mitte",
+    "block": "Gulliver Kante",
+    "name": "Gulliver Kante",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/963866760",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "937690119",
+    "area": "Mitte",
+    "block": "Jenny",
+    "name": "Jenny",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/937690119",
+    "tgs": [
+      "#sd",
+      "#trav"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "963863982",
+    "area": "Mitte",
+    "block": "Engerling",
+    "name": "Enderling",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/963863982",
+    "tgs": [
+      "#lay"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8422579326",
+    "area": "Mitte",
+    "block": "Jedi Jack",
+    "name": "Ab durch die Decke",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8422579326",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8422576182",
+    "area": "Mitte",
+    "block": "Jedi Jack",
+    "name": "Yoda der Yogi-Meister",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8422576182",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "1860730710",
+    "area": "Mitte",
+    "block": "Jedi Jack",
+    "name": "Erbsen auf der Flucht",
+    "difficulty": "7B/B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/1860730710",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8422573719",
+    "area": "Mitte",
+    "block": "Jedi Jack",
+    "name": "Erbsenprinz",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8422573719",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "1860730599",
+    "area": "Mitte",
+    "block": "Jedi Jack",
+    "name": "Arschbombe",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/1860730599",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "1860730488",
+    "area": "Mitte",
+    "block": "Jedi Jack",
+    "name": "Jedi Jack rechts",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/1860730488",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "1860711570",
+    "area": "Mitte",
+    "block": "Jedi Jack",
+    "name": "Jedi Jack links",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/1860711570",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "963862509",
+    "area": "Mitte",
+    "block": "Abrundtief",
+    "name": "Abgrundtief",
+    "difficulty": "5C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/963862509",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "963861570",
+    "area": "Mitte",
+    "block": "Mikeboulder",
+    "name": "Mikeboulder",
+    "difficulty": "7B - C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/963861570",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8422371624",
+    "area": "Mitte",
+    "block": "Blown Away",
+    "name": "Blown Yawa",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8422371624",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8422368507",
+    "area": "Mitte",
+    "block": "Blown Away",
+    "name": "Napoleon Blownaparte",
+    "difficulty": "7A+/B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8422368507",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "729894381",
+    "area": "Mitte",
+    "block": "Blown Away",
+    "name": "Blown Away",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729894381",
+    "tgs": [],
+    "starscount": 3
+  },
+  {
+    "id": "729894297",
+    "area": "Mitte",
+    "block": "Blown Away",
+    "name": "c",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729894297",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "729894213",
+    "area": "Mitte",
+    "block": "Blown Away",
+    "name": "110b",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729894213",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "729894102",
+    "area": "Mitte",
+    "block": "Blown Away",
+    "name": "Sketchy",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729894102",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8080958397",
+    "area": "Mitte",
+    "block": "Barbarella",
+    "name": "Mikkel",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8080958397",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8027807631",
+    "area": "Bach",
+    "block": "Madman",
+    "name": "Walk in the Park",
+    "difficulty": "5C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8027807631",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "724121499",
+    "area": "Bach",
+    "block": "Madman",
+    "name": "Marathonman",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724121499",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "724121622",
+    "area": "Bach",
+    "block": "Madman",
+    "name": "Madman",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724121622",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "504307989",
+    "area": "Bach",
+    "block": "Smoking Squirrel",
+    "name": "Smoking Squirrel",
+    "difficulty": "6A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/504307989",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "3810705855",
+    "area": "Bach",
+    "block": "Bosna",
+    "name": "Bosnanova",
+    "difficulty": "4B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/3810705855",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "461044011",
+    "area": "Bach",
+    "block": "Bosna",
+    "name": "Mantle Magic",
+    "difficulty": "4B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/461044011",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "8027737755",
+    "area": "Bach",
+    "block": "Bosna",
+    "name": "More Mantle Magic",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8027737755",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8027717733",
+    "area": "Bach",
+    "block": "Bosna",
+    "name": "Microbosna",
+    "difficulty": "6C/C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8027717733",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "724044504",
+    "area": "Bach",
+    "block": "Bosna",
+    "name": "Super Bosna",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724044504",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "724044393",
+    "area": "Bach",
+    "block": "Bosna",
+    "name": "Bosna Royal",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724044393",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "724044270",
+    "area": "Bach",
+    "block": "Bosna",
+    "name": "Bosna Brutal",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724044270",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724044147",
+    "area": "Bach",
+    "block": "Bosna",
+    "name": "Bosna Genial",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724044147",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "724109706",
+    "area": "Bach",
+    "block": "Bodycount",
+    "name": "Leckerland",
+    "difficulty": "6A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724109706",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "8027698626",
+    "area": "Bach",
+    "block": "Bodycount",
+    "name": "B",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8027698626",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724109583",
+    "area": "Bach",
+    "block": "Bodycount",
+    "name": "Trickkiste",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724109583",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724107240",
+    "area": "Bach",
+    "block": "Bodycount",
+    "name": "Bodycount",
+    "difficulty": "8A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724107240",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "724107117",
+    "area": "Bach",
+    "block": "Bodycount",
+    "name": "Propaganda",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724107117",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724102773",
+    "area": "Bach",
+    "block": "Morgenlatte",
+    "name": "Goodmorningcorner",
+    "difficulty": "5C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724102773",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "724103265",
+    "area": "Bach",
+    "block": "Morgenlatte",
+    "name": "Zombie",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724103265",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "7863751134",
+    "area": "Bach",
+    "block": "Morgenlatte",
+    "name": "Zombie light",
+    "difficulty": "6A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/7863751134",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "6536876781",
+    "area": "Bach",
+    "block": "Morgenlatte",
+    "name": "Traversenmuffel",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/6536876781",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "724103142",
+    "area": "Bach",
+    "block": "Morgenlatte",
+    "name": "Morgenlatte",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724103142",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "724103019",
+    "area": "Bach",
+    "block": "Morgenlatte",
+    "name": "Morgenmuffel",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724103019",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "9178723554",
+    "area": "Bach",
+    "block": "Morgenlatte",
+    "name": "Burning Mummy sit",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9178723554",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724102896",
+    "area": "Bach",
+    "block": "Morgenlatte",
+    "name": "Burning Mummy",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724102896",
+    "tgs": [],
+    "starscount": 1
+  },
+  {
+    "id": "724103388",
+    "area": "Bach",
+    "block": "Morgenlatte",
+    "name": "The Mummy",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724103388",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "7863770805",
+    "area": "Bach",
+    "block": "Morgenlatte",
+    "name": "Burning Babylon",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/7863770805",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724100367",
+    "area": "Bach",
+    "block": "Klein aber fein",
+    "name": "Klein aber fein",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724100367",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "724100244",
+    "area": "Bach",
+    "block": "Klein aber fein",
+    "name": "Kändy",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724100244",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8027649138",
+    "area": "Bach",
+    "block": "Protektor",
+    "name": "Corridor of Power",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8027649138",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724098819",
+    "area": "Bach",
+    "block": "Protektor",
+    "name": "Protektor",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724098819",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "8027645478",
+    "area": "Bach",
+    "block": "Protektor",
+    "name": "Ma Kula'tlan",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8027645478",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8023000962",
+    "area": "Bach",
+    "block": "Rotzkiebel",
+    "name": "Kante Rasante",
+    "difficulty": "6A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8023000962",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8022997749",
+    "area": "Bach",
+    "block": "Rotzkiebel",
+    "name": "Ali Kante",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8022997749",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8022994194",
+    "area": "Bach",
+    "block": "Rotzkiebel",
+    "name": "Brilliante Kante",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8022994194",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8022986796",
+    "area": "Bach",
+    "block": "Rotzkiebel",
+    "name": "Kante Pikante",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8022986796",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724091373",
+    "area": "Bach",
+    "block": "Rotzkiebel",
+    "name": "Rotzkiebel",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724091373",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "8022974487",
+    "area": "Bach",
+    "block": "Rotzkiebel",
+    "name": "Rotzkiebel direkt",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8022974487",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724091277",
+    "area": "Bach",
+    "block": "Rotzkiebel",
+    "name": "Rotzkiebel links",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724091277",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724091148",
+    "area": "Bach",
+    "block": "Rotzkiebel",
+    "name": "Perdita Durango",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724091148",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724091037",
+    "area": "Bach",
+    "block": "Rotzkiebel",
+    "name": "Technoschreck",
+    "difficulty": "7A - B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724091037",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "724090926",
+    "area": "Bach",
+    "block": "Rotzkiebel",
+    "name": "Tekfreak",
+    "difficulty": "3B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724090926",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "724089003",
+    "area": "Bach",
+    "block": "A bag of roosters",
+    "name": "Cornetto",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724089003",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "724088907",
+    "area": "Bach",
+    "block": "A bag of roosters",
+    "name": "The Crafter",
+    "difficulty": "7C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724088907",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724088784",
+    "area": "Bach",
+    "block": "A bag of roosters",
+    "name": "Dirtbag",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724088784",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724088655",
+    "area": "Bach",
+    "block": "A bag of roosters",
+    "name": "A bag of roosters",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724088655",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724086708",
+    "area": "Bach",
+    "block": "Viva la Vida",
+    "name": "Viva la Vida",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724086708",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724086612",
+    "area": "Bach",
+    "block": "Viva la Vida",
+    "name": "Smartmode",
+    "difficulty": "5C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724086612",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724086516",
+    "area": "Bach",
+    "block": "Viva la Vida",
+    "name": "Life is live",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724086516",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724085217",
+    "area": "Bach",
+    "block": "Sap Mantle",
+    "name": "Sap Mantle",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724085217",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724083519",
+    "area": "Bach",
+    "block": "Rumpelstilzchen",
+    "name": "Rumpelstilzchen",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724083519",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "724083435",
+    "area": "Bach",
+    "block": "Rumpelstilzchen",
+    "name": "226b",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724083435",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8022923649",
+    "area": "Bach",
+    "block": "Rumpelstilzchen",
+    "name": "The Benchmark",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8022923649",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "9178684917",
+    "area": "Bach",
+    "block": "Astronautenfieber",
+    "name": "First Microcosmos",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9178684917",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724067739",
+    "area": "Bach",
+    "block": "Astronautenfieber",
+    "name": "Astronautenfieber",
+    "difficulty": "8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724067739",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "724067862",
+    "area": "Bach",
+    "block": "Astronautenfieber",
+    "name": "Astronautenwiener",
+    "difficulty": "8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724067862",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8022871302",
+    "area": "Bach",
+    "block": "Astronautenfieber",
+    "name": "Space Monkey",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8022871302",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724067610",
+    "area": "Bach",
+    "block": "Astronautenfieber",
+    "name": "Boulder bitch",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724067610",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "1410757593",
+    "area": "Bach",
+    "block": "Traversatta",
+    "name": "Traversatta short",
+    "difficulty": "6A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/1410757593",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "724064712",
+    "area": "Bach",
+    "block": "Traversatta",
+    "name": "Traversatta",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724064712",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "9178621359",
+    "area": "Bach",
+    "block": "Conan",
+    "name": "Wainwright",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9178621359",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724061601",
+    "area": "Bach",
+    "block": "Conan",
+    "name": "Roofus",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724061601",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "9178614165",
+    "area": "Bach",
+    "block": "Conan",
+    "name": "Akiro",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9178614165",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724060254",
+    "area": "Bach",
+    "block": "Conan",
+    "name": "Conan",
+    "difficulty": "7C+/8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724060254",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "724058664",
+    "area": "Bach",
+    "block": "Apple Crumble",
+    "name": "Apple Crumble",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724058664",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "8022845202",
+    "area": "Bach",
+    "block": "Apple Crumble",
+    "name": "Skunt Weasel",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8022845202",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "724036380",
+    "area": "Bach",
+    "block": "Midget",
+    "name": "Midget",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724036380",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "6589850799",
+    "area": "Bach",
+    "block": "Supositorium",
+    "name": "Supositorium Direct",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/6589850799",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "6589848285",
+    "area": "Bach",
+    "block": "Supositorium",
+    "name": "Supositorium",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/6589848285",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "6589846404",
+    "area": "Bach",
+    "block": "Supositorium",
+    "name": "Bandolino",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/6589846404",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8022834387",
+    "area": "Bach",
+    "block": "Bamboo",
+    "name": "Traver Zolta´n",
+    "difficulty": "7B - C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8022834387",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724034571",
+    "area": "Bach",
+    "block": "Bamboo",
+    "name": "Boom",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724034571",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724034448",
+    "area": "Bach",
+    "block": "Bamboo",
+    "name": "Bam",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724034448",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "724034325",
+    "area": "Bach",
+    "block": "Bamboo",
+    "name": "Bamboo",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724034325",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "8022817407",
+    "area": "Bach",
+    "block": "La Dance",
+    "name": "Lapdance",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8022817407",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "723867978",
+    "area": "Bach",
+    "block": "La Dance",
+    "name": "La Dance",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723867978",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8022792363",
+    "area": "Bach",
+    "block": "La Dance",
+    "name": "Slapdance",
+    "difficulty": "7C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8022792363",
+    "tgs": [
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8022790725",
+    "area": "Bach",
+    "block": "La Dance",
+    "name": "Summer Dance",
+    "difficulty": "7C+/8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8022790725",
+    "tgs": [
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "723867867",
+    "area": "Bach",
+    "block": "La Dance",
+    "name": "Summer never ends",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723867867",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8022787905",
+    "area": "Bach",
+    "block": "La Dance",
+    "name": "Peace & Love",
+    "difficulty": "8A/A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8022787905",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "723855747",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Stil vor Talent",
+    "difficulty": "8C/C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723855747",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "4917897960",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "La grosse Tarlouze",
+    "difficulty": "8C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/4917897960",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "3917441034",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "SuperSuper Nova",
+    "difficulty": "8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/3917441034",
+    "tgs": [],
+    "starscount": 3
+  },
+  {
+    "id": "9178459926",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Hydromancer direct",
+    "difficulty": "7C+/8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9178459926",
+    "tgs": [
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "723860076",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Hydromancer",
+    "difficulty": "7C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723860076",
+    "tgs": [
+      "#rl"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "9178456290",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Aquaman sit",
+    "difficulty": "8B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9178456290",
+    "tgs": [
+      "#sd",
+      "#rlr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "7957596600",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "End of Story",
+    "difficulty": "8B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/7957596600",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "723859965",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Unendliche Geschichte",
+    "difficulty": "8B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723859965",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "723859854",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Unendliche Geschichte 1",
+    "difficulty": "8A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723859854",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "9178452981",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Aquaman",
+    "difficulty": "8A/A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9178452981",
+    "tgs": [
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "723859743",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Unendliche Geschichte 2",
+    "difficulty": "8A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723859743",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "723855831",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Nothing Changes",
+    "difficulty": "8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723855831",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "9178445988",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Walkman",
+    "difficulty": "8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9178445988",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "723855636",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Massive Attack",
+    "difficulty": "8A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723855636",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "723855552",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Gu Shampoo",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723855552",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "723855441",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Super Nova",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723855441",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "723855330",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Nana Bianca",
+    "difficulty": "8A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723855330",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "723855213",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Mr. Elegant",
+    "difficulty": "8A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723855213",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "723855102",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Du côte du Seshuan",
+    "difficulty": "7C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723855102",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "9178436127",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Mursphys Law",
+    "difficulty": "7C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9178436127",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "9178425651",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Le Dragon de Sishuan",
+    "difficulty": "7B+/C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9178425651",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "723854991",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Dungeons and dragons",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723854991",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "9178282944",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "e",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9178282944",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "9178218780",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "d",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9178218780",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "723854880",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Devils and Dust",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/723854880",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "9177973668",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Flora and Fauna sit",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9177973668",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "9177968328",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Flora and Fauna",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9177968328",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "9177970869",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Discovery Channel sit",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9177970869",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "9177965283",
+    "area": "Bach",
+    "block": "Bruno",
+    "name": "Discovery Channel",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/9177965283",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8080955829",
+    "area": "Mitte",
+    "block": "Barbarella",
+    "name": "Leo",
+    "difficulty": "6A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8080955829",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8080954224",
+    "area": "Mitte",
+    "block": "Barbarella",
+    "name": "Supermantle",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8080954224",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8080950327",
+    "area": "Mitte",
+    "block": "Barbarella",
+    "name": "Maximal Minimal",
+    "difficulty": "8A+/B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8080950327",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8080948686",
+    "area": "Mitte",
+    "block": "Barbarella",
+    "name": "MiniMinimal",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8080948686",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8080946481",
+    "area": "Mitte",
+    "block": "Barbarella",
+    "name": "Minimax",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8080946481",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729892062",
+    "area": "Mitte",
+    "block": "Barbarella",
+    "name": "Duran",
+    "difficulty": "4C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729892062",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8080935093",
+    "area": "Mitte",
+    "block": "Barbarella",
+    "name": "Duran-Duran",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8080935093",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729891939",
+    "area": "Mitte",
+    "block": "Barbarella",
+    "name": "Barbarella",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729891939",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "8080933122",
+    "area": "Mitte",
+    "block": "Barbarella",
+    "name": "Kidnapper",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8080933122",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8080929000",
+    "area": "Mitte",
+    "block": "Barbarella",
+    "name": "Stolen",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8080929000",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729889530",
+    "area": "Mitte",
+    "block": "Grillaume",
+    "name": "Grillaume",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729889530",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "729889434",
+    "area": "Mitte",
+    "block": "Grillaume",
+    "name": "a",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729889434",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729885792",
+    "area": "Mitte",
+    "block": "Muschitanz",
+    "name": "Muschitanz",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729885792",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "8080881957",
+    "area": "Mitte",
+    "block": "Muschitanz",
+    "name": "Muschitanz left",
+    "difficulty": "7B+/C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8080881957",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8080878354",
+    "area": "Mitte",
+    "block": "Muschitanz",
+    "name": "Schwanztanz",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8080878354",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "4007972931",
+    "area": "Mitte",
+    "block": "Block holy limit",
+    "name": "Holy Limit",
+    "difficulty": "8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/4007972931",
+    "tgs": [],
+    "starscount": 2
+  },
+  {
+    "id": "986570562",
+    "area": "Mitte",
+    "block": "Mastermind",
+    "name": "Mastermind",
+    "difficulty": "6A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/986570562",
+    "tgs": [],
+    "starscount": 3
+  },
+  {
+    "id": "8080701813",
+    "area": "Mitte",
+    "block": "Gollum",
+    "name": "Ganjalf",
+    "difficulty": "8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8080701813",
+    "tgs": [
+      "#lay"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729880695",
+    "area": "Mitte",
+    "block": "Gollum",
+    "name": "Sméagol",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729880695",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "729880572",
+    "area": "Mitte",
+    "block": "Gollum",
+    "name": "Gollum",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729880572",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729880449",
+    "area": "Mitte",
+    "block": "Gollum",
+    "name": "Gartenzwerg",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729880449",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729883644",
+    "area": "Mitte",
+    "block": "Freiwild",
+    "name": "Freiwild",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729883644",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "8080692729",
+    "area": "Mitte",
+    "block": "Freiwild",
+    "name": "Freischütz",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8080692729",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8076290247",
+    "area": "Mitte",
+    "block": "Sündenfall",
+    "name": "Titmaster",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076290247",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8076287316",
+    "area": "Mitte",
+    "block": "Sündenfall",
+    "name": "Krusty",
+    "difficulty": "7C/C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076287316",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8076285354",
+    "area": "Mitte",
+    "block": "Sündenfall",
+    "name": "Hades",
+    "difficulty": "8A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076285354",
+    "tgs": [
+      "#sd",
+      "#lrl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729874479",
+    "area": "Mitte",
+    "block": "Sündenfall",
+    "name": "Absolution",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729874479",
+    "tgs": [
+      "#slab"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729874350",
+    "area": "Mitte",
+    "block": "Sündenfall",
+    "name": "Oh Tannenbaum",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729874350",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "8076277794",
+    "area": "Mitte",
+    "block": "Sündenfall",
+    "name": "Break Fast",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076277794",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8076275481",
+    "area": "Mitte",
+    "block": "Sündenfall",
+    "name": "Sunblocker",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076275481",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729874227",
+    "area": "Mitte",
+    "block": "Sündenfall",
+    "name": "Verbotene Frucht",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729874227",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "729874098",
+    "area": "Mitte",
+    "block": "Sündenfall",
+    "name": "Erbsünde",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729874098",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "8076269688",
+    "area": "Mitte",
+    "block": "Sündenfall",
+    "name": "Fegefeuer",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076269688",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8076268146",
+    "area": "Mitte",
+    "block": "Sündenfall",
+    "name": "Feuerbesen",
+    "difficulty": "7C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076268146",
+    "tgs": [
+      "#sd",
+      "#lrl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729873969",
+    "area": "Mitte",
+    "block": "Sündenfall",
+    "name": "Sündenfall",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729873969",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "8076265698",
+    "area": "Mitte",
+    "block": "Sündenfall",
+    "name": "Circus Maximus",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076265698",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "729873846",
+    "area": "Mitte",
+    "block": "Sündenfall",
+    "name": "The knowing",
+    "difficulty": "8B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729873846",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "729873735",
+    "area": "Mitte",
+    "block": "Sündenfall",
+    "name": "The Understanding",
+    "difficulty": "8C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729873735",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8076252897",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "Never ending Darkness",
+    "difficulty": "8A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076252897",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729865920",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "The right hand of Darkness",
+    "difficulty": "7C+/8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729865920",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "729865797",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "The left hand of Darkness",
+    "difficulty": "8A/A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729865797",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "8076250128",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "Dark Sakai",
+    "difficulty": "8A+/B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076250128",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "6229425606",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "Tigris sit",
+    "difficulty": "8B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/6229425606",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "729865674",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "In search of lost time",
+    "difficulty": "8C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729865674",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729866043",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "Dark Matter",
+    "difficulty": "8B+/C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729866043",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8076242370",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "Tigris",
+    "difficulty": "8B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076242370",
+    "tgs": [
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729865563",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "Remembrance of things past",
+    "difficulty": "8B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729865563",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8076235167",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "L'exploration de l'ombre",
+    "difficulty": "8B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076235167",
+    "tgs": [
+      "#rlr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8076232773",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "Fear of the Dark",
+    "difficulty": "8B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076232773",
+    "tgs": [
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729865434",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "From darkness to sunshine",
+    "difficulty": "7C+/8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729865434",
+    "tgs": [
+      "#from"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "8076223164",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "Sunshine",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076223164",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8076221448",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "From Sunshine to Heaven",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076221448",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729865323",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "Licht am Horizont",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729865323",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8076219069",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "Highway to Hell",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076219069",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729865200",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "La Force Tranquille",
+    "difficulty": "8C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729865200",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "729865104",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "La Force Tranquille direct",
+    "difficulty": "8C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729865104",
+    "tgs": [],
+    "starscount": 3
+  },
+  {
+    "id": "4038004419",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "Enki",
+    "difficulty": "8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/4038004419",
+    "tgs": [],
+    "starscount": 3
+  },
+  {
+    "id": "4007940585",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "Samadhi",
+    "difficulty": "8B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/4007940585",
+    "tgs": [],
+    "starscount": 3
+  },
+  {
+    "id": "729864993",
+    "area": "Mitte",
+    "block": "Darkness cave",
+    "name": "The bizarre ride",
+    "difficulty": "8A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729864993",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "729860541",
+    "area": "Mitte",
+    "block": "Piranha",
+    "name": "Goldfisch",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729860541",
+    "tgs": [
+      "#sd",
+      "#morpho"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "729860418",
+    "area": "Mitte",
+    "block": "Piranha",
+    "name": "Piranha",
+    "difficulty": "7C/C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729860418",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "8076190764",
+    "area": "Mitte",
+    "block": "Piranha",
+    "name": "Tuna",
+    "difficulty": "7C/C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076190764",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729860289",
+    "area": "Mitte",
+    "block": "Piranha",
+    "name": "Cantatu",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729860289",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729860166",
+    "area": "Mitte",
+    "block": "Piranha",
+    "name": "Sinderella",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729860166",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729859326",
+    "area": "Mitte",
+    "block": "Forgotten years",
+    "name": "Forgotten years",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729859326",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729858501",
+    "area": "Mitte",
+    "block": "White snake",
+    "name": "White snake",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729858501",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "8076173157",
+    "area": "Mitte",
+    "block": "Schöne Welt",
+    "name": "Crazy World",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076173157",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "729856500",
+    "area": "Mitte",
+    "block": "Schöne Welt",
+    "name": "Raue Welt",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729856500",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729856377",
+    "area": "Mitte",
+    "block": "Schöne Welt",
+    "name": "Schöne Welt",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729856377",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "729853023",
+    "area": "Mitte",
+    "block": "Electric Boogie",
+    "name": "Jungle's Beat",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729853023",
+    "tgs": [],
+    "starscount": 1
+  },
+  {
+    "id": "8076159717",
+    "area": "Mitte",
+    "block": "Electric Boogie",
+    "name": "Naty",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076159717",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729852882",
+    "area": "Mitte",
+    "block": "Electric Boogie",
+    "name": "Electric Boogie",
+    "difficulty": "8A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729852882",
+    "tgs": [
+      "#sd",
+      "#expo",
+      "#morpho"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "8076152925",
+    "area": "Mitte",
+    "block": "Electric Boogie",
+    "name": "The Electric Company",
+    "difficulty": "8A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8076152925",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729852798",
+    "area": "Mitte",
+    "block": "Electric Boogie",
+    "name": "Woogi Boogi",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729852798",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8075886045",
+    "area": "Mitte",
+    "block": "Seven of Nine",
+    "name": "Wallflower",
+    "difficulty": "4C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8075886045",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729851613",
+    "area": "Mitte",
+    "block": "Seven of Nine",
+    "name": "Seven of Nine",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729851613",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "728823765",
+    "area": "Beach",
+    "block": "Beach block",
+    "name": "Power of pan",
+    "difficulty": "7B - C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728823765",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "728823636",
+    "area": "Beach",
+    "block": "Beach block",
+    "name": "The Wizard",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728823636",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584836294",
+    "area": "Beach",
+    "block": "Microcosmos",
+    "name": "Event Horizon",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584836294",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584832799",
+    "area": "Beach",
+    "block": "Microcosmos",
+    "name": "Joint Venture",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584832799",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "7849395933",
+    "area": "Beach",
+    "block": "Microcosmos",
+    "name": "Mikrobe",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/7849395933",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "8584830300",
+    "area": "Beach",
+    "block": "Microcosmos",
+    "name": "Tretmine",
+    "difficulty": "IFAS:D",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584830300",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8584829064",
+    "area": "Beach",
+    "block": "Microcosmos",
+    "name": "Giulebbatici geni gerosolimitanti",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584829064",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964168233",
+    "area": "Beach",
+    "block": "Microcosmos",
+    "name": "The selfish gene",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964168233",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8584827624",
+    "area": "Beach",
+    "block": "Microcosmos",
+    "name": "The Vision",
+    "difficulty": "8B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584827624",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964168035",
+    "area": "Beach",
+    "block": "Microcosmos",
+    "name": "Brid(g)estone",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964168035",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "964167840",
+    "area": "Beach",
+    "block": "Microcosmos",
+    "name": "Treeattack",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964167840",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "964167633",
+    "area": "Beach",
+    "block": "Microcosmos",
+    "name": "Microcosmos",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964167633",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "8584426305",
+    "area": "Beach",
+    "block": "Kavamura",
+    "name": "Lovely",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584426305",
+    "tgs": [
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964130883",
+    "area": "Beach",
+    "block": "Kavamura",
+    "name": "The Query",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964130883",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "964130793",
+    "area": "Beach",
+    "block": "Kavamura",
+    "name": "b",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964130793",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964130670",
+    "area": "Beach",
+    "block": "Kavamura",
+    "name": "Kavamura",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964130670",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964128786",
+    "area": "Beach",
+    "block": "Baby Girl",
+    "name": "Bodhi Mind",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964128786",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964128663",
+    "area": "Beach",
+    "block": "Baby Girl",
+    "name": "Baby boy",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964128663",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "964128540",
+    "area": "Beach",
+    "block": "Baby Girl",
+    "name": "Baby Girl",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964128540",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584419501",
+    "area": "Beach",
+    "block": "Baby Girl",
+    "name": "Mini Tricky",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584419501",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964127181",
+    "area": "Beach",
+    "block": "Muchacha",
+    "name": "Muerte",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964127181",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964127058",
+    "area": "Beach",
+    "block": "Muchacha",
+    "name": "Muchacha",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964127058",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8357191302",
+    "area": "Beach",
+    "block": "Campfireblock",
+    "name": "Stehaufmännchen",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8357191302",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8357190825",
+    "area": "Beach",
+    "block": "Campfireblock",
+    "name": "Firestarter",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8357190825",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8357190984",
+    "area": "Beach",
+    "block": "Campfireblock",
+    "name": "Firestarter left",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8357190984",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "8584380891",
+    "area": "Beach",
+    "block": "Campfireblock",
+    "name": "Morpheus",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584380891",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8357191140",
+    "area": "Beach",
+    "block": "Campfireblock",
+    "name": "Narrow one",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8357191140",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8584369287",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "peter",
+    "difficulty": "5C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584369287",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584366866",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "Pan",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584366866",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "8584365459",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "Scary Slap",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584365459",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584363953",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "Backstage",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584363953",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8584362522",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "Backround",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584362522",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8584361118",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "Soft-Shell",
+    "difficulty": "6A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584361118",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584359714",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "Riviera",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584359714",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8584358154",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "Pipe & Backdoor",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584358154",
+    "tgs": [
+      "#sd",
+      "#morpho"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584356369",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "The Wave",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584356369",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "964125276",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "Riverside",
+    "difficulty": "8B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964125276",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8584353114",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "Riverdance",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584353114",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "964125153",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "From shallow water to riverbed",
+    "difficulty": "8B/B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964125153",
+    "tgs": [
+      "#sd",
+      "#rlrl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584351437",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "From shallow water to Baptiste",
+    "difficulty": "8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584351437",
+    "tgs": [
+      "#sd",
+      "#rlr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584349931",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "Flippas Brachial",
+    "difficulty": "8A/A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584349931",
+    "tgs": [
+      "#sd",
+      "#rlr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584348443",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "Flippas sit",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584348443",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "6229804701",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "Bloom",
+    "difficulty": "7C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/6229804701",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "964125042",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "Riverbed",
+    "difficulty": "8A+/B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964125042",
+    "tgs": [
+      "#lrl"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "8584346973",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "Baptiste",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584346973",
+    "tgs": [
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584345506",
+    "area": "Beach",
+    "block": "Riverbed",
+    "name": "Flippas",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584345506",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "964123692",
+    "area": "Beach",
+    "block": "Nimmersatt",
+    "name": "Nimmersatt",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964123692",
+    "tgs": [
+      "#lay"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964123608",
+    "area": "Beach",
+    "block": "Nimmersatt",
+    "name": "a",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964123608",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8584305135",
+    "area": "Beach",
+    "block": "Practice of the Wild",
+    "name": "Scared of the wild",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584305135",
+    "tgs": [
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584302027",
+    "area": "Beach",
+    "block": "Practice of the Wild",
+    "name": "Longbow",
+    "difficulty": "8B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584302027",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964118580",
+    "area": "Beach",
+    "block": "Practice of the Wild",
+    "name": "Practice of the Wild",
+    "difficulty": "8B+/C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964118580",
+    "tgs": [],
+    "starscount": 3
+  },
+  {
+    "id": "964118457",
+    "area": "Beach",
+    "block": "Practice of the Wild",
+    "name": "Neandertaler",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964118457",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "964118328",
+    "area": "Beach",
+    "block": "Practice of the Wild",
+    "name": "Steinzeit",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964118328",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584310970",
+    "area": "Beach",
+    "block": "Practice of the Wild",
+    "name": "Bitches Blunts & bad Surprises",
+    "difficulty": "7A+/B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584310970",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964118208",
+    "area": "Beach",
+    "block": "Practice of the Wild",
+    "name": "Pire Mine",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964118208",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964118085",
+    "area": "Beach",
+    "block": "Practice of the Wild",
+    "name": "The bomb is explosion",
+    "difficulty": "8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964118085",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584299168",
+    "area": "Beach",
+    "block": "Practice of the Wild",
+    "name": "Jacob's Ladder",
+    "difficulty": "7C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584299168",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "1287260367",
+    "area": "Beach",
+    "block": "Esperanto",
+    "name": "Faded",
+    "difficulty": "6A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/1287260367",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "1287260244",
+    "area": "Beach",
+    "block": "Esperanto",
+    "name": "Esperanto",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/1287260244",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "964121265",
+    "area": "Beach",
+    "block": "Esperanto",
+    "name": "Life in the dirt",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964121265",
+    "tgs": [
+      "#lay"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964121142",
+    "area": "Beach",
+    "block": "Esperanto",
+    "name": "Dusty soul",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964121142",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584228263",
+    "area": "Beach",
+    "block": "Abraxas",
+    "name": "Barking up the wrong tree",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584228263",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964122612",
+    "area": "Beach",
+    "block": "Abraxas",
+    "name": "Abraxas",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964122612",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "964214568",
+    "area": "Beach",
+    "block": "Exclusive",
+    "name": "Sideways",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964214568",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "964214445",
+    "area": "Beach",
+    "block": "Exclusive",
+    "name": "Exclusive",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964214445",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "964211166",
+    "area": "Beach",
+    "block": "Samurai tango",
+    "name": "Naginata",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964211166",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "964211043",
+    "area": "Beach",
+    "block": "Samurai tango",
+    "name": "Samurai Tango",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964211043",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "964210920",
+    "area": "Beach",
+    "block": "Samurai tango",
+    "name": "Katana",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964210920",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "8584779615",
+    "area": "Beach",
+    "block": "The Slice",
+    "name": "The Cleft",
+    "difficulty": "5A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584779615",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8110114482",
+    "area": "Beach",
+    "block": "The Slice",
+    "name": "Slice",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8110114482",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "964194003",
+    "area": "Beach",
+    "block": "Beach mantle",
+    "name": "Beach mantle",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964194003",
+    "tgs": [],
+    "starscount": 2
+  },
+  {
+    "id": "964193703",
+    "area": "Beach",
+    "block": "Beach mantle",
+    "name": "Killer tomato",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964193703",
+    "tgs": [],
+    "starscount": 1
+  },
+  {
+    "id": "8584847247",
+    "area": "Beach",
+    "block": "Beach mantle",
+    "name": "Hungarian Invasion",
+    "difficulty": "7C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584847247",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584845192",
+    "area": "Beach",
+    "block": "Beach mantle",
+    "name": "i",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584845192",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8584842945",
+    "area": "Beach",
+    "block": "Beach mantle",
+    "name": "The witch",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584842945",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584840935",
+    "area": "Beach",
+    "block": "Beach mantle",
+    "name": "Boatrunner",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584840935",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "964193853",
+    "area": "Beach",
+    "block": "Beach mantle",
+    "name": "b",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/964193853",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "2775745497",
+    "area": "Beach",
+    "block": "Beach mantle",
+    "name": "Paradise for Mice",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/2775745497",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584838010",
+    "area": "Beach",
+    "block": "Beach mantle",
+    "name": "The Cheese-Taboo",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584838010",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "2775740244",
+    "area": "Beach",
+    "block": "Beach mantle",
+    "name": "Mausefalle",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/2775740244",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "2775739155",
+    "area": "Beach",
+    "block": "Beach mantle",
+    "name": "Jerry",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/2775739155",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "2775736959",
+    "area": "Beach",
+    "block": "Beach mantle",
+    "name": "Tom",
+    "difficulty": "4C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/2775736959",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "728824419",
+    "area": "Beach",
+    "block": "Beach block",
+    "name": "Beach combo",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728824419",
+    "tgs": [
+      "#rl"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8584481070",
+    "area": "Beach",
+    "block": "Beach block",
+    "name": "Beach Katapult",
+    "difficulty": "7B/B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8584481070",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "460315011",
+    "area": "Beach",
+    "block": "Beach block",
+    "name": "Beach Easy",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/460315011",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "728824293",
+    "area": "Beach",
+    "block": "Beach block",
+    "name": "Beach arête",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728824293",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "461043078",
+    "area": "Beach",
+    "block": "Beach block",
+    "name": "Beach Traverse",
+    "difficulty": "6A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/461043078",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "728824170",
+    "area": "Beach",
+    "block": "Beach block",
+    "name": "Slip Slap Slop (right exit)",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728824170",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "728824047",
+    "area": "Beach",
+    "block": "Beach block",
+    "name": "Slip Slap Slop",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728824047",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "718305558",
+    "area": "Beach",
+    "block": "Beach block",
+    "name": "Grit de Luxe",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/718305558",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "728823924",
+    "area": "Beach",
+    "block": "Beach block",
+    "name": "Grit de Luxe direkt",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728823924",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "729851490",
+    "area": "Mitte",
+    "block": "Seven of Nine",
+    "name": "Charmeur",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/729851490",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "728658795",
+    "area": "Mitte",
+    "block": "Linserboulder",
+    "name": "Linserboulder",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728658795",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "728665419",
+    "area": "Mitte",
+    "block": "Calanda Bräu",
+    "name": "Hopfen & Malz",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728665419",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "728656419",
+    "area": "Mitte",
+    "block": "Calanda Bräu",
+    "name": "Calanda Bräu SD",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728656419",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "728656308",
+    "area": "Mitte",
+    "block": "Calanda Bräu",
+    "name": "Calanda Bräu",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728656308",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "728656197",
+    "area": "Mitte",
+    "block": "Calanda Bräu",
+    "name": "Burger-Würger",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728656197",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8072332287",
+    "area": "Mitte",
+    "block": "High Noon",
+    "name": "Luft in den Zehen",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8072332287",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "728650056",
+    "area": "Mitte",
+    "block": "High Noon",
+    "name": "Feierabend",
+    "difficulty": "5C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728650056",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "728649933",
+    "area": "Mitte",
+    "block": "High Noon",
+    "name": "High Noon",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728649933",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8072325801",
+    "area": "Mitte",
+    "block": "High Noon",
+    "name": "La Boume straight",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8072325801",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "728649810",
+    "area": "Mitte",
+    "block": "High Noon",
+    "name": "La Boume direkt",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728649810",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "728649687",
+    "area": "Mitte",
+    "block": "High Noon",
+    "name": "La Boume de Luxe",
+    "difficulty": "7B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728649687",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "728654085",
+    "area": "Mitte",
+    "block": "Low Flow",
+    "name": "Low Flow",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728654085",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "728653962",
+    "area": "Mitte",
+    "block": "Low Flow",
+    "name": "Left Flow",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728653962",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "728646318",
+    "area": "Mitte",
+    "block": "New age travellers",
+    "name": "New age travellers",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728646318",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "8072270682",
+    "area": "Mitte",
+    "block": "New age travellers",
+    "name": "King of Kongtroversy",
+    "difficulty": "7A+/B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8072270682",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "728646195",
+    "area": "Mitte",
+    "block": "New age travellers",
+    "name": "Oldschool hikers",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728646195",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "728642346",
+    "area": "Mitte",
+    "block": "Minisex",
+    "name": "d",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728642346",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "728642235",
+    "area": "Mitte",
+    "block": "Minisex",
+    "name": "Minisex",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728642235",
+    "tgs": [],
+    "starscount": 2
+  },
+  {
+    "id": "8072221464",
+    "area": "Mitte",
+    "block": "Minisex",
+    "name": "Quicky",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8072221464",
+    "tgs": [
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8072215938",
+    "area": "Mitte",
+    "block": "Minisex",
+    "name": "Macrosex",
+    "difficulty": "7C/C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8072215938",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8072202300",
+    "area": "Mitte",
+    "block": "Minisex",
+    "name": "Nanosex",
+    "difficulty": "7C+/8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8072202300",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8072198946",
+    "area": "Mitte",
+    "block": "Minisex",
+    "name": "Minisex Roof (stand)",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8072198946",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8072194746",
+    "area": "Mitte",
+    "block": "Minisex",
+    "name": "Minisex Roof (short)",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8072194746",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "6229661667",
+    "area": "Mitte",
+    "block": "Minisex",
+    "name": "Minisex Roof Low",
+    "difficulty": "8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/6229661667",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "728639142",
+    "area": "Mitte",
+    "block": "U-Boot",
+    "name": "U-Boot",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/728639142",
+    "tgs": [
+      "#rl"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "7863694716",
+    "area": "Mitte",
+    "block": "U-Boot",
+    "name": "Atom-U-Boot",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/7863694716",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "6815410881",
+    "area": "Bach",
+    "block": "unidentified 2",
+    "name": "1",
+    "difficulty": "",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/6815410881",
+    "tgs": [
+      "#sitstart"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "6815402475",
+    "area": "Bach",
+    "block": "unidentified 1",
+    "name": "The wave",
+    "difficulty": "6A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/6815402475",
+    "tgs": [
+      "#rl",
+      "#traverse"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "724143357",
+    "area": "Bach",
+    "block": "Superhorny",
+    "name": "Superhorny",
+    "difficulty": "6B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724143357",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "724141254",
+    "area": "Bach",
+    "block": "Smash",
+    "name": "Smash",
+    "difficulty": "7A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724141254",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724136841",
+    "area": "Bach",
+    "block": "One summer in Paradise",
+    "name": "Pura Vida",
+    "difficulty": "8A/A+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724136841",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "724136724",
+    "area": "Bach",
+    "block": "One summer in Paradise",
+    "name": "Schneasturm",
+    "difficulty": "7C+/8A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724136724",
+    "tgs": [
+      "#rl"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "724136601",
+    "area": "Bach",
+    "block": "One summer in Paradise",
+    "name": "One summer in Paradise",
+    "difficulty": "8A+/B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724136601",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "724136478",
+    "area": "Bach",
+    "block": "One summer in Paradise",
+    "name": "Tough times",
+    "difficulty": "8B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724136478",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724136355",
+    "area": "Bach",
+    "block": "One summer in Paradise",
+    "name": "Schneebrett",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724136355",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "8027893185",
+    "area": "Bach",
+    "block": "One summer in Paradise",
+    "name": "Boyfriends on one summer",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8027893185",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724135092",
+    "area": "Bach",
+    "block": "Bierbauch",
+    "name": "Sixpack",
+    "difficulty": "4A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724135092",
+    "tgs": [
+      "#expo"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724134267",
+    "area": "Bach",
+    "block": "Bierbauch",
+    "name": "Bierbauch",
+    "difficulty": "6C+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724134267",
+    "tgs": [],
+    "starscount": 2
+  },
+  {
+    "id": "724132758",
+    "area": "Bach",
+    "block": "Oh Birgit",
+    "name": "Oh Birgit",
+    "difficulty": "6B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724132758",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "8027869284",
+    "area": "Bach",
+    "block": "Oh Birgit",
+    "name": "Road 2",
+    "difficulty": "4A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8027869284",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8027867985",
+    "area": "Bach",
+    "block": "Oh Birgit",
+    "name": "Road 1",
+    "difficulty": "4A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8027867985",
+    "tgs": [],
+    "starscount": 0
+  },
+  {
+    "id": "8027853960",
+    "area": "Bach",
+    "block": "Oh Birgit",
+    "name": "Hijacked",
+    "difficulty": "5A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8027853960",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724132629",
+    "area": "Bach",
+    "block": "Oh Birgit",
+    "name": "Paris",
+    "difficulty": "4A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724132629",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "724132506",
+    "area": "Bach",
+    "block": "Oh Birgit",
+    "name": "Helena",
+    "difficulty": "4B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724132506",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "8027814414",
+    "area": "Bach",
+    "block": "Hasch mich",
+    "name": "The Unexpected",
+    "difficulty": "6C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8027814414",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724127379",
+    "area": "Bach",
+    "block": "Hasch mich",
+    "name": "Hasch mich",
+    "difficulty": "5B",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724127379",
+    "tgs": [
+      "#sd"
+    ],
+    "starscount": 1
+  },
+  {
+    "id": "724124196",
+    "area": "Bach",
+    "block": "Höhenrausch",
+    "name": "Höhenrausch",
+    "difficulty": "7B+",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724124196",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 3
+  },
+  {
+    "id": "724124325",
+    "area": "Bach",
+    "block": "Höhenrausch",
+    "name": "Höhenzone",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724124325",
+    "tgs": [
+      "#sd",
+      "#rl"
+    ],
+    "starscount": 2
+  },
+  {
+    "id": "8027811894",
+    "area": "Bach",
+    "block": "Höhenrausch",
+    "name": "Vollrausch",
+    "difficulty": "7C",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/8027811894",
+    "tgs": [
+      "#sd",
+      "#lr"
+    ],
+    "starscount": 0
+  },
+  {
+    "id": "724124067",
+    "area": "Bach",
+    "block": "Höhenrausch",
+    "name": "Dropzone",
+    "difficulty": "7A",
+    "link": "https://www.thecrag.com/en/climbing/switzerland/alpen/graubunden/magic-wood-averstal/route/724124067",
+    "tgs": [
+      "#sd",
+      "#expo"
+    ],
+    "starscount": 2
+  }
+]

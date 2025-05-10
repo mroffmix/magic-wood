@@ -1,0 +1,942 @@
+[
+  {
+    "area": "Bach",
+    "name": "Bruno",
+    "blockNumber": "1"
+  },
+  {
+    "area": "Bach",
+    "name": "La Dance",
+    "blockNumber": "3"
+  },
+  {
+    "area": "Bach",
+    "name": "Bamboo",
+    "blockNumber": "5"
+  },
+  {
+    "area": "Bach",
+    "name": "Supositorium",
+    "blockNumber": "6"
+  },
+  {
+    "area": "Bach",
+    "name": "Midget",
+    "blockNumber": "9"
+  },
+  {
+    "area": "Bach",
+    "name": "Apple Crumble",
+    "blockNumber": "10"
+  },
+  {
+    "area": "Bach",
+    "name": "Conan",
+    "blockNumber": "11"
+  },
+  {
+    "area": "Bach",
+    "name": "Traversatta",
+    "blockNumber": "16"
+  },
+  {
+    "area": "Bach",
+    "name": "Astronautenfieber",
+    "blockNumber": "17"
+  },
+  {
+    "area": "Bach",
+    "name": "Rumpelstilzchen",
+    "blockNumber": "19"
+  },
+  {
+    "area": "Bach",
+    "name": "Sap Mantle",
+    "blockNumber": "20"
+  },
+  {
+    "area": "Bach",
+    "name": "Viva la Vida",
+    "blockNumber": "21"
+  },
+  {
+    "area": "Bach",
+    "name": "A bag of roosters",
+    "blockNumber": "22"
+  },
+  {
+    "area": "Bach",
+    "name": "Rotzkiebel",
+    "blockNumber": "23"
+  },
+  {
+    "area": "Bach",
+    "name": "Protektor",
+    "blockNumber": "24"
+  },
+  {
+    "area": "Bach",
+    "name": "Klein aber fein",
+    "blockNumber": "25"
+  },
+  {
+    "area": "Bach",
+    "name": "Morgenlatte",
+    "blockNumber": "26"
+  },
+  {
+    "area": "Bach",
+    "name": "Bodycount",
+    "blockNumber": "27"
+  },
+  {
+    "area": "Bach",
+    "name": "Bosna",
+    "blockNumber": "28"
+  },
+  {
+    "area": "Bach",
+    "name": "Smoking Squirrel",
+    "blockNumber": "29"
+  },
+  {
+    "area": "Bach",
+    "name": "Uitettu Manne",
+    "blockNumber": "30"
+  },
+  {
+    "area": "Bach",
+    "name": "Madman",
+    "blockNumber": "31"
+  },
+  {
+    "area": "Bach",
+    "name": "Höhenrausch",
+    "blockNumber": "34"
+  },
+  {
+    "area": "Bach",
+    "name": "Hasch mich",
+    "blockNumber": "35"
+  },
+  {
+    "area": "Bach",
+    "name": "Oh Birgit",
+    "blockNumber": "39"
+  },
+  {
+    "area": "Bach",
+    "name": "Bierbauch",
+    "blockNumber": "40"
+  },
+  {
+    "area": "Bach",
+    "name": "One summer in Paradise",
+    "blockNumber": "41"
+  },
+  {
+    "area": "Bach",
+    "name": "Smash",
+    "blockNumber": "44"
+  },
+  {
+    "area": "Bach",
+    "name": "Superhorny",
+    "blockNumber": "45"
+  },
+  {
+    "area": "Mitte",
+    "name": "U-Boot",
+    "blockNumber": "6"
+  },
+  {
+    "area": "Mitte",
+    "name": "Minisex",
+    "blockNumber": "9"
+  },
+  {
+    "area": "Mitte",
+    "name": "New age travellers",
+    "blockNumber": "11"
+  },
+  {
+    "area": "Mitte",
+    "name": "Low Flow",
+    "blockNumber": "13"
+  },
+  {
+    "area": "Mitte",
+    "name": "High Noon",
+    "blockNumber": "14"
+  },
+  {
+    "area": "Mitte",
+    "name": "Calanda Bräu",
+    "blockNumber": "15"
+  },
+  {
+    "area": "Mitte",
+    "name": "Linserboulder",
+    "blockNumber": "16"
+  },
+  {
+    "area": "Mitte",
+    "name": "Seven of Nine",
+    "blockNumber": "18"
+  },
+  {
+    "area": "Mitte",
+    "name": "Electric Boogie",
+    "blockNumber": "19"
+  },
+  {
+    "area": "Mitte",
+    "name": "Schöne Welt",
+    "blockNumber": "20"
+  },
+  {
+    "area": "Mitte",
+    "name": "White snake",
+    "blockNumber": "22"
+  },
+  {
+    "area": "Mitte",
+    "name": "Forgotten years",
+    "blockNumber": "23"
+  },
+  {
+    "area": "Mitte",
+    "name": "Piranha",
+    "blockNumber": "24"
+  },
+  {
+    "area": "Mitte",
+    "name": "Darkness cave",
+    "blockNumber": "27"
+  },
+  {
+    "area": "Mitte",
+    "name": "Sündenfall",
+    "blockNumber": "29"
+  },
+  {
+    "area": "Mitte",
+    "name": "Freiwild",
+    "blockNumber": "31"
+  },
+  {
+    "area": "Mitte",
+    "name": "Gollum",
+    "blockNumber": "32"
+  },
+  {
+    "area": "Mitte",
+    "name": "Mastermind",
+    "blockNumber": "34"
+  },
+  {
+    "area": "Mitte",
+    "name": "Muschitanz",
+    "blockNumber": "36"
+  },
+  {
+    "area": "Mitte",
+    "name": "Grillaume",
+    "blockNumber": "39"
+  },
+  {
+    "area": "Mitte",
+    "name": "Barbarella",
+    "blockNumber": "40"
+  },
+  {
+    "area": "Mitte",
+    "name": "Blown Away",
+    "blockNumber": "41"
+  },
+  {
+    "area": "Mitte",
+    "name": "Mikeboulder",
+    "blockNumber": "45"
+  },
+  {
+    "area": "Mitte",
+    "name": "Subsector Moria",
+    "blockNumber": "45b"
+  },
+  {
+    "area": "Mitte",
+    "name": "Subsector Moria",
+    "blockNumber": "45c"
+  },
+  {
+    "area": "Mitte",
+    "name": "Abrundtief",
+    "blockNumber": "46"
+  },
+  {
+    "area": "Mitte",
+    "name": "Jedi Jack",
+    "blockNumber": "47"
+  },
+  {
+    "area": "Mitte",
+    "name": "Bodhi Cave",
+    "blockNumber": "48a"
+  },
+  {
+    "area": "Mitte",
+    "name": "Engerling",
+    "blockNumber": "50"
+  },
+  {
+    "area": "Mitte",
+    "name": "Jenny",
+    "blockNumber": "51"
+  },
+  {
+    "area": "Mitte",
+    "name": "Gulliver Kante",
+    "blockNumber": "52"
+  },
+  {
+    "area": "Mitte",
+    "name": "Dharma",
+    "blockNumber": "53"
+  },
+  {
+    "area": "Mitte",
+    "name": "Mobi Dick",
+    "blockNumber": "56"
+  },
+  {
+    "area": "Mitte",
+    "name": "Flatlander",
+    "blockNumber": "60"
+  },
+  {
+    "area": "Mitte",
+    "name": "Bright side of life",
+    "blockNumber": "65"
+  },
+  {
+    "area": "Mitte",
+    "name": "Dinos don't Dynos",
+    "blockNumber": "68"
+  },
+  {
+    "area": "Mitte",
+    "name": "Riders on the Storm",
+    "blockNumber": "70"
+  },
+  {
+    "area": "Mitte",
+    "name": "Diesel Power",
+    "blockNumber": "71"
+  },
+  {
+    "area": "Mitte",
+    "name": "Golden Feet",
+    "blockNumber": "72"
+  },
+  {
+    "area": "Mitte",
+    "name": "Serial Thrilla",
+    "blockNumber": "73"
+  },
+  {
+    "area": "Mitte",
+    "name": "Highlander",
+    "blockNumber": "74"
+  },
+  {
+    "area": "Mitte",
+    "name": "Die Schöne",
+    "blockNumber": "75"
+  },
+  {
+    "area": "Mitte",
+    "name": "Intermezzo",
+    "blockNumber": "76"
+  },
+  {
+    "area": "Mitte",
+    "name": "Adi Dassler",
+    "blockNumber": "77"
+  },
+  {
+    "area": "Beach",
+    "name": "Italian Corner",
+    "blockNumber": "1"
+  },
+  {
+    "area": "Beach",
+    "name": "Gaja",
+    "blockNumber": "4"
+  },
+  {
+    "area": "Beach",
+    "name": "Angel Heart",
+    "blockNumber": "5"
+  },
+  {
+    "area": "Beach",
+    "name": "Nona",
+    "blockNumber": "6"
+  },
+  {
+    "area": "Beach",
+    "name": "Abraxas",
+    "blockNumber": "7"
+  },
+  {
+    "area": "Beach",
+    "name": "Esperanto",
+    "blockNumber": "8"
+  },
+  {
+    "area": "Beach",
+    "name": "Practice of the Wild",
+    "blockNumber": "10"
+  },
+  {
+    "area": "Beach",
+    "name": "Nimmersatt",
+    "blockNumber": "11"
+  },
+  {
+    "area": "Beach",
+    "name": "Riverbed",
+    "blockNumber": "13"
+  },
+  {
+    "area": "Beach",
+    "name": "Campfireblock",
+    "blockNumber": "13a"
+  },
+  {
+    "area": "Beach",
+    "name": "Muchacha",
+    "blockNumber": "14"
+  },
+  {
+    "area": "Beach",
+    "name": "Baby Girl",
+    "blockNumber": "16"
+  },
+  {
+    "area": "Beach",
+    "name": "Microcosmos",
+    "blockNumber": "25"
+  },
+  {
+    "area": "Beach",
+    "name": "Beach block",
+    "blockNumber": "27"
+  },
+  {
+    "area": "Beach",
+    "name": "Beach mantle",
+    "blockNumber": "28"
+  },
+  {
+    "area": "Beach",
+    "name": "The Slice",
+    "blockNumber": "29"
+  },
+  {
+    "area": "Beach",
+    "name": "Samurai tango",
+    "blockNumber": "35"
+  },
+  {
+    "area": "Beach",
+    "name": "Exclusive",
+    "blockNumber": "37"
+  },
+  {
+    "area": "Kamel",
+    "name": "Horrible",
+    "blockNumber": "1"
+  },
+  {
+    "area": "Kamel",
+    "name": "Heieiei",
+    "blockNumber": "2"
+  },
+  {
+    "area": "Kamel",
+    "name": "Torpedo",
+    "blockNumber": "5"
+  },
+  {
+    "area": "Kamel",
+    "name": "Alter Schwede",
+    "blockNumber": "6"
+  },
+  {
+    "area": "Kamel",
+    "name": "Jurassic Parc",
+    "blockNumber": "7"
+  },
+  {
+    "area": "Kamel",
+    "name": "Sexy as hell",
+    "blockNumber": "9"
+  },
+  {
+    "area": "Kamel",
+    "name": "Blue Sky of mine",
+    "blockNumber": "10"
+  },
+  {
+    "area": "Kamel",
+    "name": "The Corner",
+    "blockNumber": "11"
+  },
+  {
+    "area": "Kamel",
+    "name": "Scrubs",
+    "blockNumber": "12"
+  },
+  {
+    "area": "Kamel",
+    "name": "Höhlenhangel",
+    "blockNumber": "14"
+  },
+  {
+    "area": "Kamel",
+    "name": "Okkultischt",
+    "blockNumber": "15"
+  },
+  {
+    "area": "Kamel",
+    "name": "Panzerknacker",
+    "blockNumber": "16"
+  },
+  {
+    "area": "Kamel",
+    "name": "Fettes Schweinchen",
+    "blockNumber": "17"
+  },
+  {
+    "area": "Kamel",
+    "name": "Kanonärohr",
+    "blockNumber": "86"
+  },
+  {
+    "area": "Kamel",
+    "name": "Coccyx",
+    "blockNumber": "19"
+  },
+  {
+    "area": "Kamel",
+    "name": "The Gift",
+    "blockNumber": "21"
+  },
+  {
+    "area": "Kamel",
+    "name": "Jacks Arête",
+    "blockNumber": "22"
+  },
+  {
+    "area": "Kamel",
+    "name": "Big Cheese",
+    "blockNumber": "65"
+  },
+  {
+    "area": "Kamel",
+    "name": "Kashmir",
+    "blockNumber": "25"
+  },
+  {
+    "area": "Kamel",
+    "name": "Headhunter",
+    "blockNumber": "26"
+  },
+  {
+    "area": "Kamel",
+    "name": "Bulldog",
+    "blockNumber": "28"
+  },
+  {
+    "area": "Kamel",
+    "name": "Muttertag",
+    "blockNumber": "30"
+  },
+  {
+    "area": "Kamel",
+    "name": "Batman",
+    "blockNumber": "30"
+  },
+  {
+    "area": "Kamel",
+    "name": "No Exit",
+    "blockNumber": "31"
+  },
+  {
+    "area": "Kamel",
+    "name": "Klisch Klasch",
+    "blockNumber": "32"
+  },
+  {
+    "area": "Kamel",
+    "name": "Acume Pronto",
+    "blockNumber": "33"
+  },
+  {
+    "area": "Kamel",
+    "name": "Red Roses",
+    "blockNumber": "34"
+  },
+  {
+    "area": "Kamel",
+    "name": "Gummibär",
+    "blockNumber": "35"
+  },
+  {
+    "area": "Kamel",
+    "name": "Jack",
+    "blockNumber": "36"
+  },
+  {
+    "area": "Kamel",
+    "name": "Merlin",
+    "blockNumber": "39"
+  },
+  {
+    "area": "Kamel",
+    "name": "Millefeux",
+    "blockNumber": "40"
+  },
+  {
+    "area": "Kamel",
+    "name": "Blindfisch",
+    "blockNumber": "44"
+  },
+  {
+    "area": "Kamel",
+    "name": "La Verda",
+    "blockNumber": "46"
+  },
+  {
+    "area": "Kamel",
+    "name": "Erdbeerkante",
+    "blockNumber": "47"
+  },
+  {
+    "area": "Kamel",
+    "name": "Angry Samoa",
+    "blockNumber": "49"
+  },
+  {
+    "area": "Kamel",
+    "name": "Mentale Blockade",
+    "blockNumber": "51"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Hasch",
+    "blockNumber": "1"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Marihuanacorner",
+    "blockNumber": "2"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Spankstick",
+    "blockNumber": "3"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Chickenhead",
+    "blockNumber": "4"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Kristallo",
+    "blockNumber": "5"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Kompressor",
+    "blockNumber": "6"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Spiderman",
+    "blockNumber": "7"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Hip-Hop",
+    "blockNumber": "10"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "End of Darkness",
+    "blockNumber": "11"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Foxy",
+    "blockNumber": "13"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Airborn",
+    "blockNumber": "14"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Vergissmeinnicht",
+    "blockNumber": "15"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Toni",
+    "blockNumber": "17"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Joyride",
+    "blockNumber": "18"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Jepee!",
+    "blockNumber": "19"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Lame pun",
+    "blockNumber": "20"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "King Kong",
+    "blockNumber": "22"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Chiquita",
+    "blockNumber": "23"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Babynahrung",
+    "blockNumber": "24"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Pokerface",
+    "blockNumber": "25"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Menage à troi",
+    "blockNumber": "26"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Gardening",
+    "blockNumber": "28"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Space Cowboy",
+    "blockNumber": "29"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Binarius furbus",
+    "blockNumber": "31"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Octopussy",
+    "blockNumber": "32"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Basler Leckerli",
+    "blockNumber": "33"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "So far so good",
+    "blockNumber": "34"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Knallpot",
+    "blockNumber": "35"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Spot the Spotter",
+    "blockNumber": "36"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Timberman",
+    "blockNumber": "37"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Froschmaul",
+    "blockNumber": "41"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Lolo Ferrari",
+    "blockNumber": "42"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Mut zur Verzweiflung",
+    "blockNumber": "43"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Fantasia",
+    "blockNumber": "45"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Bodyblade",
+    "blockNumber": "47"
+  },
+  {
+    "area": "Haupt 1",
+    "name": "Sofasurfer",
+    "blockNumber": "49"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Jack Block",
+    "blockNumber": "2"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Hageltrauma",
+    "blockNumber": "4"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Joe",
+    "blockNumber": "5"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Moos Block",
+    "blockNumber": "6"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Deepthroat",
+    "blockNumber": "7"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Fetter Fisch",
+    "blockNumber": "8"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Gorilla",
+    "blockNumber": "12"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Golden Ei",
+    "blockNumber": "13"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Traumfänger",
+    "blockNumber": "16"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Rail-Road",
+    "blockNumber": "17"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Sick Suck",
+    "blockNumber": "18"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "James Bong",
+    "blockNumber": "19"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Kalorienmonster",
+    "blockNumber": "20"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Punching Tree",
+    "blockNumber": "21"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Sabi Angoise",
+    "blockNumber": "24"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Dopeshow",
+    "blockNumber": "25"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Softball",
+    "blockNumber": "26"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Moonraker",
+    "blockNumber": "28"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Block Business",
+    "blockNumber": "30"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Dildomanie",
+    "blockNumber": "31"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Hexenschuss",
+    "blockNumber": "32"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Man of the Cow",
+    "blockNumber": "34"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Tobizontral",
+    "blockNumber": "35"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Stinkefinger",
+    "blockNumber": "36"
+  },
+  {
+    "area": "Haupt 2",
+    "name": "Sweety",
+    "blockNumber": "37"
+  }
+]
