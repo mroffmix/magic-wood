@@ -52,6 +52,34 @@ const hideTooltip = () => {
   showTooltip.value = false;
 };
 
+// New: Compute area names from areas (assumes each area has a 'name' property)
+const areaNames = computed(() => areas.map((area: any) => area.name));
+
+// New: Computed index of the currently selected area (default to 0 if not found)
+const selectedAreaIndex = computed(() => {
+  const index = areaNames.value.findIndex(name => name === selectedArea.value);
+  return index >= 0 ? index : 0;
+});
+
+// New: Handler functions for carousel navigation
+const nextArea = () => {
+  const currentIndex = selectedAreaIndex.value;
+  const newIndex = (currentIndex + 1) % areaNames.value.length;
+  selectedArea.value = areaNames.value[newIndex];
+};
+
+const prevArea = () => {
+  const currentIndex = selectedAreaIndex.value;
+  const newIndex = (currentIndex - 1 + areaNames.value.length) % areaNames.value.length;
+  selectedArea.value = areaNames.value[newIndex];
+};
+
+// New: Compute selected area's background color (assumes each area may have a 'color' property)
+const selectedAreaColor = computed(() => {
+  const area = areas.find((a: any) => a.name === selectedArea.value);
+  return area?.fill || '#eee';
+});
+
 // Pan-Zoom Integration
 const mapSvg = ref<SVGSVGElement | null>(null);
 let panZoomInstance: any = null;
@@ -88,6 +116,13 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
+  <!-- Updated carousel UI above the map -->
+  <div class="carousel-container" :style="{ backgroundColor: selectedAreaColor }">
+    <button class="carousel-btn" @click="prevArea">&#8592;</button>
+    <span class="carousel-text">{{ areaNames[selectedAreaIndex] }}</span>
+    <button class="carousel-btn" @click="nextArea">&#8594;</button>
+  </div>
+  
   <div id="map">
     <div class="map-wrapper" >
       <svg 
@@ -186,6 +221,29 @@ onBeforeUnmount(() => {
   padding: 10px;
   max-width: 500px;
   z-index: 1000;
+}
+
+.carousel-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  /* border-radius: 5px; */
+  color: #fff;
+}
+.carousel-btn {
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: inherit;
+  cursor: pointer;
+  padding: 0 15px;
+}
+.carousel-text {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
 }
 </style>
 
