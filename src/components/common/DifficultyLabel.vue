@@ -22,8 +22,8 @@ const difficultyValue = computed(() => {
     '9A': 49, '9A+': 50, '9B': 51, '9B+': 52, '9C': 53
   };
 
-  // Normalize difficulty format (uppercase, no spaces)
-  const normalizedDifficulty = props.difficulty.toUpperCase().replace(/\s/g, '');
+  // Normalize difficulty: take the part before '/' or '-' (if present), uppercase, remove spaces
+  const normalizedDifficulty = props.difficulty.split(/[/\-]/)[0].toUpperCase().replace(/\s/g, '');
   
   return difficultyMap[normalizedDifficulty] || 0;
 });

@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import type { SvgObject } from '@/types/SvgObject';
 import { ref, computed } from 'vue';
-import routesData from '@/routes-data/filled_routes.json';
-import RouteTooltip from '@/components/common/RouteTooltip.vue';
 
 const props = defineProps({
   crags: {
@@ -19,59 +17,11 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['select-area', 'hover']);
-
-// Add tooltip state variables
-const showTooltip = ref(false);
-const tooltipX = ref(0);
-const tooltipY = ref(0);
-const selectedCrag = ref<SvgObject | null>(null);
-
-// Function to get routes for a specific crag/block
-const getRoutesByCrag = (cragName: string, cragSector: string) => {
-  return routesData
-    .filter(route => route.area === cragSector) // Filter out routes with empty block
-    .filter(route => route.blockNumber === cragName)
-    .filter(route => route.difficulty && route.difficulty.trim() !== ''); // Filter out routes with empty difficulty
-};
-
-// Computed property to get routes for the selected crag
-const cragRoutes = computed(() => {
-  if (!selectedCrag.value) return [];
-  return getRoutesByCrag(selectedCrag.value.name, selectedCrag.value.sector || '');
-});
-
-// Group routes by difficulty for better organization
-const groupedRoutes = computed(() => {
-  const grouped: {[key: string]: typeof cragRoutes.value} = {};
-  
-  cragRoutes.value.forEach(route => {
-    const difficulty = route.difficulty || 'Unknown';
-    if (!grouped[difficulty]) {
-      grouped[difficulty] = [];
-    }
-    grouped[difficulty].push(route);
-  });
-  
-  return grouped;
-});
+const emit = defineEmits(['select-area', 'hover', 'select-crag']);
 
 const selectArea = (crag: SvgObject, event: MouseEvent) => {
   emit('select-area', crag.name);
-  
-  // Set the selected crag and show tooltip
-  selectedCrag.value = crag;
-  
-  // Position tooltip centered above the crag
-  const center = props.getPathCenter(crag.path, crag.x, crag.y);
-  tooltipX.value = center.x - 125; // Center the tooltip (250px width / 2)
-  tooltipY.value = center.y - 120; // Position above the crag with some margin
-  
-  showTooltip.value = true;
-};
-
-const hideTooltip = () => {
-  showTooltip.value = false;
+  emit('select-crag', crag);
 };
 
 const setHoveredArea = (name: string | null) => {
@@ -130,16 +80,6 @@ const setHoveredArea = (name: string | null) => {
         }"
       >{{ crag.name }}</tspan>
     </text>
-    
-    <!-- Tooltip component -->
-    <RouteTooltip
-      v-if="showTooltip && selectedCrag"
-      :selected-crag="selectedCrag"
-      :crag-routes="cragRoutes"
-      :x="tooltipX"
-      :y="tooltipY"
-      @close="hideTooltip"
-    />
   </g>
 </template>
 

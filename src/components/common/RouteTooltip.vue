@@ -34,8 +34,7 @@ const closeTooltip = () => {
 
 <template>
   <foreignObject 
-    width="250" 
-    height="200" 
+
     @click.stop="closeTooltip"
   >
     <div 
@@ -90,7 +89,7 @@ const closeTooltip = () => {
   pointer-events: auto;
   width: 100%;
   height: 100%;
-  max-height: 200px;
+  max-height: 450px;
   box-sizing: border-box;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
   /* border: 1px solid rgba(255, 255, 255, 0.2); */
@@ -209,7 +208,7 @@ h3 b {
   overflow: hidden;
   text-overflow: ellipsis;
   font-size: 9px; /* Slightly reduced font size */
-  line-height: 1.2; /* Tighter line height */
+  line-height: 1; /* Tighter line height */
 }
 
 .route-area {

@@ -14,8 +14,8 @@
     "lint": "run-s lint:*"
   },
   "dependencies": {
-    "vue": "^3.5.13",
-    "vue-panzoom": "^1.1.6"
+    "@panzoom/panzoom": "^4.6.0",
+    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.5",
