@@ -11,6 +11,8 @@ import AreasLayer from './components/layers/AreasLayer.vue';
 import TracksLayer from './components/layers/TracksLayer.vue';
 import CragsLayer from './components/layers/CragsLayer.vue';
 import RouteTooltip from '@/components/common/RouteTooltip.vue';
+import DifficultyFilter from '@/components/filters/DifficultyFilter.vue';
+import AreaCarousel from '@/components/common/AreaCarousel.vue';
 import routesData from '@/routes-data/filled_routes.json';
 import type { SvgObject } from '@/types/SvgObject';
 
@@ -93,7 +95,7 @@ const centerOnArea = (areaName: string) => {
       const centerY = -center.y + (parentRect.height / 4);
       
       // Pan to center with animation
-      panZoomInstance.pan(centerX + 100, centerY, { animate: true });
+      // panZoomInstance.pan(centerX + 100, centerY, { animate: true });
       panZoomInstance.zoom(1, { animate: true });
     }
   }
@@ -148,10 +150,10 @@ let panZoomInstance: any = null;
 onMounted(() => {
   if (mapSvg.value) {
     panZoomInstance = Panzoom(mapSvg.value, {
-      maxScale: 5,
+      maxScale: 8,
       minScale: 0.5,
       step: 0.3,
-      startScale: 1.5
+      startScale: 3.5
     });
     mapSvg.value.parentElement?.addEventListener('wheel', panZoomInstance.zoomWithWheel);
 
@@ -174,16 +176,21 @@ onBeforeUnmount(() => {
     panZoomInstance.destroy();
   }
 });
+
+// Add difficulty filter state
+const minDifficulty = ref('2B');
+const maxDifficulty = ref('8C');
 </script>
 
 <template>
   <!-- Begin wrapping all content in a container that uses vertical stacking -->
   <div class="app-container">
-    <div class="carousel-container" :style="{ backgroundColor: selectedAreaBackground }">
-      <button class="carousel-btn" @click="prevArea">&#8592;</button>
-      <span class="carousel-text"> <h3>{{ areaNames[selectedAreaIndex] }}</h3></span>
-      <button class="carousel-btn" @click="nextArea">&#8594;</button>
-    </div>
+    <AreaCarousel 
+      :area-names="areaNames" 
+      :selected-index="selectedAreaIndex" 
+      @next="nextArea" 
+      @prev="prevArea"
+    />
     
     <div id="map">
       <div class="map-wrapper" >
@@ -226,108 +233,128 @@ onBeforeUnmount(() => {
           />
 
           <!-- Debug point -->
+          
           <circle 
             v-if="debugCenter" 
             :cx="debugCenter.x" 
             :cy="debugCenter.y" 
-            r="10" 
+            r="1" 
             fill="red" 
-            stroke="black" 
             stroke-width="2"
           />
+           
         </svg>
       </div>
       
-      <div v-if="showTooltip && selectedCrag" class="fixed-tooltip">
+     
+    </div>
+    
+    <!-- Difficulty filter positioned at bottom -->
+    <div class="bottom-filter-container">
+      <DifficultyFilter
+        v-model:minDifficulty="minDifficulty"
+        v-model:maxDifficulty="maxDifficulty"
+      />
+    </div>
+
+    <div v-if="showTooltip && selectedCrag" class="fixed-tooltip">
         <RouteTooltip
           :selected-crag="selectedCrag"
           :crag-routes="cragRoutes"
           @close="hideTooltip"
         />
       </div>
-    </div>
   </div>
   <!-- End app-container -->
 </template>
 
 <style scoped>
-.map-wrapper {
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  touch-action: manipulation;
-  
-  /* border: 1px solid rgb(75, 75, 75); */
-}
-
-.map-wrapper svg {
-  width: 1265px;
-  height: 781px;
-  display: block;
-  
-}
-
-.absolute {
-  position: absolute;  
-}
-.cursor-pointer {
-  cursor: pointer;
-}
-/* #map {
-  width: 100vw;
-  height: 100vh;
-} */
-.map-header {
-  margin-top: 60px;
-  margin-bottom: 12px;
-  text-align: center;
-}
-.map-header h1 {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #222;
-  margin: 0;
-}
-.tooltip-container {
-  transform: translate(1000px, 100px);
-}
-.fixed-tooltip {
-  position: fixed;
-  bottom: 40px;
-  width: 100%;
-  padding: 10px;
-  max-width: 500px;
-  z-index: 1000;
-}
-
-.carousel-container {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px;
-  border-radius: 5px;
-  color: #060404;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Added shadow */
-}
-.carousel-btn {
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  color: inherit;
-  cursor: pointer;
-  padding: 0 15px;
-}
-.carousel-text {
-  font-size: 1.2rem;
-  font-weight: bold;
-  /* text-shadow: 0 1px 2px rgba(0,0,0,0.4); */
-}
-
 .app-container {
   display: flex;
   flex-direction: column;
+  width: 100vw; /* Use viewport width unit */
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Map takes all available space between fixed elements */
+#map {
+  flex: 1;
+  width: 100vw; /* Full viewport width */
+  display: flex;
+  flex-direction: column;
+  position: absolute; /* Use absolute positioning */
+  top: 45px; /* Top position after the carousel */
+  bottom: 40px; /* Bottom position before the filter */
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.map-wrapper {
   width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  touch-action: manipulation;
+}
+
+.map-wrapper svg {
+  width: 100%; /* Allow SVG to scale with the container */
+  height: 100%;
+  max-width: none; /* Remove any max-width constraints */
+  min-width: 0; /* Remove min-width constraint */
+  object-fit: cover; /* Cover available space */
+}
+
+/* Position AreaCarousel at the top of the page */
+:deep(.carousel-container) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  width: 100vw; /* Full viewport width */
+}
+
+/* Position DifficultyFilter at the bottom of the page */
+.bottom-filter-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 100; /* Higher z-index than the tooltip */
+  pointer-events: none;
+  width: 100vw; /* Full viewport width */
+}
+
+.bottom-filter-container > * {
+  pointer-events: auto;
+  width: 100%;
+}
+
+.fixed-tooltip {
+  position: fixed;
+  bottom: 120px; /* Increased from 100px to give more space */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 95%; /* Slightly wider */
+  max-width: 450px; /* Increased from 400px */
+  z-index: 90;
+  margin-bottom: 20px;
+}
+
+/* Desktop-specific adjustments for the tooltip */
+@media (min-width: 768px) {
+  .fixed-tooltip {
+    max-width: 550px; /* Larger tooltip on desktop */
+    bottom: 140px; /* Position it higher on desktop */
+  }
 }
 </style>
 
@@ -336,5 +363,11 @@ body {
   background-color: rgba(197, 193, 193, 0.068);
   margin: 0;
   padding: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+html {
+  height: 100%;
 }
 </style>

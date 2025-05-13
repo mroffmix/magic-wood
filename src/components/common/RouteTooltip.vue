@@ -83,16 +83,15 @@ const closeTooltip = () => {
 .tooltip {
   background-color: rgba(91, 86, 86, 0.969);
   color: white;
-  padding: 0;
+  padding: 15px; /* Increased padding */
   border-radius: 8px;
-  font-size: 10px;
+  font-size: 14px; /* Increased from 10px */
   pointer-events: auto;
   width: 100%;
   height: 100%;
-  max-height: 450px;
+  max-height: 500px; /* Increased max height */
   box-sizing: border-box;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-  /* border: 1px solid rgba(255, 255, 255, 0.2); */
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -104,9 +103,9 @@ const closeTooltip = () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px;
+  padding: 10px; /* Increased from 6px */
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-  margin-bottom: 0;
+  margin-bottom: 5px; /* Added some margin */
   width: 100%;
   box-sizing: border-box;
 }
@@ -119,18 +118,18 @@ const closeTooltip = () => {
 }
 
 .sector-name {
-  font-size: 8px;
+  font-size: 12px; /* Increased from 8px */
   color: #aaa;
-  margin-bottom: 2px;
+  margin-bottom: 4px; /* Increased from 2px */
   text-align: left;
 }
 
 .tooltip-content {
   overflow-y: auto;
-  padding: 6px;
+  padding: 6px 10px; /* Reduced vertical padding from 10px */
   flex: 1;
-  scrollbar-width: none; /* Hide scrollbar for Firefox */
-  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   width: 100%;
 }
 
@@ -143,10 +142,10 @@ const closeTooltip = () => {
   background: none;
   border: none;
   color: white;
-  font-size: 18px;
+  font-size: 24px; /* Increased from 18px */
   cursor: pointer;
-  width: 24px;
-  height: 24px;
+  width: 32px; /* Increased from 24px */
+  height: 32px; /* Increased from 24px */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -159,7 +158,7 @@ const closeTooltip = () => {
 
 h3 {
   margin: 0;
-  font-size: 10px;
+  font-size: 16px; /* Increased from 10px */
   text-align: left;
 }
 
@@ -171,16 +170,16 @@ h3 b {
 .routes-list {
   display: flex;
   flex-direction: column;
-  gap: 2px; /* Reduced from 4px */
-  overflow: visible; /* Allow content to be scrollable within the parent */
+  gap: 2px; /* Reduced from 6px */
+  overflow: visible;
 }
 
 .route-item {
   display: grid;
   grid-template-columns: 2fr auto auto;
   align-items: center;
-  gap: 3px; /* Reduced slightly */
-  padding: 2px 0; /* Reduced from 3px */
+  gap: 6px; /* Reduced from 8px */
+  padding: 4px 0; /* Reduced from 8px */
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -203,40 +202,87 @@ h3 b {
 }
 
 .route-name {
-  font-weight: 300;
+  font-weight: 400; /* Slightly increased */
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-size: 9px; /* Slightly reduced font size */
-  line-height: 1; /* Tighter line height */
+  font-size: 13px; /* Reduced from 14px */
+  line-height: 1.1; /* Reduced from 1.2 */
 }
 
 .route-area {
-  font-size: 6px; /* Reduced from 7px */
+  font-size: 11px; /* Reduced from 12px */
   color: #ccc;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  line-height: 1.1; /* Tighter line height */
+  line-height: 1.1; /* Reduced from 1.2 */
 }
 
 .difficulty-container {
   display: flex;
   justify-content: flex-end;
-  min-width: 28px;
+  min-width: 40px;
 }
 
 .route-stars {
   color: gold;
-  margin-right: 4px;
+  margin-right: 6px; /* Reduced from 8px */
   text-align: right;
   flex-shrink: 0;
+  font-size: 13px; /* Reduced from 14px */
 }
 
 .no-routes {
   font-style: italic;
   opacity: 0.7;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 30px; /* Increased from 20px */
+  font-size: 16px; /* Added larger font size */
+}
+
+/* Desktop-specific adjustments */
+@media (min-width: 768px) {
+  .tooltip {
+    font-size: 16px;
+    padding: 20px;
+  }
+  
+  h3 {
+    font-size: 20px;
+  }
+  
+  .tooltip-header {
+    padding: 12px 15px;
+  }
+  
+  .route-name {
+    font-size: 16px;
+    line-height: 1.3;
+  }
+  
+  .route-stars {
+    font-size: 16px;
+    margin-right: 10px;
+  }
+  
+  .route-item {
+    padding: 6px 0;
+    gap: 10px;
+  }
+  
+  .close-button {
+    font-size: 28px;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .tooltip-content {
+    padding: 10px 15px;
+  }
+  
+  .no-routes {
+    font-size: 18px;
+  }
 }
 </style>

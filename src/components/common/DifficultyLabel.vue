@@ -72,12 +72,22 @@ const textColor = computed(() => {
 <style scoped>
 .difficulty-label {
   display: inline-block;
-  padding: 2px 4px;
-  border-radius: 3px;
+  padding: 4px 8px;
+  border-radius: 4px;
   font-weight: bold;
-  font-size: 9px;
-  min-width: 20px;
+  font-size: 14px;
+  min-width: 36px;
   text-align: center;
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Desktop-specific styles */
+@media (min-width: 768px) {
+  .difficulty-label {
+    padding: 5px 10px;
+    font-size: 16px;
+    min-width: 42px;
+    border-radius: 5px;
+  }
 }
 </style>
