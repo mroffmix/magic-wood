@@ -150,10 +150,10 @@ let panZoomInstance: any = null;
 onMounted(() => {
   if (mapSvg.value) {
     panZoomInstance = Panzoom(mapSvg.value, {
-      maxScale: 8,
-      minScale: 0.5,
-      step: 0.3,
-      startScale: 3.5
+      maxScale: 20,
+      minScale: 2.5,
+      step: 5,
+      startScale: 2.5
     });
     mapSvg.value.parentElement?.addEventListener('wheel', panZoomInstance.zoomWithWheel);
 
