@@ -20,15 +20,13 @@ const isFilterVisible = ref(true);
 
 // Map difficulty to a numeric value for filtering and color mapping
 const difficultyMap: { [key: string]: number } = {
-  '1A': 1, '1A+': 2, '1B': 3, '1B+': 4, '1C': 5, '1C+': 6,
-  '2A': 7, '2A+': 8, '2B': 9, '2B+': 10, '2C': 11, '2C+': 12,
+  '2B': 9, '2B+': 10, '2C': 11, '2C+': 12,
   '3A': 13, '3A+': 14, '3B': 15, '3B+': 16, '3C': 17, '3C+': 18,
   '4A': 19, '4A+': 20, '4B': 21, '4B+': 22, '4C': 23, '4C+': 24,
   '5A': 25, '5A+': 26, '5B': 27, '5B+': 28, '5C': 29, '5C+': 30,
   '6A': 31, '6A+': 32, '6B': 33, '6B+': 34, '6C': 35, '6C+': 36,
   '7A': 37, '7A+': 38, '7B': 39, '7B+': 40, '7C': 41, '7C+': 42,
-  '8A': 43, '8A+': 44, '8B': 45, '8B+': 46, '8C': 47, '8C+': 48,
-  '9A': 49, '9A+': 50, '9B': 51, '9B+': 52, '9C': 53
+  '8A': 43, '8A+': 44, '8B': 45, '8B+': 46, '8C': 47, '8C+': 48
 };
 
 // Create an array of difficulty labels for the range
