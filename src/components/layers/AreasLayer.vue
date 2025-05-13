@@ -1,4 +1,4 @@
-import type { SvgObject } from "../types/SvgObject.ts";<script setup lang="ts">
+<script setup lang="ts">
 import type { SvgObject } from '@/types/SvgObject';
 
 defineProps({

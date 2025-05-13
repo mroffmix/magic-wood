@@ -61,23 +61,84 @@ const selectedAreaIndex = computed(() => {
   return index >= 0 ? index : 0;
 });
 
-// New: Handler functions for carousel navigation
+// Add debug reference for the center point
+const debugCenter = ref<{x: number, y: number} | null>(null);
+
+// Updated: Function to center and focus on a selected area accounting for shifted coordinates
+const centerOnArea = (areaName: string) => {
+  if (!panZoomInstance) return;
+  
+  const area = areas.find((a: any) => a.name === areaName);
+  if (!area) return;
+  
+  // Get the area's coordinates, which are already shifted by applyShiftPath
+  const center = {
+    // Calculate actual center by adding half the width and height to the x,y coordinates
+    x: area.x + (area.width / 2),
+    y: area.y + (area.height / 2)
+  };
+  
+  // Set debug point coordinates for visualization
+  debugCenter.value = { x: center.x, y: center.y };
+  
+  // Get the SVG element dimensions
+  if (mapSvg.value) {
+    const parent = mapSvg.value.parentElement;
+    if (parent) {
+      const parentRect = parent.getBoundingClientRect();
+      
+      // Fix calculation: need to center the area in the viewport
+      // Calculate how much to pan to get the area in the center
+      const centerX = -center.x + (parentRect.width / 4);
+      const centerY = -center.y + (parentRect.height / 4);
+      
+      // Pan to center with animation
+      panZoomInstance.pan(centerX + 100, centerY, { animate: true });
+      panZoomInstance.zoom(1, { animate: true });
+    }
+  }
+};
+
+// Updated: Handler functions for carousel navigation with type safety
 const nextArea = () => {
   const currentIndex = selectedAreaIndex.value;
   const newIndex = (currentIndex + 1) % areaNames.value.length;
   selectedArea.value = areaNames.value[newIndex];
+  // Use optional chaining or provide default value to handle undefined
+  if (selectedArea.value) {
+    centerOnArea(selectedArea.value);
+  }
 };
 
 const prevArea = () => {
   const currentIndex = selectedAreaIndex.value;
   const newIndex = (currentIndex - 1 + areaNames.value.length) % areaNames.value.length;
   selectedArea.value = areaNames.value[newIndex];
+  // Use optional chaining or provide default value to handle undefined
+  if (selectedArea.value) {
+    centerOnArea(selectedArea.value);
+  }
 };
 
 // New: Compute selected area's background color (assumes each area may have a 'color' property)
 const selectedAreaColor = computed(() => {
   const area = areas.find((a: any) => a.name === selectedArea.value);
   return area?.fill || '#eee';
+});
+
+// New: Computed property for transparent background color (50% opacity)
+const selectedAreaBackground = computed(() => {
+  let hex = selectedAreaColor.value;
+  if (hex && hex.startsWith('#')) {
+    if (hex.length === 4) {
+      hex = '#' + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3];
+    }
+    const r = parseInt(hex.slice(1, 3), 16);
+    const g = parseInt(hex.slice(3, 5), 16);
+    const b = parseInt(hex.slice(5, 7), 16);
+    return `rgba(${r}, ${g}, ${b}, 0.5)`;
+  }
+  return hex;
 });
 
 // Pan-Zoom Integration
@@ -116,63 +177,77 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <!-- Updated carousel UI above the map -->
-  <div class="carousel-container" :style="{ backgroundColor: selectedAreaColor }">
-    <button class="carousel-btn" @click="prevArea">&#8592;</button>
-    <span class="carousel-text">{{ areaNames[selectedAreaIndex] }}</span>
-    <button class="carousel-btn" @click="nextArea">&#8594;</button>
-  </div>
-  
-  <div id="map">
-    <div class="map-wrapper" >
-      <svg 
-        ref="mapSvg"
-        viewBox="0 0 1265 781"
-        xmlns="http://www.w3.org/2000/svg"
-      >
-        <defs>
-          <radialGradient id="cragGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
-            <stop offset="0%" stop-color="#888888" stop-opacity="1"/>
-            <stop offset="100%" stop-color="#444444" stop-opacity="1"/>
-          </radialGradient>
-          <radialGradient id="lightCragGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
-            <stop offset="0%" stop-color="#e0e0e0" stop-opacity="1"/>
-            <stop offset="100%" stop-color="#bbbbbb" stop-opacity="1"/>
-          </radialGradient>
-        </defs>
-        
-        <!-- Map Layers -->
-        <AreasLayer 
-          :areas="areas" 
-          :selectedArea="selectedArea" 
-          @select-area="selectArea" 
-          @hover="hoveredArea = $event"
-        />
-      
-        <TracksLayer 
-          :tracks="tracks" 
-          :semTracks="semTrack" 
-        />
-      
-        <CragsLayer 
-          :crags="crags" 
-          :eCrags="e_crags" 
-          :getPathCenter="getPathCenter"
-          @select-area="selectArea" 
-          @hover="hoveredArea = $event"
-          @select-crag="handleSelectCrag"
-        />
-      </svg>
+  <!-- Begin wrapping all content in a container that uses vertical stacking -->
+  <div class="app-container">
+    <div class="carousel-container" :style="{ backgroundColor: selectedAreaBackground }">
+      <button class="carousel-btn" @click="prevArea">&#8592;</button>
+      <span class="carousel-text"> <h3>{{ areaNames[selectedAreaIndex] }}</h3></span>
+      <button class="carousel-btn" @click="nextArea">&#8594;</button>
     </div>
     
-    <div v-if="showTooltip && selectedCrag" class="fixed-tooltip">
-      <RouteTooltip
-        :selected-crag="selectedCrag"
-        :crag-routes="cragRoutes"
-        @close="hideTooltip"
-      />
+    <div id="map">
+      <div class="map-wrapper" >
+        <svg 
+          ref="mapSvg"
+          viewBox="0 0 1265 781"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <radialGradient id="cragGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+              <stop offset="0%" stop-color="#888888" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#444444" stop-opacity="1"/>
+            </radialGradient>
+            <radialGradient id="lightCragGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+              <stop offset="0%" stop-color="#e0e0e0" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#bbbbbb" stop-opacity="1"/>
+            </radialGradient>
+          </defs>
+          
+          <!-- Map Layers -->
+          <AreasLayer 
+            :areas="areas" 
+            :selectedArea="selectedArea" 
+            @select-area="selectArea" 
+            @hover="hoveredArea = $event"
+          />
+        
+          <TracksLayer 
+            :tracks="tracks" 
+            :semTracks="semTrack" 
+          />
+        
+          <CragsLayer 
+            :crags="crags" 
+            :eCrags="e_crags" 
+            :getPathCenter="getPathCenter"
+            @select-area="selectArea" 
+            @hover="hoveredArea = $event"
+            @select-crag="handleSelectCrag"
+          />
+
+          <!-- Debug point -->
+          <circle 
+            v-if="debugCenter" 
+            :cx="debugCenter.x" 
+            :cy="debugCenter.y" 
+            r="10" 
+            fill="red" 
+            stroke="black" 
+            stroke-width="2"
+          />
+        </svg>
+      </div>
+      
+      <div v-if="showTooltip && selectedCrag" class="fixed-tooltip">
+        <RouteTooltip
+          :selected-crag="selectedCrag"
+          :crag-routes="cragRoutes"
+          @close="hideTooltip"
+        />
+      </div>
     </div>
   </div>
+  <!-- End app-container -->
 </template>
 
 <style scoped>
@@ -181,13 +256,15 @@ onBeforeUnmount(() => {
   height: 100%;
   overflow: hidden;
   touch-action: manipulation;
-  border: 1px solid rgb(75, 75, 75);
+  
+  /* border: 1px solid rgb(75, 75, 75); */
 }
 
 .map-wrapper svg {
   width: 1265px;
   height: 781px;
   display: block;
+  
 }
 
 .absolute {
@@ -229,8 +306,9 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  /* border-radius: 5px; */
-  color: #fff;
+  border-radius: 5px;
+  color: #060404;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Added shadow */
 }
 .carousel-btn {
   background: transparent;
@@ -243,13 +321,19 @@ onBeforeUnmount(() => {
 .carousel-text {
   font-size: 1.2rem;
   font-weight: bold;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+  /* text-shadow: 0 1px 2px rgba(0,0,0,0.4); */
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 </style>
 
 <style>
 body {
-  background-color: white;
+  background-color: rgba(197, 193, 193, 0.068);
   margin: 0;
   padding: 0;
 }
