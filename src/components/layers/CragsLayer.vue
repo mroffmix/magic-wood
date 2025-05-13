@@ -2,6 +2,7 @@
 import type { SvgObject } from '@/types/SvgObject';
 import { ref, computed } from 'vue';
 
+// Add the new difficulty filter props
 const props = defineProps({
   crags: {
     type: Array as () => SvgObject[],
@@ -14,6 +15,20 @@ const props = defineProps({
   getPathCenter: {
     type: Function,
     required: true
+  },
+  // New props for difficulty filtering
+  minDifficulty: {
+    type: String,
+    default: '7A'
+  },
+  maxDifficulty: {
+    type: String,
+    default: '9C'
+  },
+  // Add routes data as a new prop
+  routes: {
+    type: Array,
+    default: () => []
   }
 });
 
@@ -27,11 +42,60 @@ const selectArea = (crag: SvgObject, event: MouseEvent) => {
 const setHoveredArea = (name: string | null) => {
   emit('hover', name);
 };
+
+// Map difficulty to a numeric value for filtering
+const difficultyMap: { [key: string]: number } = {
+  '1A': 1, '1A+': 2, '1B': 3, '1B+': 4, '1C': 5, '1C+': 6,
+  '2A': 7, '2A+': 8, '2B': 9, '2B+': 10, '2C': 11, '2C+': 12,
+  '3A': 13, '3A+': 14, '3B': 15, '3B+': 16, '3C': 17, '3C+': 18,
+  '4A': 19, '4A+': 20, '4B': 21, '4B+': 22, '4C': 23, '4C+': 24,
+  '5A': 25, '5A+': 26, '5B': 27, '5B+': 28, '5C': 29, '5C+': 30,
+  '6A': 31, '6A+': 32, '6B': 33, '6B+': 34, '6C': 35, '6C+': 36,
+  '7A': 37, '7A+': 38, '7B': 39, '7B+': 40, '7C': 41, '7C+': 42,
+  '8A': 43, '8A+': 44, '8B': 45, '8B+': 46, '8C': 47, '8C+': 48,
+  '9A': 49, '9A+': 50, '9B': 51, '9B+': 52, '9C': 53
+};
+
+// Get numeric values for min and max difficulty
+const minDifficultyValue = computed(() => difficultyMap[props.minDifficulty] || 1);
+const maxDifficultyValue = computed(() => difficultyMap[props.maxDifficulty] || 53);
+
+// Function to check if a crag should be visible based on routes difficulty
+const isCragVisible = (crag: SvgObject) => {
+  // If the crag doesn't have a name or sector, always show it
+  if (!crag.name || !crag.sector) return true;
+  
+  // Find all routes that match this crag
+  const cragRoutes = props.routes.filter((route: any) => 
+    route.blockNumber === crag.name && 
+    route.area === crag.sector && 
+    route.difficulty && 
+    route.difficulty.trim() !== ''
+  );
+  
+  // If no routes found, always show the crag
+  if (cragRoutes.length === 0) return true;
+  
+  // Check if any route's difficulty falls within the filtered range
+  return cragRoutes.some((route: any) => {
+    const normalizedDifficulty = route.difficulty.split(/[/\-]/)[0].toUpperCase().replace(/\s/g, '');
+    const routeDifficultyValue = difficultyMap[normalizedDifficulty] || 0;
+    
+    // Route is visible if its difficulty is within the filter range
+    return routeDifficultyValue >= minDifficultyValue.value && 
+           routeDifficultyValue <= maxDifficultyValue.value;
+  });
+};
+
+// Get crag opacity based on whether it matches the filter
+const getCragOpacity = (crag: SvgObject) => {
+  return isCragVisible(crag) ? 1 : 0.2; // Full opacity for matching crags, 20% for non-matching
+};
 </script>
 
 <template>
   <g class="crags-layer">
-    <!-- Easy crags -->
+    <!-- Easy crags - use the original props.eCrags without filtering -->
     <path
       v-for="(crag, index) in eCrags"
       :key="`e-${index}`"
@@ -42,14 +106,14 @@ const setHoveredArea = (name: string | null) => {
       :opacity="1"
     />
     
-    <!-- Regular crags -->
+    <!-- Regular crags - use opacity instead of filtering -->
     <path
       v-for="(crag, index) in crags"
       :key="index"
       :id="crag.name"
       :d="crag.absolutePath"
       fill="url(#cragGradient)"
-      :opacity="1"
+      :opacity="getCragOpacity(crag)"
       stroke="#222"
       stroke-width="0.7"
       @click="(event) => selectArea(crag, event)"
@@ -57,7 +121,7 @@ const setHoveredArea = (name: string | null) => {
       @mouseleave="setHoveredArea(null)"
     />
     
-    <!-- Crag labels -->
+    <!-- Crag labels - also apply opacity -->
     <text
       v-for="(crag, index) in crags"
       :key="'label-' + index"
@@ -70,6 +134,7 @@ const setHoveredArea = (name: string | null) => {
       font-weight="bold"
       pointer-events="none"
       style="user-select: none;"
+      :opacity="getCragOpacity(crag)"
     >
       <tspan
         :x="getPathCenter(crag.path, crag.x, crag.y).x"
