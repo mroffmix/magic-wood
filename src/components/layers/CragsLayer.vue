@@ -91,6 +91,50 @@ const isCragVisible = (crag: SvgObject) => {
 const getCragOpacity = (crag: SvgObject) => {
   return isCragVisible(crag) ? 1 : 0.2; // Full opacity for matching crags, 20% for non-matching
 };
+
+const getCragTitleOpacity = (crag: SvgObject) => {
+  return isCragVisible(crag) ? 1 : 0; 
+};
+
+// Function to get additional name based on routes data
+const getAdditionalName = (crag: SvgObject) => {
+  // Add type assertion to specify the expected properties
+  const matchingRoute = props.routes.find((route: any) => 
+    route.area === crag.sector &&
+    route.blockNumber === crag.name &&
+    route.starscount > 2
+  ) as { name: string } | undefined;
+  
+  // Now TypeScript knows matchingRoute has a name property when it exists
+  return matchingRoute ? matchingRoute.name : null;
+};
+
+// Add a safe wrapper for getPathCenter to handle NaN values
+const safeGetPathCenter = (crag: SvgObject) => {
+  if (!crag || !crag.path) {
+    return { x: 0, y: 0 };
+  }
+  
+  try {
+    const center = props.getPathCenter(crag.path, crag.x, crag.y);
+    
+    // Check if x or y is NaN and provide default values
+    return {
+      x: isNaN(center.x) ? 0 : center.x,
+      y: isNaN(center.y) ? 0 : center.y
+    };
+  } catch (e) {
+    console.error(`Error calculating center for crag ${crag.name}:`, e);
+    return { x: 0, y: 0 };
+  }
+};
+
+// Add function to determine if a crag is too small to contain its text
+const isCragTooSmall = (crag: SvgObject) => {
+  // Check if width or height is below threshold (7 units is a reasonable text size)
+  const minDimensionForText = 7;
+  return (crag.width < minDimensionForText || crag.height < minDimensionForText);
+}
 </script>
 
 <template>
@@ -121,30 +165,68 @@ const getCragOpacity = (crag: SvgObject) => {
       @mouseleave="setHoveredArea(null)"
     />
     
-    <!-- Crag labels - also apply opacity -->
-    <text
-      v-for="(crag, index) in crags"
-      :key="'label-' + index"
-      :x="getPathCenter(crag.path, crag.x, crag.y).x"
-      :y="getPathCenter(crag.path, crag.x, crag.y).y"
-      text-anchor="middle"
-      alignment-baseline="middle"
-      font-size="6"
-      fill="#fff"
-      font-weight="bold"
-      pointer-events="none"
-      style="user-select: none;"
-      :opacity="getCragOpacity(crag)"
-    >
-      <tspan
-        :x="getPathCenter(crag.path, crag.x, crag.y).x"
-        :y="getPathCenter(crag.path, crag.x, crag.y).y"
-        :style="{ 
-          fontSize: '4px', 
-          whiteSpace: 'pre', 
-        }"
-      >{{ crag.name }}</tspan>
-    </text>
+    <!-- Crag labels - also apply opacity and use safe center function -->
+    <g v-for="(crag, index) in crags" :key="'label-' + index">
+      <!-- Background circle only shown for small crags -->
+      <circle
+        v-if="isCragTooSmall(crag)"
+        :cx="safeGetPathCenter(crag).x"
+        :cy="safeGetPathCenter(crag).y - 1"
+        r="4"
+        fill="rgba(0, 0, 0, 0.3)"
+        :opacity="getCragTitleOpacity(crag)"
+      />
+      
+      <text
+        :x="safeGetPathCenter(crag).x"
+        :y="safeGetPathCenter(crag).y"
+        text-anchor="middle"
+        alignment-baseline="middle"
+        font-size="6"
+        fill="#fff"
+        font-weight="bold"
+        pointer-events="none"
+        style="user-select: none;"
+        :opacity="getCragOpacity(crag)"
+      >
+        <tspan
+          :x="safeGetPathCenter(crag).x"
+          :y="safeGetPathCenter(crag).y"
+          font-size="3"
+          :style="{ 
+            whiteSpace: 'pre', 
+          }"
+        >{{ crag.name }}</tspan>
+      </text>
+    </g>
+    
+    <!-- Add background and additional name as separate elements if it exists -->
+    <g v-for="(crag, index) in crags.filter(c => getAdditionalName(c))" :key="'add-name-' + index">
+      <!-- Background rectangle for additional name - sized based on text length -->
+      <rect
+        :x="safeGetPathCenter(crag).x - (getAdditionalName(crag)?.length || 0)"
+        :y="safeGetPathCenter(crag).y + 3"
+        :width="(getAdditionalName(crag)?.length || 0) * 2"
+        height="7"
+        rx="2"
+        fill="rgba(80, 80, 80, 0.8)"
+        :opacity="getCragTitleOpacity(crag)"
+        @click="(event) => selectArea(crag, event)"
+      />
+      <!-- Additional name text with click handler -->
+      <text
+        :x="safeGetPathCenter(crag).x"
+        :y="safeGetPathCenter(crag).y + 7"
+        text-anchor="middle"
+        alignment-baseline="middle"
+        font-size="3"
+        fill="#fff"
+        font-weight="normal"
+        style="user-select: none; cursor: pointer;"
+        :opacity="getCragTitleOpacity(crag)"
+        @click="(event) => selectArea(crag, event)"
+      >{{ getAdditionalName(crag) }}</text>
+    </g>
   </g>
 </template>
 

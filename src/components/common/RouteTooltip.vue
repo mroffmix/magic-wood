@@ -99,7 +99,7 @@ const closeTooltip = () => {
 
 .tooltip-header {
   top: 0;
-  background-color: rgba(91, 86, 86, 0.969);
+  /* background-color: rgba(91, 86, 86, 0.969); */
   display: flex;
   justify-content: space-between;
   align-items: center;

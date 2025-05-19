@@ -149,12 +149,27 @@ let panZoomInstance: any = null;
 
 onMounted(() => {
   if (mapSvg.value) {
-    panZoomInstance = Panzoom(mapSvg.value, {
-      maxScale: 20,
-      minScale: 2.5,
-      step: 5,
-      startScale: 2.5
-    });
+    // Detect if the device is mobile or desktop
+    const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    // Different zoom settings for mobile and desktop
+    const zoomConfig = isMobile ? 
+      {
+        maxScale: 20,
+        minScale: 2.5,
+        step: 5,
+        startScale: 2.5
+      } : 
+      {
+        maxScale: 8,    // Lower max zoom for desktop
+        minScale: 2,     // Lower min zoom for desktop
+        step: 0.7,       // More precise zoom step for desktop
+        startScale: 2  // Less initial zoom for desktop
+      };
+    
+    panZoomInstance = Panzoom(mapSvg.value, zoomConfig);
+    
+    // Add wheel event handling
     mapSvg.value.parentElement?.addEventListener('wheel', panZoomInstance.zoomWithWheel);
 
     // Center the panZoom instance using the parent's dimensions.
