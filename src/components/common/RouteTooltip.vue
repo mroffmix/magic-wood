@@ -83,7 +83,7 @@ const closeTooltip = () => {
 .tooltip {
   background-color: rgba(91, 86, 86, 0.969);
   color: white;
-  padding: 15px; /* Increased padding */
+  
   border-radius: 8px;
   font-size: 14px; /* Increased from 10px */
   pointer-events: auto;
@@ -245,7 +245,7 @@ h3 b {
 @media (min-width: 768px) {
   .tooltip {
     font-size: 16px;
-    padding: 20px;
+    padding: 10px;
   }
   
   h3 {

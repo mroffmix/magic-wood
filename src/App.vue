@@ -267,6 +267,17 @@ onBeforeUnmount(() => {
         class="search-input"
       />
       
+      <!-- Clear search button -->
+      <button 
+        v-if="searchQuery.length > 0"
+        @click="searchQuery = ''; isSearchActive = false"
+        class="clear-search-button"
+        aria-label="Clear search"
+        type="button"
+      >
+        ×
+      </button>
+      
       <!-- Search results dropdown with tooltip-like styling -->
       <div v-if="isSearchActive && searchResults.length > 0" class="search-results">
         <div 
@@ -470,7 +481,8 @@ onBeforeUnmount(() => {
   right: 0;
   z-index: 150; /* Above carousel */
   padding: 10px;
-  background-color: rgba(91, 86, 86, 0.969); 
+  background-color: rgba(91, 86, 86, 0.969);
+  position: relative; /* Add position relative for absolute positioning of button */
 }
 
 .search-input {
@@ -481,6 +493,36 @@ onBeforeUnmount(() => {
   font-size: 14px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: white;
+}
+
+/* Clear search button styles */
+.clear-search-button {
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  z-index: 152;
+  transition: background-color 0.2s ease;
+}
+
+.clear-search-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.clear-search-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
 }
 
 .search-results {
@@ -541,7 +583,7 @@ onBeforeUnmount(() => {
 }
 
 .result-area {
-  font-weight: bold;
+   font-weight: bold;
   color: #ccc;
   font-size: 11px;
 }
@@ -564,7 +606,7 @@ onBeforeUnmount(() => {
 
 /* Update map position to account for search bar */
 #map {
-  top: 95px; /* Additional space for search bar */
+  top: 55px; /* Additional space for search bar */
 }
 </style>
 

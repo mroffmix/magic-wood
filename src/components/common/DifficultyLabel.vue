@@ -72,7 +72,7 @@ const textColor = computed(() => {
 <style scoped>
 .difficulty-label {
   display: inline-block;
-  padding: 4px 8px;
+  padding: 4px 4px;
   border-radius: 4px;
   font-weight: bold;
   font-size: 14px;
@@ -84,8 +84,8 @@ const textColor = computed(() => {
 /* Desktop-specific styles */
 @media (min-width: 768px) {
   .difficulty-label {
-    padding: 5px 10px;
-    font-size: 16px;
+    padding: 2px 8px;
+    font-size: 12px;
     min-width: 42px;
     border-radius: 5px;
   }
