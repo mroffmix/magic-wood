@@ -13,6 +13,7 @@ import CragsLayer from './components/layers/CragsLayer.vue';
 import RouteTooltip from '@/components/common/RouteTooltip.vue';
 import DifficultyFilter from '@/components/filters/DifficultyFilter.vue';
 import AreaCarousel from '@/components/common/AreaCarousel.vue';
+import DifficultyLabel from '@/components/common/DifficultyLabel.vue';
 import routesData from '@/routes-data/filled_routes.json';
 import type { SvgObject } from '@/types/SvgObject';
 
@@ -195,17 +196,103 @@ onBeforeUnmount(() => {
 // Add difficulty filter state
 const minDifficulty = ref('2B');
 const maxDifficulty = ref('8C');
+
+// Add search functionality
+const searchQuery = ref('');
+const isSearchActive = ref(false);
+
+// Enhanced search results with more details
+const searchResults = computed(() => {
+  if (!searchQuery.value || searchQuery.value.trim().length < 2) return [];
+  
+  const query = searchQuery.value.toLowerCase().trim();
+  return routesData
+    .filter(route => 
+      (route.name && route.name.toLowerCase().includes(query)) || 
+      (route.blockNumber && route.blockNumber.toLowerCase().includes(query))
+    )
+    .map(route => ({
+      ...route,
+      // Format difficulty for display
+      formattedDifficulty: route.difficulty ? route.difficulty.trim() : 'N/A'
+    }))
+    .slice(0, 10); // Limit results to prevent overwhelming the UI
+});
+
+// Handle search result selection
+const selectSearchResult = (route: any) => {
+  if (route.blockNumber) {
+    // Find the corresponding crag
+    const selectedCragObject = [...crags, ...e_crags].find(c => 
+      c.name === route.blockNumber && c.sector === route.area
+    );
+    
+    if (selectedCragObject) {
+      handleSelectCrag(selectedCragObject);
+      searchQuery.value = ''; // Clear search after selection
+      isSearchActive.value = false;
+    }
+  }
+};
+
+// Close search dropdown when clicking outside
+const searchContainer = ref<HTMLElement | null>(null);
+const closeSearchDropdown = (event: MouseEvent) => {
+  if (searchContainer.value && !searchContainer.value.contains(event.target as Node)) {
+    isSearchActive.value = false;
+  }
+};
+
+onMounted(() => {
+  // Add event listener to close search dropdown when clicking outside
+  document.addEventListener('click', closeSearchDropdown);
+});
+
+onBeforeUnmount(() => {
+  // Remove event listener
+  document.removeEventListener('click', closeSearchDropdown);
+});
 </script>
 
 <template>
   <!-- Begin wrapping all content in a container that uses vertical stacking -->
   <div class="app-container">
-    <AreaCarousel 
+    <!-- Add search bar above the carousel with tooltip-like styling -->
+    <div class="search-container" ref="searchContainer">
+      <input
+        type="text"
+        v-model="searchQuery"
+        placeholder="Search routes, blocks, or areas..."
+        @focus="isSearchActive = true"
+        class="search-input"
+      />
+      
+      <!-- Search results dropdown with tooltip-like styling -->
+      <div v-if="isSearchActive && searchResults.length > 0" class="search-results">
+        <div 
+          v-for="(result, index) in searchResults" 
+          :key="index" 
+          class="search-result-item"
+          @click="selectSearchResult(result)"
+        >
+          <div class="result-name">{{ result.name }}</div>
+          <div class="result-details">
+            <div class="result-location">
+              <span class="result-area">{{ result.area }} - <span class="result-block">{{ result.blockNumber }}</span></span>
+            </div>
+             <DifficultyLabel :difficulty="result.formattedDifficulty" />
+            <!-- <div class="difficulty-badge">{{ result.formattedDifficulty }}</div> -->
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- <AreaCarousel 
       :area-names="areaNames" 
       :selected-index="selectedAreaIndex" 
       @next="nextArea" 
       @prev="prevArea"
-    />
+    /> -->
     
     <div id="map">
       <div class="map-wrapper" >
@@ -373,6 +460,111 @@ const maxDifficulty = ref('8C');
     max-width: 550px; /* Larger tooltip on desktop */
     bottom: 140px; /* Position it higher on desktop */
   }
+}
+
+/* Search Component Styles that match tooltip */
+.search-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 150; /* Above carousel */
+  padding: 10px;
+  background-color: rgba(91, 86, 86, 0.969); 
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px 12px;
+  /* border: 1px solid rgba(255, 255, 255, 0.2); */
+  border-radius: 8px;
+  font-size: 14px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: white;
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: rgba(91, 86, 86, 0.969); /* Match tooltip background */
+  color: white; /* Match tooltip text color */
+  border-radius: 0 0 8px 8px;
+  max-height: 300px;
+  overflow-y: auto;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Match tooltip shadow */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Match tooltip border */
+  z-index: 151;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+}
+
+.search-results::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+}
+
+.search-result-item {
+  padding: 10px 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.search-result-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.result-name {
+  font-weight: 300;
+  font-size: 14px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.result-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.result-location {
+  
+  display: flex;
+  flex-direction: column;
+}
+
+.result-block {
+  /* font-weight: bold; */
+  font-size: 12px;
+}
+
+.result-area {
+  font-weight: bold;
+  color: #ccc;
+  font-size: 11px;
+}
+
+.difficulty-badge {
+  background-color: #444;
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 10px;
+  min-width: 28px;
+  text-align: center;
+}
+
+/* Update carousel position to account for search bar */
+:deep(.carousel-container) {
+  top: 50px; /* Position below search bar */
+}
+
+/* Update map position to account for search bar */
+#map {
+  top: 95px; /* Additional space for search bar */
 }
 </style>
 
