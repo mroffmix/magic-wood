@@ -570,7 +570,7 @@ const isCragSelected = (crag: SvgObject) => {
 
 .fixed-tooltip {
   position: fixed;
-  bottom: 120px; /* Increased from 100px to give more space */
+  bottom: 50px; 
   left: 50%;
   transform: translateX(-50%);
   width: 95%; /* Slightly wider */
@@ -583,7 +583,7 @@ const isCragSelected = (crag: SvgObject) => {
 @media (min-width: 768px) {
   .fixed-tooltip {
     max-width: 550px; /* Larger tooltip on desktop */
-    bottom: 140px; /* Position it higher on desktop */
+    bottom: 70px; /* Position it higher on desktop */
   }
 }
 
