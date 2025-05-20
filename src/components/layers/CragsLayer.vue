@@ -112,26 +112,44 @@ const getAdditionalName = (crag: SvgObject) => {
 // Add a safe wrapper for getPathCenter to handle NaN values
 const safeGetPathCenter = (crag: SvgObject) => {
   if (!crag || !crag.path) {
+    console.warn(`Crag ${crag.name} does not have a valid path.`);
     return { x: 0, y: 0 };
   }
   
   try {
+    // Calculate center from the path
     const center = props.getPathCenter(crag.path, crag.x, crag.y);
     
-    // Check if x or y is NaN and provide default values
-    return {
-      x: isNaN(center.x) ? 0 : center.x,
-      y: isNaN(center.y) ? 0 : center.y
-    };
+    // Check if x or y is NaN and provide fallback based on bounding box instead
+    if (isNaN(center.x) || isNaN(center.y)) {
+      // console.warn(`Center coordinates for crag ${crag.name} ${crag.sector} are NaN. Using bounding box center instead.`);
+      
+      // Use bounding box to calculate center as a fallback
+      // This is more reliable for problematic paths
+      const fallbackCenter = {
+        x: crag.x + (crag.width / 2),
+        y: crag.y + (crag.height / 2)
+      };
+      
+      return fallbackCenter;
+    }
+    
+    return center;
   } catch (e) {
     console.error(`Error calculating center for crag ${crag.name}:`, e);
-    return { x: 0, y: 0 };
+    
+    // Fallback to simple bounding box center if any error occurs
+    return {
+      x: crag.x + (crag.width / 2),
+      y: crag.y + (crag.height / 2)
+    };
   }
 };
 
 // Add function to determine if a crag is too small to contain its text
 const isCragTooSmall = (crag: SvgObject) => {
   // Check if width or height is below threshold (7 units is a reasonable text size)
+  
   const minDimensionForText = 7;
   return (crag.width < minDimensionForText || crag.height < minDimensionForText);
 }
