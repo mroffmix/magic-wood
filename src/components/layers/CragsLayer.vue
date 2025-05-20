@@ -29,6 +29,11 @@ const props = defineProps({
   routes: {
     type: Array,
     default: () => []
+  },
+  // New prop to check if a crag is selected
+  isCragSelected: {
+    type: Function,
+    required: true
   }
 });
 
@@ -168,13 +173,13 @@ const isCragTooSmall = (crag: SvgObject) => {
       :opacity="1"
     />
     
-    <!-- Regular crags - use opacity instead of filtering -->
+    <!-- Regular crags - apply highlight if selected -->
     <path
       v-for="(crag, index) in crags"
       :key="index"
       :id="crag.name + '_' + (crag.sector || '')"
       :d="crag.absolutePath"
-      fill="url(#cragGradient)"
+      :fill="isCragSelected(crag) ? 'url(#selectedCragGradient)' : 'url(#cragGradient)'"
       :opacity="getCragOpacity(crag)"
       stroke="#222"
       stroke-width="0.7"

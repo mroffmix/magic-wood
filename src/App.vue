@@ -281,11 +281,7 @@ onBeforeUnmount(() => {
 
 // Add quick navigation function
 const quickNavigate = () => {
-  // Get selectedCrag from global variable if not set
-  let selectedCragObj = selectedCrag.value;
-  if (!selectedCragObj && (window as any).selectedCrag) {
-    selectedCragObj = (window as any).selectedCrag;
-  }
+  const selectedCragObj = selectedCrag.value || (window as any).selectedCrag; // Simplified logic
   if (selectedCragObj) {
     panZoomInstance?.zoom(1, { animate: true });
     focusOn(selectedCragObj);
@@ -324,8 +320,13 @@ function focusOn(crag: SvgObject) {
   const panX = viewCx / S - gpt.x;
   const panY = viewCy / S - gpt.y;
 
-  pz.pan(panX, panY, { animate: true, duration: 400 });
+  pz.pan(panX, panY-25, { animate: true, duration: 400 });
 }
+
+// Function to determine if a crag is selected
+const isCragSelected = (crag: SvgObject) => {
+  return selectedCrag.value?.name === crag.name && selectedCrag.value?.sector === crag.sector;
+};
 
 </script>
 
@@ -391,7 +392,7 @@ function focusOn(crag: SvgObject) {
     /> -->
     
     <div id="map" ref="mapContainer">
-      <div class="map-wrapper" >
+      <div class="map-wrapper">
         <svg 
           ref="mapSvg"
           viewBox="0 0 1280 800"
@@ -408,6 +409,11 @@ function focusOn(crag: SvgObject) {
             <radialGradient id="lightCragGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
               <stop offset="0%" stop-color="#e0e0e0" stop-opacity="1"/>
               <stop offset="100%" stop-color="#bbbbbb" stop-opacity="1"/>
+            </radialGradient>
+            <!-- Add a highlight gradient for the selected crag -->
+            <radialGradient id="selectedCragGradient" cx="50%" cy="50%" r="70%" fx="50%" fy="50%">
+              <stop offset="0%" stop-color="#FFD700" stop-opacity="1"/>
+              <stop offset="100%" stop-color="#FFA500" stop-opacity="1"/>
             </radialGradient>
           </defs>
           
@@ -434,6 +440,7 @@ function focusOn(crag: SvgObject) {
             @select-area="selectArea" 
             @hover="hoveredArea = $event"
             @select-crag="handleSelectCrag"
+            :isCragSelected="isCragSelected" 
           />
 
           <!-- Debug point -->
