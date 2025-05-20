@@ -172,7 +172,7 @@ const isCragTooSmall = (crag: SvgObject) => {
     <path
       v-for="(crag, index) in crags"
       :key="index"
-      :id="crag.name"
+      :id="crag.name + '_' + (crag.sector || '')"
       :d="crag.absolutePath"
       fill="url(#cragGradient)"
       :opacity="getCragOpacity(crag)"

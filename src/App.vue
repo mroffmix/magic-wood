@@ -47,6 +47,9 @@ const selectArea = (name: string) => {
 
 const handleSelectCrag = (crag: SvgObject) => {
   selectArea(crag.name);
+  focusOn(crag);
+  ;(window as any).selectedCrag = crag;
+  panZoomInstance?.zoom(5, { animate: true });
   selectedCrag.value = crag;
   showTooltip.value = true;
 };
@@ -65,7 +68,9 @@ const selectedAreaIndex = computed(() => {
 });
 
 // Add debug reference for the center point
-const debugCenter = ref<{x: number, y: number} | null>(null);
+const debugCenter = ref<{ x: number, y: number } | null>(null);
+const viewBoxCenter = ref<{ x: number, y: number } | null>(null);
+const targetCenter = ref<{x: number, y: number} | null>(null);
 
 // Updated: Function to center and focus on a selected area accounting for shifted coordinates
 const centerOnArea = (areaName: string) => {
@@ -146,6 +151,7 @@ const selectedAreaBackground = computed(() => {
 
 // Pan-Zoom Integration
 const mapSvg = ref<SVGSVGElement | null>(null);
+const mapContainer = ref<HTMLElement | null>(null);
 let panZoomInstance: any = null;
 
 onMounted(() => {
@@ -163,9 +169,9 @@ onMounted(() => {
       } : 
       {
         maxScale: 8,    // Lower max zoom for desktop
-        minScale: 2,     // Lower min zoom for desktop
+        minScale: 1.0,     // Lower min zoom for desktop
         step: 0.7,       // More precise zoom step for desktop
-        startScale: 2  // Less initial zoom for desktop
+        startScale: 1.0  // Less initial zoom for desktop
       };
     
     panZoomInstance = Panzoom(mapSvg.value, zoomConfig);
@@ -175,14 +181,26 @@ onMounted(() => {
 
     // Center the panZoom instance using the parent's dimensions.
     const parent = mapSvg.value.parentElement;
+    
+   
     if (parent) {
       const parentRect = parent.getBoundingClientRect();
       const svgRect = mapSvg.value.getBoundingClientRect();
       // Calculate offset so that the SVG is centered in the parent.
       const offsetX = (parentRect.width - svgRect.width) / 2;
       const offsetY = (parentRect.height - svgRect.height) / 2;
-      panZoomInstance.pan(offsetX, offsetY);
+
+       viewBoxCenter.value = {
+        x: 1280,
+        y: 800
+       };
+      
+      // panZoomInstance.pan(offsetX, offsetY, { animate: true });
+
+
+     
     }
+    
   }
 });
 
@@ -223,7 +241,7 @@ const searchResults = computed(() => {
 const selectSearchResult = (route: any) => {
   if (route.blockNumber) {
     // Find the corresponding crag
-    const selectedCragObject = [...crags, ...e_crags].find(c => 
+    const selectedCragObject = [...crags].find(c => 
       c.name === route.blockNumber && c.sector === route.area
     );
     
@@ -231,6 +249,9 @@ const selectSearchResult = (route: any) => {
       handleSelectCrag(selectedCragObject);
       searchQuery.value = ''; // Clear search after selection
       isSearchActive.value = false;
+      
+      // Center on the selected crag with improved positioning
+      
     }
   }
 };
@@ -252,6 +273,56 @@ onBeforeUnmount(() => {
   // Remove event listener
   document.removeEventListener('click', closeSearchDropdown);
 });
+
+// Add quick navigation function
+const quickNavigate = () => {
+
+  // Get selectedCrag from global variable if not set
+  let selectedCragObj = selectedCrag.value;
+  if (!selectedCragObj && (window as any).selectedCrag) {
+    selectedCragObj = (window as any).selectedCrag;
+  }
+  if (selectedCragObj) {
+    focusOn(selectedCragObj);
+  }
+  panZoomInstance?.zoom(5, { animate: true });
+
+};
+
+
+function focusOn(crag: SvgObject) {
+  const svg = mapSvg.value!;
+  const pz  = panZoomInstance;
+  if (!svg || !pz) return;
+
+  /* 1-2. элемент + масштаб */
+  console.log('crag', crag.name + '_' + crag.sector);
+  const el = svg.getElementById(crag.name + '_' + crag.sector) as SVGGraphicsElement | null;
+  console.log('el', el);
+  if (!el) return;
+  const zoomTo = 1;
+  if (zoomTo !== undefined) pz.zoom(zoomTo, { animate: false });
+  const S = pz.getScale();               // фактический zoom
+
+  /* 3. центр bbox в координатах SVG-корня */
+  const bbox = el.getBBox();
+  const pt   = svg.createSVGPoint();
+  pt.x = bbox.x + bbox.width  / 2;
+  pt.y = bbox.y + bbox.height / 2;
+  const gpt  = pt.matrixTransform(el.getCTM()!);
+
+  /* 4. середина контейнера */
+  const parent = svg.parentElement as HTMLElement;
+  const viewCx = parent.clientWidth  / 2;
+  const viewCy = parent.clientHeight / 2;
+
+  /* 5. новый абсолютный pan ⟵ правильная формула */
+  const panX = viewCx / S - gpt.x;
+  const panY = viewCy / S - gpt.y;
+
+  pz.pan(panX, panY, { animate: true, duration: 400 });
+}
+
 </script>
 
 <template>
@@ -276,6 +347,16 @@ onBeforeUnmount(() => {
         type="button"
       >
         ×
+      </button>
+      
+      <!-- Quick Navigation Button -->
+      <button 
+        @click="quickNavigate"
+        class="quick-nav-button"
+        aria-label="Quick navigation"
+        type="button"
+      >
+        <span class="map-icon">📍</span>
       </button>
       
       <!-- Search results dropdown with tooltip-like styling -->
@@ -305,11 +386,14 @@ onBeforeUnmount(() => {
       @prev="prevArea"
     /> -->
     
-    <div id="map">
+    <div id="map" ref="mapContainer">
       <div class="map-wrapper" >
         <svg 
           ref="mapSvg"
-          viewBox="0 0 1265 781"
+          viewBox="0 0 1280 800"
+          width="100%"       
+          height="100%"
+          preserveAspectRatio="xMidYMid meet"
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
@@ -358,11 +442,27 @@ onBeforeUnmount(() => {
             fill="red" 
             stroke-width="2"
           />
-           
+
+          <circle 
+            v-if="viewBoxCenter" 
+            :cx="viewBoxCenter.x" 
+            :cy="viewBoxCenter.y" 
+            r="4" 
+            fill="blue" 
+            stroke-width="4"
+          />
+
+          <circle 
+            v-if="targetCenter" 
+            :cx="targetCenter.x" 
+            :cy="targetCenter.y" 
+            r="4" 
+            fill="green" 
+            stroke-width="4"
+          />
+
         </svg>
       </div>
-      
-     
     </div>
     
     <!-- Difficulty filter positioned at bottom -->
@@ -406,6 +506,7 @@ onBeforeUnmount(() => {
   left: 0;
   right: 0;
   overflow: hidden;
+
 }
 
 .map-wrapper {
@@ -416,6 +517,7 @@ onBeforeUnmount(() => {
   justify-content: center;
   overflow: hidden;
   touch-action: manipulation;
+
 }
 
 .map-wrapper svg {
@@ -424,6 +526,7 @@ onBeforeUnmount(() => {
   max-width: none; /* Remove any max-width constraints */
   min-width: 0; /* Remove min-width constraint */
   object-fit: cover; /* Cover available space */
+  background-color: rgba(143, 136, 135, 0.106);
 }
 
 /* Position AreaCarousel at the top of the page */
@@ -525,6 +628,41 @@ onBeforeUnmount(() => {
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
 }
 
+/* Quick navigation button styles */
+.quick-nav-button {
+  position: absolute;
+  right: 60px; /* Position to the left of clear button */
+  top: 18px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  z-index: 152;
+  transition: background-color 0.2s ease;
+}
+
+.quick-nav-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.quick-nav-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+.map-icon {
+  display: inline-block;
+  transform: translateY(-1px); /* Slight adjustment for visual alignment */
+}
+
+/* Search results dropdown styles */
 .search-results {
   position: absolute;
   top: 100%;
