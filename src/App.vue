@@ -48,6 +48,7 @@ const selectArea = (name: string) => {
 
 const handleSelectCrag = (crag: SvgObject) => {
   selectArea(crag.name);
+  panZoomInstance?.zoom(1, { animate: true });
   focusOn(crag);
   ;(window as any).selectedCrag = crag;
   panZoomInstance?.zoom(panZoomScale, { animate: true });
@@ -164,7 +165,7 @@ onMounted(() => {
     const zoomConfig = isMobile ? 
       {
         maxScale: 20,
-        minScale: 2.5,
+        minScale: 1.0,
         step: 5,
         startScale: 2.5
       } : 
@@ -284,6 +285,7 @@ const quickNavigate = () => {
     selectedCragObj = (window as any).selectedCrag;
   }
   if (selectedCragObj) {
+    panZoomInstance?.zoom(1, { animate: true });
     focusOn(selectedCragObj);
     panZoomInstance?.zoom(panZoomScale, { animate: true });
   }
