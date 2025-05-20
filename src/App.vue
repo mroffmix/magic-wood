@@ -28,7 +28,7 @@ const hoveredArea = ref<string | null>(null);
 
 const showTooltip = ref(false);
 const selectedCrag = ref<SvgObject | null>(null);
-var panZoomScale = 2;
+const panZoomScale = ref(5); // Default value, will be updated based on device
 
 const getRoutesByCrag = (cragName: string, cragSector: string) => {
   return routesData
@@ -51,7 +51,7 @@ const handleSelectCrag = (crag: SvgObject) => {
   panZoomInstance?.zoom(1, { animate: true });
   focusOn(crag);
   ;(window as any).selectedCrag = crag;
-  panZoomInstance?.zoom(panZoomScale, { animate: true });
+  panZoomInstance?.zoom(panZoomScale.value, { animate: true });
   selectedCrag.value = crag;
   showTooltip.value = true;
 };
@@ -160,7 +160,10 @@ onMounted(() => {
   if (mapSvg.value) {
     // Detect if the device is mobile or desktop
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    panZoomScale = isMobile ? 2 : 5; 
+    
+    // Set different zoom scales based on device type
+    panZoomScale.value = isMobile ? 8 : 5;
+    
     // Different zoom settings for mobile and desktop
     const zoomConfig = isMobile ? 
       {
@@ -278,7 +281,6 @@ onBeforeUnmount(() => {
 
 // Add quick navigation function
 const quickNavigate = () => {
-
   // Get selectedCrag from global variable if not set
   let selectedCragObj = selectedCrag.value;
   if (!selectedCragObj && (window as any).selectedCrag) {
@@ -287,10 +289,8 @@ const quickNavigate = () => {
   if (selectedCragObj) {
     panZoomInstance?.zoom(1, { animate: true });
     focusOn(selectedCragObj);
-    panZoomInstance?.zoom(panZoomScale, { animate: true });
+    panZoomInstance?.zoom(panZoomScale.value, { animate: true });
   }
-  
-
 };
 
 
