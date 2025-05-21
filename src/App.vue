@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import { ref, computed, onMounted, onBeforeUnmount, watch } from 'vue';
 import Panzoom from '@panzoom/panzoom';
 import { applyShiftPath, getPathCenter } from './utils/shiftPath';
 import { areas } from './map-data/areas'; 
@@ -30,6 +30,19 @@ const showTooltip = ref(false);
 const selectedCrag = ref<SvgObject | null>(null);
 const panZoomScale = ref(5); // Default value, will be updated based on device
 
+// Map difficulty to a numeric value for filtering
+const difficultyMap: { [key: string]: number } = {
+  '1A': 1, '1A+': 2, '1B': 3, '1B+': 4, '1C': 5, '1C+': 6,
+  '2A': 7, '2A+': 8, '2B': 9, '2B+': 10, '2C': 11, '2C+': 12,
+  '3A': 13, '3A+': 14, '3B': 15, '3B+': 16, '3C': 17, '3C+': 18,
+  '4A': 19, '4A+': 20, '4B': 21, '4B+': 22, '4C': 23, '4C+': 24,
+  '5A': 25, '5A+': 26, '5B': 27, '5B+': 28, '5C': 29, '5C+': 30,
+  '6A': 31, '6A+': 32, '6B': 33, '6B+': 34, '6C': 35, '6C+': 36,
+  '7A': 37, '7A+': 38, '7B': 39, '7B+': 40, '7C': 41, '7C+': 42,
+  '8A': 43, '8A+': 44, '8B': 45, '8B+': 46, '8C': 47, '8C+': 48,
+  '9A': 49, '9A+': 50, '9B': 51, '9B+': 52, '9C': 53
+};
+
 const getRoutesByCrag = (cragName: string, cragSector: string) => {
   return routesData
     .filter(route => route.area === cragSector)
@@ -39,11 +52,50 @@ const getRoutesByCrag = (cragName: string, cragSector: string) => {
 
 const cragRoutes = computed(() => {
   if (!selectedCrag.value) return [];
-  return getRoutesByCrag(selectedCrag.value.name, selectedCrag.value.sector || '');
+  
+  // Get all routes for the selected crag
+  const routes = getRoutesByCrag(selectedCrag.value.name, selectedCrag.value.sector || '');
+  
+  // Get numeric values for min and max difficulty
+  const minDifficultyValue = difficultyMap[minDifficulty.value] || 1;
+  const maxDifficultyValue = difficultyMap[maxDifficulty.value] || 53;
+  
+  // Filter routes by difficulty
+  return routes.filter(route => {
+    // Parse the difficulty value
+    const normalizedDifficulty = route.difficulty.split(/[/\-]/)[0].toUpperCase().replace(/\s/g, '');
+    const routeDifficultyValue = difficultyMap[normalizedDifficulty] || 0;
+    
+    // Include route if its difficulty is within the filter range
+    return routeDifficultyValue >= minDifficultyValue && 
+           routeDifficultyValue <= maxDifficultyValue;
+  });
+});
+
+// Add computed property for filtered out routes
+const filteredOutRoutes = computed(() => {
+  if (!selectedCrag.value) return [];
+  
+  // Get all routes for the selected crag
+  const allRoutes = getRoutesByCrag(selectedCrag.value.name, selectedCrag.value.sector || '');
+  
+  // Get numeric values for min and max difficulty
+  const minDifficultyValue = difficultyMap[minDifficulty.value] || 1;
+  const maxDifficultyValue = difficultyMap[maxDifficulty.value] || 53;
+  
+  // Filter out routes that don't match the difficulty range
+  return allRoutes.filter(route => {
+    // Parse the difficulty value
+    const normalizedDifficulty = route.difficulty.split(/[/\-]/)[0].toUpperCase().replace(/\s/g, '');
+    const routeDifficultyValue = difficultyMap[normalizedDifficulty] || 0;
+    
+    // Include routes outside the filter range
+    return routeDifficultyValue < minDifficultyValue || routeDifficultyValue > maxDifficultyValue;
+  });
 });
 
 const selectArea = (name: string) => {
-  selectedArea.value = name;
+  return;
 };
 
 const handleSelectCrag = (crag: SvgObject) => {
@@ -216,9 +268,18 @@ onBeforeUnmount(() => {
   }
 });
 
-// Add difficulty filter state
-const minDifficulty = ref('2B');
-const maxDifficulty = ref('8C');
+// Add difficulty filter state with localStorage persistence
+const minDifficulty = ref(localStorage.getItem('minDifficulty') || '2B');
+const maxDifficulty = ref(localStorage.getItem('maxDifficulty') || '8C');
+
+// Watch for changes and update localStorage
+watch(minDifficulty, (newValue) => {
+  localStorage.setItem('minDifficulty', newValue);
+});
+
+watch(maxDifficulty, (newValue) => {
+  localStorage.setItem('maxDifficulty', newValue);
+});
 
 // Add search functionality
 const searchQuery = ref('');
@@ -488,6 +549,7 @@ const isCragSelected = (crag: SvgObject) => {
         <RouteTooltip
           :selected-crag="selectedCrag"
           :crag-routes="cragRoutes"
+          :filtered-out-routes="filteredOutRoutes"
           @close="hideTooltip"
         />
       </div>

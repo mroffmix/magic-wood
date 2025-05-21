@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { SvgObject } from '@/types/SvgObject';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import DifficultyLabel from '@/components/common/DifficultyLabel.vue';
 
 // Add interface for route object
@@ -22,6 +22,10 @@ const props = defineProps({
   cragRoutes: {
     type: Array as () => Route[],
     required: true
+  },
+  filteredOutRoutes: {
+    type: Array as () => Route[],
+    default: () => []
   }
 });
 
@@ -30,17 +34,26 @@ const emit = defineEmits(['close']);
 const closeTooltip = () => {
   emit('close');
 };
+
+// Add state to track if we're showing filtered routes
+const showingFilteredRoutes = ref(false);
+
+// Toggle visibility of filtered routes
+const toggleFilteredRoutes = () => {
+  showingFilteredRoutes.value = !showingFilteredRoutes.value;
+};
+
+// Compute the displayed routes based on the toggle state
+const displayedRoutes = computed(() => {
+  return showingFilteredRoutes.value 
+    ? [...props.cragRoutes, ...props.filteredOutRoutes]
+    : props.cragRoutes;
+});
 </script>
 
 <template>
-  <foreignObject 
-
-    @click.stop="closeTooltip"
-  >
-    <div 
-      xmlns="http://www.w3.org/1999/xhtml" 
-      class="tooltip"
-    >
+  <foreignObject @click.stop="closeTooltip">
+    <div xmlns="http://www.w3.org/1999/xhtml" class="tooltip">
       <div class="tooltip-header">
         <div class="header-info">
           <h3><b>🧗🏻{{ selectedCrag.sector }}</b> ({{ selectedCrag.name }})</h3>
@@ -49,8 +62,8 @@ const closeTooltip = () => {
       </div>
       
       <div class="tooltip-content">
-        <div v-if="cragRoutes.length" class="routes-list">
-          <div v-for="route in cragRoutes" :key="route.id" class="route-item">
+        <div v-if="displayedRoutes.length" class="routes-list">
+          <div v-for="route in displayedRoutes" :key="route.id" class="route-item">
             <div class="route-info">
               <a 
                 :href="route.link || '#'" 
@@ -60,7 +73,6 @@ const closeTooltip = () => {
                 @click.stop
               >
                 <div class="route-name">{{ route.name }}</div>
-                <!-- <div class="route-area">{{ route.area }}</div> -->
               </a>
             </div>
             <div class="route-stars">
@@ -74,6 +86,13 @@ const closeTooltip = () => {
         <div v-else class="no-routes">
           No routes found for this block
         </div>
+      </div>
+      
+      <!-- Add toggle button for filtered routes if there are any -->
+      <div v-if="filteredOutRoutes.length > 0" class="filtered-routes-toggle">
+        <button @click.stop="toggleFilteredRoutes" class="toggle-button">
+          {{ showingFilteredRoutes ? 'Hide filtered routes' : `Show all routes (+${filteredOutRoutes.length})` }}
+        </button>
       </div>
     </div>
   </foreignObject>
@@ -241,6 +260,29 @@ h3 b {
   font-size: 16px; /* Added larger font size */
 }
 
+/* Add styles for the filtered routes toggle */
+.filtered-routes-toggle {
+  padding: 8px;
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 5px;
+}
+
+.toggle-button {
+  background: rgba(255, 255, 255, 0.15);
+  border: none;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.toggle-button:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
 /* Desktop-specific adjustments */
 @media (min-width: 768px) {
   .tooltip {
@@ -283,6 +325,11 @@ h3 b {
   
   .no-routes {
     font-size: 18px;
+  }
+
+  .toggle-button {
+    font-size: 14px;
+    padding: 8px 14px;
   }
 }
 </style>
