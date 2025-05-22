@@ -99,13 +99,27 @@ const selectArea = (name: string) => {
 };
 
 const handleSelectCrag = (crag: SvgObject) => {
+  const routes = getRoutesByCrag(crag.name, crag.sector || '');
+  if (routes.length - filteredOutRoutes.value.length < 0) {
+    return
+  } 
+
+
   selectArea(crag.name);
   panZoomInstance?.zoom(1, { animate: true });
   focusOn(crag);
   ;(window as any).selectedCrag = crag;
   panZoomInstance?.zoom(panZoomScale.value, { animate: true });
   selectedCrag.value = crag;
-  showTooltip.value = true;
+  
+  // Check if this crag has any routes before showing the tooltip
+  const allRoutes = getRoutesByCrag(crag.name, crag.sector || '');
+  if (allRoutes.length > 0) {
+    showTooltip.value = true;
+  } else {
+    // Don't show tooltip for crags without routes
+    showTooltip.value = false;
+  }
 };
 
 const hideTooltip = () => {
@@ -227,8 +241,8 @@ onMounted(() => {
       {
         maxScale: 8,    // Lower max zoom for desktop
         minScale: 1.0,     // Lower min zoom for desktop
-        step: 0.7,       // More precise zoom step for desktop
-        startScale: 1.0  // Less initial zoom for desktop
+        step: 0.1,       // More precise zoom step for desktop
+        startScale: 1.5  // Less initial zoom for desktop
       };
     
     panZoomInstance = Panzoom(mapSvg.value, zoomConfig);
@@ -389,6 +403,21 @@ const isCragSelected = (crag: SvgObject) => {
   return selectedCrag.value?.name === crag.name && selectedCrag.value?.sector === crag.sector;
 };
 
+// Updated computed properties to determine if tooltip should be shown
+const hasVisibleRoutes = computed(() => {
+  // Get all available routes for the selected crag, regardless of difficulty filter
+  if (!selectedCrag.value) return false;
+  
+  const allRoutes = getRoutesByCrag(selectedCrag.value.name, selectedCrag.value.sector || '');
+  
+  // Fix: Use the length of the array instead of subtracting the array itself
+  return allRoutes.length - filteredOutRoutes.value.length > 0;
+});
+
+const shouldShowTooltip = computed(() => {
+  return showTooltip.value && selectedCrag.value && hasVisibleRoutes.value;
+});
+
 </script>
 
 <template>
@@ -545,7 +574,7 @@ const isCragSelected = (crag: SvgObject) => {
       />
     </div>
 
-    <div v-if="showTooltip && selectedCrag" class="fixed-tooltip">
+    <div v-if="shouldShowTooltip" class="fixed-tooltip">
         <RouteTooltip
           :selected-crag="selectedCrag"
           :crag-routes="cragRoutes"

@@ -195,6 +195,7 @@ const isCragTooSmall = (crag: SvgObject) => {
         v-if="isCragTooSmall(crag)"
         :cx="safeGetPathCenter(crag).x"
         :cy="safeGetPathCenter(crag).y - 1"
+        @click="(event) => selectArea(crag, event)"
         r="4"
         fill="rgba(0, 0, 0, 0.3)"
         :opacity="getCragTitleOpacity(crag)"
@@ -203,6 +204,7 @@ const isCragTooSmall = (crag: SvgObject) => {
       <text
         :x="safeGetPathCenter(crag).x"
         :y="safeGetPathCenter(crag).y"
+        @click="(event) => selectArea(crag, event)"
         text-anchor="middle"
         alignment-baseline="middle"
         font-size="6"
