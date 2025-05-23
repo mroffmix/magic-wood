@@ -30,7 +30,7 @@ const hoveredArea = ref<string | null>(null);
 
 const showTooltip = ref(false);
 const selectedCrag = ref<SvgObject | null>(null);
-const panZoomScale = ref(5); // Default value, will be updated based on device
+const panZoomScale = ref(3); // Default value, will be updated based on device
 
 // Initialize interaction handler to detect drag vs click
 const interactionHandler = useInteractionHandler(8); // 8px drag threshold
@@ -218,9 +218,9 @@ const applyBoundaryConstraints = () => {
   const scaledWidth = svgViewBox.width * scale;
   const scaledHeight = svgViewBox.height * scale;
   
-  // Allow some margin (20% of container size) so map doesn't get stuck at edges
-  const marginX = containerRect.width * 0.2;
-  const marginY = containerRect.height * 0.2;
+  // Allow larger margin (50% of container size) to enable focusing on edge elements
+  const marginX = containerRect.width * 0.5;
+  const marginY = containerRect.height * 0.5;
   
   // Calculate bounds that keep most of the map visible
   const minX = Math.min(-marginX, containerRect.width - scaledWidth + marginX);
@@ -261,7 +261,7 @@ onMounted(() => {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     // Set different zoom scales based on device type
-    panZoomScale.value = isMobile ? 8 : 5;
+    panZoomScale.value = isMobile ? 5 : 4;
     
 
     // Different zoom settings for mobile and desktop
@@ -270,15 +270,15 @@ onMounted(() => {
         maxScale: 20,
         minScale: 1.0,
         step: 5,
-        startScale: 2.5,
-        contain: 'outside' // Basic containment
+        startScale: 2.5
+        // Remove contain option to allow focusing on edge elements
       } : 
       {
         maxScale: 8,    // Lower max zoom for desktop
         minScale: 1.0,     // Lower min zoom for desktop
         step: 0.1,       // More precise zoom step for desktop
-        startScale: 1.5,  // Less initial zoom for desktop
-        contain: 'outside' // Basic containment
+        startScale: 1.5  // Less initial zoom for desktop
+        // Remove contain option to allow focusing on edge elements
       };
     
     panZoomInstance = Panzoom(mapSvg.value, zoomConfig);
@@ -468,36 +468,35 @@ function focusOn(crag: SvgObject, bypassTooltipCheck = false) {
   }
 
   const svg = mapSvg.value!;
-  const pz  = panZoomInstance;
+  const pz = panZoomInstance;
   if (!svg || !pz) return;
 
-  /* 1-2. элемент + масштаб */
-  // console.log('crag', crag.name + '_' + crag.sector);
+  /* 1. Find the target element */
   const el = svg.getElementById(crag.name + '_' + crag.sector) as SVGGraphicsElement | null;
-  // console.log('el', el);
   if (!el) return;
-  const zoomTo = 1;
-  if (zoomTo !== undefined) pz.zoom(zoomTo, { animate: false });
-  const S = pz.getScale();               // фактический zoom
 
-  /* 3. центр bbox в координатах SVG-корня */
+  /* 2. Reset to scale 1 first for accurate calculations */
+  pz.zoom(1, { animate: false });
+
+  /* 3. Get center of element bbox in SVG coordinates */
   const bbox = el.getBBox();
-  const pt   = svg.createSVGPoint();
-  pt.x = bbox.x + bbox.width  / 2;
+  const pt = svg.createSVGPoint();
+  pt.x = bbox.x + bbox.width / 2;
   pt.y = bbox.y + bbox.height / 2;
-  const gpt  = pt.matrixTransform(el.getCTM()!);
+  const gpt = pt.matrixTransform(el.getCTM()!);
 
-  /* 4. середина контейнера */
+  /* 4. Get center of container */
   const parent = svg.parentElement as HTMLElement;
-  const viewCx = parent.clientWidth  / 2;
+  const viewCx = parent.clientWidth / 2;
   const viewCy = parent.clientHeight / 2;
 
-  /* 5. новый абсолютный pan ⟵ правильная формула */
-  const panX = viewCx / S - gpt.x;
-  const panY = viewCy / S - gpt.y;
+  /* 5. Calculate pan to center the element */
+  const panX = viewCx - gpt.x;
+  const panY = (viewCy - 25) - gpt.y;
 
-  pz.pan(panX, panY - 25, { animate: true });
-  panZoomInstance?.zoom(panZoomScale.value, { animate: true });
+  /* 6. Apply pan first, then zoom */
+  pz.pan(panX, panY, { animate: true });
+  pz.zoom(panZoomScale.value, { animate: true });
 }
 
 // Function to determine if a crag is selected
@@ -811,7 +810,7 @@ const shouldShowTooltip = computed(() => {
 
 .fixed-tooltip {
   position: fixed;
-  bottom: 90px; 
+  bottom: 50px; 
   left: 50%;
   transform: translateX(-50%);
   width: 95%; /* Slightly wider */
