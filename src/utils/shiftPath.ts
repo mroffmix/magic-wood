@@ -60,7 +60,7 @@ export function shiftPath(d: string, dx: number, dy: number): string {
 export function getPathCenter(path: string, dx = 0, dy = 0) {
   // Извлекаем все числа (координаты) из path
   const coords = path.match(/-?\d+(\.\d+)?/g)?.map(Number) || [];
-  let xs: number[] = [], ys: number[] = [];
+  const xs: number[] = [], ys: number[] = [];
   for (let i = 0; i < coords.length; i += 2) {
     xs.push(coords[i]);
     ys.push(coords[i + 1]);
@@ -74,7 +74,7 @@ export function getPathCenter(path: string, dx = 0, dy = 0) {
 }
 
 
-export function applyShiftPath(arr: Array<any>) {
+export function applyShiftPath(arr: Array<{ path: string; x: number; y: number; absolutePath?: string }>) {
   arr.forEach(item => {
     item.absolutePath = shiftPath(item.path, item.x, item.y);
   });

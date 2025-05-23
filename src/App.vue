@@ -13,9 +13,10 @@ import CragsLayer from './components/layers/CragsLayer.vue';
 import RouteTooltip from '@/components/common/RouteTooltip.vue';
 import DifficultyFilter from '@/components/filters/DifficultyFilter.vue';
 import DifficultyLabel from '@/components/common/DifficultyLabel.vue';
+import FilteredRoutesModal from '@/components/common/FilteredRoutesModal.vue';
 import routesData from '@/routes-data/filled_routes.json';
 import type { SvgObject } from '@/types/SvgObject';
-import { difficultyMap, getDifficultyValue } from '@/utils/difficulty';
+import { getDifficultyValue } from '@/utils/difficulty';
 import { useInteractionHandler } from '@/utils/interaction';
 
 applyShiftPath(areas);
@@ -37,6 +38,29 @@ const interactionHandler = useInteractionHandler(8); // 8px drag threshold
 // Track panzoom drag state
 const isPanZooming = ref(false);
 const hadPanMovement = ref(false);
+
+// Filtered routes modal state
+const showFilteredRoutesModal = ref(false);
+
+// Starred crags visibility state
+const showStarredCrags = ref(false);
+
+// Handle route selection from modal
+const handleRouteSelection = (route: any) => {
+  console.log('Selected route:', route);
+  
+  // Find the corresponding crag for this route
+  const correspondingCrag = [...crags, ...e_crags].find(crag => 
+    crag.name === route.blockNumber && crag.sector === route.area
+  );
+  
+  if (correspondingCrag) {
+    console.log('Found corresponding crag:', correspondingCrag);
+    handleSelectCrag(correspondingCrag);
+  } else {
+    console.log('No corresponding crag found for route:', route);
+  }
+};
 
 
 const getRoutesByCrag = (cragName: string, cragSector: string) => {
@@ -563,6 +587,26 @@ const shouldShowTooltip = computed(() => {
         <span class="map-icon">📍</span>
       </button>
       
+      <!-- Filtered Routes Button -->
+      <button 
+        @click="showFilteredRoutesModal = true"
+        class="filtered-routes-button"
+        aria-label="Show filtered routes"
+        type="button"
+      >
+        <span class="list-icon">📋</span>
+      </button>
+      
+      <!-- Starred Crags Toggle Button -->
+      <button 
+        @click="showStarredCrags = !showStarredCrags"
+        :class="['starred-crags-button', { active: showStarredCrags }]"
+        aria-label="Toggle starred crags"
+        type="button"
+      >
+        <span class="star-icon">⭐</span>
+      </button>
+      
       <!-- Search results dropdown with tooltip-like styling -->
       <div v-if="isSearchActive && searchResults.length > 0" class="search-results">
         <div 
@@ -636,6 +680,7 @@ const shouldShowTooltip = computed(() => {
             :minDifficulty="minDifficulty"
             :maxDifficulty="maxDifficulty"
             :routes="routesData"
+            :showStarredCrags="showStarredCrags"
             @select-area="selectArea" 
             @hover="hoveredArea = $event"
             @select-crag="handleSelectCrag"
@@ -691,6 +736,16 @@ const shouldShowTooltip = computed(() => {
           @close="hideTooltip"
         />
       </div>
+      
+      <!-- Filtered Routes Modal -->
+      <FilteredRoutesModal
+        :routes="routesData"
+        :min-difficulty="minDifficulty"
+        :max-difficulty="maxDifficulty"
+        :is-visible="showFilteredRoutesModal"
+        @close="showFilteredRoutesModal = false"
+        @select-route="handleRouteSelection"
+      />
   </div>
   <!-- End app-container -->
 </template>
@@ -870,6 +925,80 @@ const shouldShowTooltip = computed(() => {
 }
 
 .map-icon {
+  display: inline-block;
+  transform: translateY(-1px); /* Slight adjustment for visual alignment */
+}
+
+/* Filtered routes button styles */
+.filtered-routes-button {
+  position: absolute;
+  right: 100px; /* Position to the left of quick nav button */
+  top: 18px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  z-index: 152;
+  transition: background-color 0.2s ease;
+}
+
+.filtered-routes-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.filtered-routes-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+.list-icon {
+  display: inline-block;
+  transform: translateY(-1px); /* Slight adjustment for visual alignment */
+}
+
+/* Starred crags button styles */
+.starred-crags-button {
+  position: absolute;
+  right: 140px; /* Position to the left of filtered routes button */
+  top: 18px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 12px;
+  z-index: 152;
+  transition: all 0.2s ease;
+}
+
+.starred-crags-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.starred-crags-button.active {
+  background: rgba(255, 215, 0, 0.3);
+  color: #ffd700;
+  border: 1px solid rgba(255, 215, 0, 0.5);
+}
+
+.starred-crags-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+.star-icon {
   display: inline-block;
   transform: translateY(-1px); /* Slight adjustment for visual alignment */
 }

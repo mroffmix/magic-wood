@@ -41,6 +41,11 @@ const props = defineProps({
   isCragSelected: {
     type: Function,
     required: true
+  },
+  // New prop to show crags with starred routes
+  showStarredCrags: {
+    type: Boolean,
+    default: false
   }
 });
 
@@ -112,6 +117,29 @@ const getAdditionalName = (crag: SvgObject) => {
   );
   
   return matchingRoute ? matchingRoute.name : null;
+};
+
+// Function to check if a crag has starred routes AND is currently visible
+const cragHasStarredRoutes = (crag: SvgObject) => {
+  if (!props.showStarredCrags) return false;
+  
+  // Only show stars for crags that are currently visible (match difficulty filter)
+  if (!isCragVisible(crag)) return false;
+  
+  // Check if the crag has starred routes that match the current difficulty filter
+  return props.routes.some(route => {
+    if (route.area !== crag.sector || route.blockNumber !== crag.name) {
+      return false;
+    }
+    
+    // Route must have stars
+    if (route.starscount === 0) return false;
+    
+    // Route must be within the current difficulty range
+    const routeDifficultyValue = getDifficultyValue(route.difficulty);
+    return routeDifficultyValue >= minDifficultyValue.value && 
+           routeDifficultyValue <= maxDifficultyValue.value;
+  });
 };
 
 // Add a safe wrapper for getPathCenter to handle NaN values
@@ -251,6 +279,29 @@ const isCragTooSmall = (crag: SvgObject) => {
         :opacity="getCragTitleOpacity(crag)"
         @click="() => selectArea(crag)"
       >{{ getAdditionalName(crag) }}</text>
+    </g>
+    
+    <!-- Star indicators for crags with starred routes -->
+    <g v-for="(crag, index) in crags.filter(c => cragHasStarredRoutes(c))" :key="'star-' + index">
+      <circle
+        :cx="safeGetPathCenter(crag).x + 6"
+        :cy="safeGetPathCenter(crag).y - 6"
+        r="2"
+        fill="rgba(255, 215, 0, 0.9)"
+        stroke="rgba(255, 255, 255, 0.8)"
+        stroke-width="0.5"
+        @click="() => selectArea(crag)"
+      />
+      <text
+        :x="safeGetPathCenter(crag).x + 6"
+        :y="safeGetPathCenter(crag).y - 6"
+        text-anchor="middle"
+        alignment-baseline="middle"
+        font-size="2"
+        fill="#000"
+        font-weight="bold"
+        style="user-select: none; pointer-events: none;"
+      >★</text>
     </g>
   </g>
 </template>
