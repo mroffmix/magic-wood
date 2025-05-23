@@ -86,7 +86,7 @@ export function createInteractionHandler(dragThreshold: number = 8) {
   /**
    * Handle pointer up event (mouse up or touch end)
    */
-  function handlePointerUp(event: Event): void {
+  function handlePointerUp(_event: Event): void {
     const wasDragging = state.isDragging;
     
     state.isPointerDown = false;

@@ -46,7 +46,7 @@ const showFilteredRoutesModal = ref(false);
 const showStarredCrags = ref(false);
 
 // Handle route selection from modal
-const handleRouteSelection = (route: any) => {
+const handleRouteSelection = (route: { blockNumber: string; area: string; [key: string]: unknown }) => {
   console.log('Selected route:', route);
   
   // Find the corresponding crag for this route
@@ -125,7 +125,7 @@ const filteredOutRoutes = computed(() => {
   });
 });
 
-const selectArea = (_name: string) => {
+const selectArea = () => {
   return;
 };
 
