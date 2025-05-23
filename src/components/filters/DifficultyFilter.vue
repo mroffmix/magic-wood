@@ -247,105 +247,109 @@ onMounted(() => {
     <!-- Compact view when filter is hidden -->
     <div v-if="!isFilterVisible" class="difficulty-filter-compact" @click="toggleFilterVisibility">
       <div class="compact-display">
-        <span class="compact-label">Difficulty:</span>
-        <span 
-          class="compact-value"
-          :style="{ 
-            backgroundColor: minSliderValue === maxSliderValue 
-              ? getDifficultyColor(minSliderValue) 
-              : `linear-gradient(to right, ${getDifficultyColor(minSliderValue)}, ${getDifficultyColor(maxSliderValue)})`,
-            color: '#fff'
-          }"
-        >
-          {{ rangeDisplayText }}
-        </span>
+        <div class="compact-left">
+          <span class="compact-label">Difficulty:</span>
+          <span 
+            class="compact-value"
+            :style="{ 
+              backgroundColor: minSliderValue === maxSliderValue 
+                ? getDifficultyColor(minSliderValue) 
+                : `linear-gradient(to right, ${getDifficultyColor(minSliderValue)}, ${getDifficultyColor(maxSliderValue)})`,
+              color: '#fff'
+            }"
+          >
+            {{ rangeDisplayText }}
+          </span>
+        </div>
         <span class="expand-icon">▲</span>
       </div>
     </div>
 
     <!-- Full slider view when filter is visible -->
     <div v-if="isFilterVisible" class="difficulty-filter" @click="closeSelects">
-      <!-- Hide button positioned at top right -->
-      <button 
-        @click.stop="toggleFilterVisibility"
-        class="collapse-button"
-        aria-label="Hide difficulty filter"
-      >
-        ▼
-      </button>
-      
-      <!-- Horizontal layout with labels and slider -->
-      <div class="slider-row">
-        <!-- Min difficulty label on the left -->
-        <div class="difficulty-label-container" @click.stop="handleMinLabelClick">
-          <DifficultyLabel :difficulty="minDifficultyValue" />
-          
-          <!-- Min difficulty select dropdown -->
-          <div v-if="showMinSelect" class="difficulty-select-dropdown">
-            <div 
-              v-for="option in validMinOptions" 
-              :key="option.value"
-              class="difficulty-option difficulty-number-option"
-              @click="selectMinDifficulty(option)"
-            >
-              {{ option.display }}
+      <!-- Horizontal layout with slider and collapse button -->
+      <div class="filter-content-row">
+        <div class="slider-row">
+          <!-- Min difficulty label on the left -->
+          <div class="difficulty-label-container" @click.stop="handleMinLabelClick">
+            <DifficultyLabel :difficulty="minDifficultyValue" />
+            
+            <!-- Min difficulty select dropdown -->
+            <div v-if="showMinSelect" class="difficulty-select-dropdown">
+              <div 
+                v-for="option in validMinOptions" 
+                :key="option.value"
+                class="difficulty-option difficulty-number-option"
+                @click="selectMinDifficulty(option)"
+              >
+                {{ option.display }}
+              </div>
             </div>
           </div>
-        </div>
-        
-        <!-- Dual slider container in the middle -->
-        <div class="dual-slider-container">
-          <!-- Track background -->
-          <div class="slider-track">
-            <div class="slider-range" :style="rangeTrackStyle"></div>
+          
+          <!-- Dual slider container in the middle -->
+          <div class="dual-slider-container">
+            <!-- Track background -->
+            <div class="slider-track">
+              <div class="slider-range" :style="rangeTrackStyle"></div>
+            </div>
+            
+            <!-- Min slider -->
+            <input
+              type="range"
+              :min="MIN_VALUE"
+              :max="MAX_VALUE"
+              :value="minSliderValue"
+              @input="handleMinInput"
+              @focus="handleMinFocus"
+              @blur="handleBlur"
+              @mousedown="handleMinFocus"
+              @touchstart="handleMinFocus"
+              class="slider slider-min"
+              :style="{ zIndex: minSliderZIndex }"
+            />
+            
+            <!-- Max slider -->
+            <input
+              type="range"
+              :min="MIN_VALUE"
+              :max="MAX_VALUE"
+              :value="maxSliderValue"
+              @input="handleMaxInput"
+              @focus="handleMaxFocus"
+              @blur="handleBlur"
+              @mousedown="handleMaxFocus"
+              @touchstart="handleMaxFocus"
+              class="slider slider-max"
+              :style="{ zIndex: maxSliderZIndex }"
+            />
           </div>
           
-          <!-- Min slider -->
-          <input
-            type="range"
-            :min="MIN_VALUE"
-            :max="MAX_VALUE"
-            :value="minSliderValue"
-            @input="handleMinInput"
-            @focus="handleMinFocus"
-            @blur="handleBlur"
-            @mousedown="handleMinFocus"
-            @touchstart="handleMinFocus"
-            class="slider slider-min"
-            :style="{ zIndex: minSliderZIndex }"
-          />
-          
-          <!-- Max slider -->
-          <input
-            type="range"
-            :min="MIN_VALUE"
-            :max="MAX_VALUE"
-            :value="maxSliderValue"
-            @input="handleMaxInput"
-            @focus="handleMaxFocus"
-            @blur="handleBlur"
-            @mousedown="handleMaxFocus"
-            @touchstart="handleMaxFocus"
-            class="slider slider-max"
-            :style="{ zIndex: maxSliderZIndex }"
-          />
-        </div>
-        
-        <!-- Max difficulty label on the right -->
-        <div class="difficulty-label-container" @click.stop="handleMaxLabelClick">
-          <DifficultyLabel :difficulty="maxDifficultyValue" />
-          
-          <!-- Max difficulty select dropdown -->
-          <div v-if="showMaxSelect" class="difficulty-select-dropdown difficulty-select-dropdown-right">
-            <div 
-              v-for="option in validMaxOptions" 
-              :key="option.value"
-              class="difficulty-option difficulty-number-option"
-              @click="selectMaxDifficulty(option)"
-            >
-              {{ option.display }}
+          <!-- Max difficulty label on the right -->
+          <div class="difficulty-label-container" @click.stop="handleMaxLabelClick">
+            <DifficultyLabel :difficulty="maxDifficultyValue" />
+            
+            <!-- Max difficulty select dropdown -->
+            <div v-if="showMaxSelect" class="difficulty-select-dropdown difficulty-select-dropdown-right">
+              <div 
+                v-for="option in validMaxOptions" 
+                :key="option.value"
+                class="difficulty-option difficulty-number-option"
+                @click="selectMaxDifficulty(option)"
+              >
+                {{ option.display }}
+              </div>
             </div>
           </div>
+          
+          <!-- Collapse button on the right -->
+          <button 
+            @click.stop="toggleFilterVisibility"
+            class="collapse-button"
+            aria-label="Hide difficulty filter"
+          >
+            ▼
+          </button>
         </div>
       </div>
     </div>
@@ -369,6 +373,13 @@ onMounted(() => {
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
 }
 
+.filter-content-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
 .difficulty-filter-compact {
   background-color: rgba(50, 50, 50, 0.8);
   border-radius: 8px 8px 0 0;
@@ -386,14 +397,24 @@ onMounted(() => {
 .compact-display {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 8px;
   font-size: 14px;
+  width: 100%;
+}
+
+.compact-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0; /* Allow shrinking */
 }
 
 .compact-label {
   color: rgba(255, 255, 255, 0.8);
   font-size: 12px;
+  flex-shrink: 0; /* Don't shrink the label */
 }
 
 .compact-value {
@@ -407,12 +428,11 @@ onMounted(() => {
 .expand-icon {
   color: rgba(255, 255, 255, 0.6);
   font-size: 12px;
+  flex-shrink: 0; /* Don't shrink the icon */
+  margin-left: 8px;
 }
 
 .collapse-button {
-  position: absolute;
-  top: 8px;
-  right: 12px;
   background: rgba(255, 255, 255, 0.1);
   border: none;
   border-radius: 4px;
@@ -425,7 +445,7 @@ onMounted(() => {
   cursor: pointer;
   font-size: 10px;
   transition: background-color 0.2s ease;
-  z-index: 10;
+  flex-shrink: 0; /* Don't shrink the button */
 }
 
 .collapse-button:hover {
@@ -437,7 +457,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   gap: 12px;
-  width: 100%;
+  flex: 1; /* Take available space */
 }
 
 .difficulty-label-container {
@@ -461,7 +481,7 @@ onMounted(() => {
   border-radius: 6px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   z-index: 100;
-  margin-bottom: 4px;
+  margin-bottom: 30px; /* Increased margin to avoid collapse button */
   min-width: 40px;
   display: flex;
   flex-direction: column;

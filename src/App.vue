@@ -38,6 +38,7 @@ const interactionHandler = useInteractionHandler(8); // 8px drag threshold
 // Track panzoom drag state
 const isPanZooming = ref(false);
 const hadPanMovement = ref(false);
+const isProgrammaticMove = ref(false); // Track when focusOn is moving the map
 
 // Filtered routes modal state
 const showFilteredRoutesModal = ref(false);
@@ -288,6 +289,11 @@ onMounted(() => {
       // console.log('Panzoom start - setting isPanZooming to true');
       isPanZooming.value = true;
       hadPanMovement.value = false; // Reset movement flag
+      
+      // Hide tooltip only if this is user-initiated movement (not programmatic)
+      if (!isProgrammaticMove.value) {
+        showTooltip.value = false;
+      }
     });
     
     mapSvg.value.addEventListener('panzoompan', () => {
@@ -295,6 +301,11 @@ onMounted(() => {
       hadPanMovement.value = true;
       // Apply boundary constraints during panning
       requestAnimationFrame(applyBoundaryConstraints);
+      
+      // Hide tooltip only if this is user-initiated movement (not programmatic)
+      if (!isProgrammaticMove.value) {
+        showTooltip.value = false;
+      }
     });
     
     mapSvg.value.addEventListener('panzoomzoom', () => {
@@ -302,6 +313,11 @@ onMounted(() => {
       hadPanMovement.value = true;
       // Apply boundary constraints after zooming
       requestAnimationFrame(applyBoundaryConstraints);
+      
+      // Hide tooltip only if this is user-initiated movement (not programmatic)
+      if (!isProgrammaticMove.value) {
+        showTooltip.value = false;
+      }
     });
     
     mapSvg.value.addEventListener('panzoomend', () => {
@@ -475,28 +491,36 @@ function focusOn(crag: SvgObject, bypassTooltipCheck = false) {
   const el = svg.getElementById(crag.name + '_' + crag.sector) as SVGGraphicsElement | null;
   if (!el) return;
 
-  /* 2. Reset to scale 1 first for accurate calculations */
+  /* 2. Mark as programmatic movement to prevent tooltip hiding */
+  isProgrammaticMove.value = true;
+
+  /* 3. Reset to scale 1 first for accurate calculations */
   pz.zoom(1, { animate: false });
 
-  /* 3. Get center of element bbox in SVG coordinates */
+  /* 4. Get center of element bbox in SVG coordinates */
   const bbox = el.getBBox();
   const pt = svg.createSVGPoint();
   pt.x = bbox.x + bbox.width / 2;
   pt.y = bbox.y + bbox.height / 2;
   const gpt = pt.matrixTransform(el.getCTM()!);
 
-  /* 4. Get center of container */
+  /* 5. Get center of container */
   const parent = svg.parentElement as HTMLElement;
   const viewCx = parent.clientWidth / 2;
   const viewCy = parent.clientHeight / 2;
 
-  /* 5. Calculate pan to center the element */
+  /* 6. Calculate pan to center the element */
   const panX = viewCx - gpt.x;
   const panY = (viewCy - 25) - gpt.y;
 
-  /* 6. Apply pan first, then zoom */
+  /* 7. Apply pan first, then zoom */
   pz.pan(panX, panY, { animate: true });
   pz.zoom(panZoomScale.value, { animate: true });
+
+  /* 8. Reset programmatic flag after a delay to allow animations to complete */
+  setTimeout(() => {
+    isProgrammaticMove.value = false;
+  }, 1000);
 }
 
 // Function to determine if a crag is selected
