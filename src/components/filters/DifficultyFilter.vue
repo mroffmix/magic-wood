@@ -16,8 +16,85 @@ const props = defineProps({
 
 const emit = defineEmits(['update:minDifficulty', 'update:maxDifficulty']);
 
-// State for filter visibility
-const isFilterVisible = ref(true);
+// State for filter visibility - start compact to save space
+const isFilterVisible = ref(false);
+
+// State for select dropdowns
+const showMinSelect = ref(false);
+const showMaxSelect = ref(false);
+
+// Toggle filter visibility
+const toggleFilterVisibility = () => {
+  isFilterVisible.value = !isFilterVisible.value;
+};
+
+// Handle difficulty label clicks
+const handleMinLabelClick = () => {
+  showMinSelect.value = !showMinSelect.value;
+  showMaxSelect.value = false; // Close other select
+};
+
+const handleMaxLabelClick = () => {
+  showMaxSelect.value = !showMaxSelect.value;
+  showMinSelect.value = false; // Close other select
+};
+
+// Get compact grade options (main numbers only: 2, 3, 4, 5, 6, 7, 8)
+const getCompactGradeOptions = () => {
+  const mainGrades = [];
+  for (let grade = 2; grade <= 8; grade++) {
+    const baseGrade = `${grade}A`; // Use base grade (e.g., 2A, 3A, etc.)
+    if (difficultyMap[baseGrade]) {
+      mainGrades.push({
+        display: grade.toString(),
+        value: baseGrade,
+        numericValue: difficultyMap[baseGrade]
+      });
+    }
+  }
+  return mainGrades;
+};
+
+// Get valid options for min difficulty (only main grades <= current max)
+const validMinOptions = computed(() => {
+  const compactOptions = getCompactGradeOptions();
+  return compactOptions.filter(option => 
+    option.numericValue <= maxSliderValue.value
+  );
+});
+
+// Get valid options for max difficulty (only main grades >= current min)
+const validMaxOptions = computed(() => {
+  const compactOptions = getCompactGradeOptions();
+  return compactOptions.filter(option => 
+    option.numericValue >= minSliderValue.value
+  );
+});
+
+// Handle select option clicks
+const selectMinDifficulty = (gradeOption: { display: string; value: string; numericValue: number }) => {
+  minSliderValue.value = gradeOption.numericValue;
+  showMinSelect.value = false;
+};
+
+const selectMaxDifficulty = (gradeOption: { display: string; value: string; numericValue: number }) => {
+  maxSliderValue.value = gradeOption.numericValue;
+  showMaxSelect.value = false;
+};
+
+// Close selects when clicking outside
+const closeSelects = () => {
+  showMinSelect.value = false;
+  showMaxSelect.value = false;
+};
+
+// Display range text for compact view
+const rangeDisplayText = computed(() => {
+  if (minSliderValue.value === maxSliderValue.value) {
+    return minDifficultyValue.value;
+  }
+  return `${minDifficultyValue.value}–${maxDifficultyValue.value}`;
+});
 
 // Filter difficulty options to only show the range needed for the filter
 const filterDifficultyOptions = difficultyOptions.filter(option => {
@@ -167,77 +244,108 @@ onMounted(() => {
 
 <template>
   <div class="difficulty-filter-container">
-    <div v-if="isFilterVisible" class="difficulty-filter">
-      <!-- Range display -->
+    <!-- Compact view when filter is hidden -->
+    <div v-if="!isFilterVisible" class="difficulty-filter-compact" @click="toggleFilterVisibility">
+      <div class="compact-display">
+        <span class="compact-label">Difficulty:</span>
+        <span 
+          class="compact-value"
+          :style="{ 
+            backgroundColor: minSliderValue === maxSliderValue 
+              ? getDifficultyColor(minSliderValue) 
+              : `linear-gradient(to right, ${getDifficultyColor(minSliderValue)}, ${getDifficultyColor(maxSliderValue)})`,
+            color: '#fff'
+          }"
+        >
+          {{ rangeDisplayText }}
+        </span>
+        <span class="expand-icon">▲</span>
+      </div>
+    </div>
 
+    <!-- Full slider view when filter is visible -->
+    <div v-if="isFilterVisible" class="difficulty-filter" @click="closeSelects">
+      <!-- Hide button positioned at top right -->
+      <button 
+        @click.stop="toggleFilterVisibility"
+        class="collapse-button"
+        aria-label="Hide difficulty filter"
+      >
+        ▼
+      </button>
       
-      <!-- Dual slider container -->
-      <div class="dual-slider-container">
-        <!-- Track background -->
-        <div class="slider-track">
-          <div class="slider-range" :style="rangeTrackStyle"></div>
-        </div>
-        
-        <!-- Min slider -->
-        <input
-          type="range"
-          :min="MIN_VALUE"
-          :max="MAX_VALUE"
-          :value="minSliderValue"
-          @input="handleMinInput"
-          @focus="handleMinFocus"
-          @blur="handleBlur"
-          @mousedown="handleMinFocus"
-          @touchstart="handleMinFocus"
-          class="slider slider-min"
-          :style="{ zIndex: minSliderZIndex }"
-        />
-        
-        <!-- Max slider -->
-        <input
-          type="range"
-          :min="MIN_VALUE"
-          :max="MAX_VALUE"
-          :value="maxSliderValue"
-          @input="handleMaxInput"
-          @focus="handleMaxFocus"
-          @blur="handleBlur"
-          @mousedown="handleMaxFocus"
-          @touchstart="handleMaxFocus"
-          class="slider slider-max"
-          :style="{ zIndex: maxSliderZIndex }"
-        />
-        
-        <!-- Handle labels using DifficultyLabel component -->
-        <div 
-          v-if="minSliderValue !== maxSliderValue"
-          class="slider-handle slider-handle-min"
-          :style="{ 
-            left: `${((minSliderValue - MIN_VALUE) / (MAX_VALUE - MIN_VALUE)) * 100}%`
-          }"
-        >
+      <!-- Horizontal layout with labels and slider -->
+      <div class="slider-row">
+        <!-- Min difficulty label on the left -->
+        <div class="difficulty-label-container" @click.stop="handleMinLabelClick">
           <DifficultyLabel :difficulty="minDifficultyValue" />
+          
+          <!-- Min difficulty select dropdown -->
+          <div v-if="showMinSelect" class="difficulty-select-dropdown">
+            <div 
+              v-for="option in validMinOptions" 
+              :key="option.value"
+              class="difficulty-option difficulty-number-option"
+              @click="selectMinDifficulty(option)"
+            >
+              {{ option.display }}
+            </div>
+          </div>
         </div>
         
-        <div 
-          v-if="minSliderValue !== maxSliderValue"
-          class="slider-handle slider-handle-max"
-          :style="{ 
-            left: `${((maxSliderValue - MIN_VALUE) / (MAX_VALUE - MIN_VALUE)) * 100}%`
-          }"
-        >
+        <!-- Dual slider container in the middle -->
+        <div class="dual-slider-container">
+          <!-- Track background -->
+          <div class="slider-track">
+            <div class="slider-range" :style="rangeTrackStyle"></div>
+          </div>
+          
+          <!-- Min slider -->
+          <input
+            type="range"
+            :min="MIN_VALUE"
+            :max="MAX_VALUE"
+            :value="minSliderValue"
+            @input="handleMinInput"
+            @focus="handleMinFocus"
+            @blur="handleBlur"
+            @mousedown="handleMinFocus"
+            @touchstart="handleMinFocus"
+            class="slider slider-min"
+            :style="{ zIndex: minSliderZIndex }"
+          />
+          
+          <!-- Max slider -->
+          <input
+            type="range"
+            :min="MIN_VALUE"
+            :max="MAX_VALUE"
+            :value="maxSliderValue"
+            @input="handleMaxInput"
+            @focus="handleMaxFocus"
+            @blur="handleBlur"
+            @mousedown="handleMaxFocus"
+            @touchstart="handleMaxFocus"
+            class="slider slider-max"
+            :style="{ zIndex: maxSliderZIndex }"
+          />
+        </div>
+        
+        <!-- Max difficulty label on the right -->
+        <div class="difficulty-label-container" @click.stop="handleMaxLabelClick">
           <DifficultyLabel :difficulty="maxDifficultyValue" />
-        </div>
-        
-        <!-- Single handle when both values are equal -->
-        <div 
-          v-if="minSliderValue === maxSliderValue"
-          class="slider-handle slider-handle-single"
-          :style="{ 
-            left: `${((minSliderValue - MIN_VALUE) / (MAX_VALUE - MIN_VALUE)) * 100}%`
-          }"
-        >
-          <DifficultyLabel :difficulty="minDifficultyValue" />
+          
+          <!-- Max difficulty select dropdown -->
+          <div v-if="showMaxSelect" class="difficulty-select-dropdown difficulty-select-dropdown-right">
+            <div 
+              v-for="option in validMaxOptions" 
+              :key="option.value"
+              class="difficulty-option difficulty-number-option"
+              @click="selectMaxDifficulty(option)"
+            >
+              {{ option.display }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -256,21 +364,142 @@ onMounted(() => {
 .difficulty-filter {
   background-color: rgba(50, 50, 50, 0.8);
   border-radius: 8px 8px 0 0;
-  padding: 20px 15px;
+  padding: 12px 15px;
   width: 100%;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
 }
 
+.difficulty-filter-compact {
+  background-color: rgba(50, 50, 50, 0.8);
+  border-radius: 8px 8px 0 0;
+  padding: 8px 15px;
+  width: 100%;
+  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.difficulty-filter-compact:hover {
+  background-color: rgba(60, 55, 55, 0.8);
+}
+
+.compact-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.compact-label {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+}
+
+.compact-value {
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.expand-icon {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 12px;
+}
+
+.collapse-button {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 4px;
+  color: rgba(255, 255, 255, 0.6);
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 10px;
+  transition: background-color 0.2s ease;
+  z-index: 10;
+}
+
+.collapse-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.slider-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.difficulty-label-container {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+}
+
+.difficulty-label-container:hover {
+  opacity: 0.8;
+}
+
+.difficulty-select-dropdown {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  background: rgba(40, 40, 40, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  z-index: 100;
+  margin-bottom: 4px;
+  min-width: 40px;
+  display: flex;
+  flex-direction: column;
+}
+
+.difficulty-select-dropdown-right {
+  left: auto;
+  right: 0;
+}
+
+.difficulty-option {
+  padding: 4px 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.difficulty-option:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.difficulty-number-option {
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+  color: white;
+  min-width: 24px;
+  padding: 8px 12px;
+}
 
 .dual-slider-container {
   position: relative;
-  width: 100%;
-  height: 60px;
+  flex: 1;
+  height: 40px; /* Reduced from 60px */
 }
 
 .slider-track {
   position: absolute;
-  top: 25px;
+  top: 17px; /* Adjusted for smaller container */
   left: 0;
   right: 0;
   height: 6px;
@@ -287,7 +516,7 @@ onMounted(() => {
 
 .slider {
   position: absolute;
-  top: 20px;
+  top: 12px; /* Adjusted for smaller container */
   left: 0;
   right: 0;
   width: 100%;
@@ -309,9 +538,9 @@ onMounted(() => {
   height: 20px;
   border-radius: 50%;
   background: #fff;
-  border: 2px solid #666;
+  border: 2px solid #333;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   transition: all 0.1s ease;
   pointer-events: auto;
 }
@@ -332,9 +561,9 @@ onMounted(() => {
   height: 20px;
   border-radius: 50%;
   background: #fff;
-  border: 2px solid #666;
+  border: 2px solid #333;
   cursor: pointer;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
   transition: all 0.1s ease;
   pointer-events: auto;
 }
@@ -355,35 +584,19 @@ onMounted(() => {
   border: none;
 }
 
-.slider-handle {
-  position: absolute;
-  top: -12px;
-  transform: translateX(-50%);
-  pointer-events: none;
-  z-index: 10;
-  transition: all 0.1s ease;
-}
-
-.slider-handle-min {
-  z-index: 11;
-}
-
-.slider-handle-max {
-  z-index: 12;
-}
-
-.slider-handle-single {
-  z-index: 13;
-}
 
 /* Mobile optimizations */
 @media (max-width: 768px) {
   .difficulty-filter {
-    padding: 15px 10px;
+    padding: 10px 12px;
+  }
+  
+  .difficulty-filter-compact {
+    padding: 6px 12px;
   }
   
   .dual-slider-container {
-    height: 70px;
+    height: 45px; /* Slightly larger for mobile touch targets */
   }
   
   .slider::-webkit-slider-thumb {
@@ -400,19 +613,44 @@ onMounted(() => {
   
   .slider-track {
     height: 8px;
-    top: 28px;
+    top: 20px;
   }
   
   .slider {
-    top: 22px;
+    top: 14px;
     height: 20px;
   }
   
+  .compact-display {
+    font-size: 16px; /* Larger text on mobile */
+  }
+  
+  .compact-value {
+    font-size: 16px;
+    padding: 6px 14px;
+  }
+  
+  .slider-row {
+    gap: 8px; /* Reduce gap on mobile */
+  }
+  
+  .difficulty-select-dropdown {
+    min-width: 50px;
+  }
+  
+  .difficulty-option {
+    padding: 6px 10px; /* Larger touch targets */
+  }
+  
+  .difficulty-number-option {
+    padding: 10px 14px;
+    font-size: 18px;
+  }
 }
 
 @media (max-width: 480px) {
   .dual-slider-container {
-    height: 80px;
+    height: 50px; /* Larger touch targets for small screens */
   }
   
   .slider::-webkit-slider-thumb {
@@ -429,22 +667,38 @@ onMounted(() => {
   
   .slider-track {
     height: 10px;
-    top: 32px;
+    top: 22px;
   }
   
   .slider {
-    top: 24px;
+    top: 16px;
     height: 24px;
-  }
-  
-  .slider-handle {
-    top: -10px;
   }
   
   .difficulty-filter {
     border-radius: 0;
   }
   
+  .difficulty-filter-compact {
+    border-radius: 0;
+  }
+  
+  .slider-row {
+    gap: 6px; /* Even smaller gap on very small screens */
+  }
+  
+  .difficulty-select-dropdown {
+    font-size: 14px;
+  }
+  
+  .difficulty-option {
+    padding: 8px 12px; /* Even larger touch targets for small screens */
+  }
+  
+  .difficulty-number-option {
+    padding: 12px 16px;
+    font-size: 20px;
+  }
 }
 
 /* Improve touch targets on mobile */
