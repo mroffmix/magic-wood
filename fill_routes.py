@@ -25,8 +25,18 @@ def fill_routes_with_block_numbers():
         filled_routes = []
         match_count = 0
         missing_count = 0
+        filtered_count = 0
         
         for route in routes_data:
+            # Skip routes with empty difficulty or containing IFAS or {US}
+            difficulty = route.get('difficulty', '')
+            if (not difficulty or 
+                difficulty.strip() == '' or 
+                'IFAS' in difficulty or 
+                '{US}' in difficulty):
+                filtered_count += 1
+                continue
+                
             # Create a copy of the route to modify
             new_route = route.copy()
             
@@ -53,6 +63,7 @@ def fill_routes_with_block_numbers():
         print(f"Total routes: {len(filled_routes)}")
         print(f"Routes with mapping match: {match_count}")
         print(f"Routes without mapping match: {missing_count}")
+        print(f"Routes filtered out due to empty/invalid difficulty: {filtered_count}")
         print(f"Output saved to: {output_file_path}")
         
         return filled_routes
@@ -66,6 +77,7 @@ def fill_routes_with_block_numbers():
     except Exception as e:
         print(f"Error processing files: {str(e)}")
         return []
+
 
 if __name__ == "__main__":
     fill_routes_with_block_numbers()

@@ -36,7 +36,7 @@ const setHoveredArea = (name: string | null) => {
       stroke-width="1"
       stroke-linejoin="round"
       stroke-dasharray="4 4"
-      class="cursor-pointer shared-path-style"
+      class="shared-path-style"
       @click="selectArea(area.name)"
       @mouseover="setHoveredArea(area.name)"
       @mouseleave="setHoveredArea(null)"

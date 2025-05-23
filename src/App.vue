@@ -12,10 +12,11 @@ import TracksLayer from './components/layers/TracksLayer.vue';
 import CragsLayer from './components/layers/CragsLayer.vue';
 import RouteTooltip from '@/components/common/RouteTooltip.vue';
 import DifficultyFilter from '@/components/filters/DifficultyFilter.vue';
-import AreaCarousel from '@/components/common/AreaCarousel.vue';
 import DifficultyLabel from '@/components/common/DifficultyLabel.vue';
 import routesData from '@/routes-data/filled_routes.json';
 import type { SvgObject } from '@/types/SvgObject';
+import { difficultyMap, getDifficultyValue } from '@/utils/difficulty';
+import { useInteractionHandler } from '@/utils/interaction';
 
 applyShiftPath(areas);
 applyShiftPath(tracks);
@@ -30,24 +31,34 @@ const showTooltip = ref(false);
 const selectedCrag = ref<SvgObject | null>(null);
 const panZoomScale = ref(5); // Default value, will be updated based on device
 
-// Map difficulty to a numeric value for filtering
-const difficultyMap: { [key: string]: number } = {
-  '1A': 1, '1A+': 2, '1B': 3, '1B+': 4, '1C': 5, '1C+': 6,
-  '2A': 7, '2A+': 8, '2B': 9, '2B+': 10, '2C': 11, '2C+': 12,
-  '3A': 13, '3A+': 14, '3B': 15, '3B+': 16, '3C': 17, '3C+': 18,
-  '4A': 19, '4A+': 20, '4B': 21, '4B+': 22, '4C': 23, '4C+': 24,
-  '5A': 25, '5A+': 26, '5B': 27, '5B+': 28, '5C': 29, '5C+': 30,
-  '6A': 31, '6A+': 32, '6B': 33, '6B+': 34, '6C': 35, '6C+': 36,
-  '7A': 37, '7A+': 38, '7B': 39, '7B+': 40, '7C': 41, '7C+': 42,
-  '8A': 43, '8A+': 44, '8B': 45, '8B+': 46, '8C': 47, '8C+': 48,
-  '9A': 49, '9A+': 50, '9B': 51, '9B+': 52, '9C': 53
-};
+// Initialize interaction handler to detect drag vs click
+const interactionHandler = useInteractionHandler(8); // 8px drag threshold
+
+// Track panzoom drag state
+const isPanZooming = ref(false);
+const hadPanMovement = ref(false);
+
 
 const getRoutesByCrag = (cragName: string, cragSector: string) => {
-  return routesData
-    .filter(route => route.area === cragSector)
-    .filter(route => route.blockNumber === cragName)
-    .filter(route => route.difficulty && route.difficulty.trim() !== '');
+  console.log('Looking for routes with cragName:', cragName);
+  console.log('Looking for routes with cragSector:', cragSector);
+  
+  // Debug the routes data a bit
+  console.log('Total routes in database:', routesData.length);
+  
+  // Get routes by sector first
+  const sectorRoutes = routesData.filter(route => route.area === cragSector);
+  console.log('Routes matching sector:', sectorRoutes.length);
+  
+  // Then filter by block name
+  const blockRoutes = sectorRoutes.filter(route => route.blockNumber === cragName);
+  console.log('Routes matching both sector and block:', blockRoutes.length);
+  
+  // Finally filter by difficulty
+  const validRoutes = blockRoutes.filter(route => route.difficulty && route.difficulty.trim() !== '');
+  console.log('Final filtered routes with valid difficulty:', validRoutes);
+  
+  return validRoutes;
 };
 
 const cragRoutes = computed(() => {
@@ -57,14 +68,12 @@ const cragRoutes = computed(() => {
   const routes = getRoutesByCrag(selectedCrag.value.name, selectedCrag.value.sector || '');
   
   // Get numeric values for min and max difficulty
-  const minDifficultyValue = difficultyMap[minDifficulty.value] || 1;
-  const maxDifficultyValue = difficultyMap[maxDifficulty.value] || 53;
+  const minDifficultyValue = getDifficultyValue(minDifficulty.value);
+  const maxDifficultyValue = getDifficultyValue(maxDifficulty.value);
   
   // Filter routes by difficulty
   return routes.filter(route => {
-    // Parse the difficulty value
-    const normalizedDifficulty = route.difficulty.split(/[/\-]/)[0].toUpperCase().replace(/\s/g, '');
-    const routeDifficultyValue = difficultyMap[normalizedDifficulty] || 0;
+    const routeDifficultyValue = getDifficultyValue(route.difficulty);
     
     // Include route if its difficulty is within the filter range
     return routeDifficultyValue >= minDifficultyValue && 
@@ -80,46 +89,81 @@ const filteredOutRoutes = computed(() => {
   const allRoutes = getRoutesByCrag(selectedCrag.value.name, selectedCrag.value.sector || '');
   
   // Get numeric values for min and max difficulty
-  const minDifficultyValue = difficultyMap[minDifficulty.value] || 1;
-  const maxDifficultyValue = difficultyMap[maxDifficulty.value] || 53;
+  const minDifficultyValue = getDifficultyValue(minDifficulty.value);
+  const maxDifficultyValue = getDifficultyValue(maxDifficulty.value);
   
   // Filter out routes that don't match the difficulty range
   return allRoutes.filter(route => {
-    // Parse the difficulty value
-    const normalizedDifficulty = route.difficulty.split(/[/\-]/)[0].toUpperCase().replace(/\s/g, '');
-    const routeDifficultyValue = difficultyMap[normalizedDifficulty] || 0;
+    const routeDifficultyValue = getDifficultyValue(route.difficulty);
     
     // Include routes outside the filter range
     return routeDifficultyValue < minDifficultyValue || routeDifficultyValue > maxDifficultyValue;
   });
 });
 
-const selectArea = (name: string) => {
+const selectArea = (_name: string) => {
   return;
 };
 
 const handleSelectCrag = (crag: SvgObject) => {
-  const routes = getRoutesByCrag(crag.name, crag.sector || '');
-  if (routes.length - filteredOutRoutes.value.length < 0) {
-    return
-  } 
-
-
-  selectArea(crag.name);
-  panZoomInstance?.zoom(1, { animate: true });
-  focusOn(crag);
-  ;(window as any).selectedCrag = crag;
-  panZoomInstance?.zoom(panZoomScale.value, { animate: true });
-  selectedCrag.value = crag;
+  const state = interactionHandler.getState();
+  const timeSinceDrag = state.lastDragEndTime > 0 ? Date.now() - state.lastDragEndTime : 'N/A';
   
-  // Check if this crag has any routes before showing the tooltip
-  const allRoutes = getRoutesByCrag(crag.name, crag.sector || '');
-  if (allRoutes.length > 0) {
-    showTooltip.value = true;
-  } else {
-    // Don't show tooltip for crags without routes
-    showTooltip.value = false;
+  // Debug interaction state
+  console.log('handleSelectCrag called, interaction state:', {
+    ...state,
+    timeSinceDragEnd: timeSinceDrag,
+    isPanZooming: isPanZooming.value,
+    hadPanMovement: hadPanMovement.value
+  });
+  
+  // Check if we're currently pan/zooming with movement or if it just ended with movement
+  if (isPanZooming.value && hadPanMovement.value) {
+    console.log('Click ignored - pan/zooming with movement');
+    return;
   }
+  
+  // Check if this is a valid click (not a drag)
+  if (!interactionHandler.isValidClick()) {
+    console.log('Click ignored - invalid click, state:', {
+      ...state,
+      timeSinceDragEnd: timeSinceDrag
+    });
+    return;
+  }
+  
+  console.log('handleSelectCrag called for:', crag.name, crag.sector);
+  
+  // Get routes for this crag before proceeding
+  const allRoutes = getRoutesByCrag(crag.name, crag.sector || '');
+  console.log('All routes count:', allRoutes.length);
+  
+  // Check if there are any routes before continuing
+  if (allRoutes.length === 0) {
+    console.log('No routes found for this crag, skipping tooltip');
+    return;
+  }
+  
+  // Check if there are any visible routes (matching current filter)
+  // We need to calculate this independently since cragRoutes depends on selectedCrag
+  const minDifficultyValue = getDifficultyValue(minDifficulty.value);
+  const maxDifficultyValue = getDifficultyValue(maxDifficulty.value);
+  
+  const visibleRoutes = allRoutes.filter(route => {
+    const routeDifficultyValue = getDifficultyValue(route.difficulty);
+    return routeDifficultyValue >= minDifficultyValue && 
+           routeDifficultyValue <= maxDifficultyValue;
+  });
+  
+  if (visibleRoutes.length === 0) {
+    console.log('No visible routes found for this crag with current filter, skipping tooltip');
+    return;
+  }
+  
+  selectedCrag.value = crag;
+  showTooltip.value = true;
+
+  focusOn(crag);
 };
 
 const hideTooltip = () => {
@@ -127,13 +171,13 @@ const hideTooltip = () => {
 };
 
 // New: Compute area names from areas (assumes each area has a 'name' property)
-const areaNames = computed(() => areas.map((area: any) => area.name));
+// const areaNames = computed(() => areas.map((area: SvgObject) => area.name));
 
 // New: Computed index of the currently selected area (default to 0 if not found)
-const selectedAreaIndex = computed(() => {
-  const index = areaNames.value.findIndex(name => name === selectedArea.value);
-  return index >= 0 ? index : 0;
-});
+// const selectedAreaIndex = computed(() => {
+//   const index = areaNames.value.findIndex(name => name === selectedArea.value);
+//   return index >= 0 ? index : 0;
+// });
 
 // Add debug reference for the center point
 const debugCenter = ref<{ x: number, y: number } | null>(null);
@@ -141,89 +185,92 @@ const viewBoxCenter = ref<{ x: number, y: number } | null>(null);
 const targetCenter = ref<{x: number, y: number} | null>(null);
 
 // Updated: Function to center and focus on a selected area accounting for shifted coordinates
-const centerOnArea = (areaName: string) => {
-  if (!panZoomInstance) return;
-  
-  const area = areas.find((a: any) => a.name === areaName);
-  if (!area) return;
-  
-  // Get the area's coordinates, which are already shifted by applyShiftPath
-  const center = {
-    // Calculate actual center by adding half the width and height to the x,y coordinates
-    x: area.x + (area.width / 2),
-    y: area.y + (area.height / 2)
-  };
-  
-  // Set debug point coordinates for visualization
-  debugCenter.value = { x: center.x, y: center.y };
-  
-  // Get the SVG element dimensions
-  if (mapSvg.value) {
-    const parent = mapSvg.value.parentElement;
-    if (parent) {
-      const parentRect = parent.getBoundingClientRect();
-      
-      // Fix calculation: need to center the area in the viewport
-      // Calculate how much to pan to get the area in the center
-      const centerX = -center.x + (parentRect.width / 4);
-      const centerY = -center.y + (parentRect.height / 4);
-      
-      // Pan to center with animation
-      // panZoomInstance.pan(centerX + 100, centerY, { animate: true });
-      panZoomInstance.zoom(1, { animate: true });
-    }
-  }
-};
+// const centerOnArea = (areaName: string) => {
+//   if (!panZoomInstance) return;
+//   
+//   const area = areas.find((a: SvgObject) => a.name === areaName);
+//   if (!area) return;
+//   
+//   // Get the area's coordinates, which are already shifted by applyShiftPath
+//   const center = {
+//     // Calculate actual center by adding half the width and height to the x,y coordinates
+//     x: area.x + (area.width / 2),
+//     y: area.y + (area.height / 2)
+//   };
+//   
+//   // Set debug point coordinates for visualization
+//   debugCenter.value = { x: center.x, y: center.y };
+//   
+//   // Get the SVG element dimensions
+//   if (mapSvg.value) {
+//     const parent = mapSvg.value.parentElement;
+//     if (parent) {
+//       const parentRect = parent.getBoundingClientRect();
+//       
+//       // Fix calculation: need to center the area in the viewport
+//       // Calculate how much to pan to get the area in the center
+//       // const centerX = -center.x + (parentRect.width / 4);
+//       // const centerY = -center.y + (parentRect.height / 4);
+//       
+//       // Pan to center with animation
+//       // panZoomInstance.pan(centerX + 100, centerY, { animate: true });
+//       panZoomInstance.zoom(1, { animate: true });
+//     }
+//   }
+// };
 
 // Updated: Handler functions for carousel navigation with type safety
-const nextArea = () => {
-  const currentIndex = selectedAreaIndex.value;
-  const newIndex = (currentIndex + 1) % areaNames.value.length;
-  selectedArea.value = areaNames.value[newIndex];
-  // Use optional chaining or provide default value to handle undefined
-  if (selectedArea.value) {
-    centerOnArea(selectedArea.value);
-  }
-};
+// const nextArea = () => {
+//   const currentIndex = selectedAreaIndex.value;
+//   const newIndex = (currentIndex + 1) % areaNames.value.length;
+//   selectedArea.value = areaNames.value[newIndex];
+//   // Use optional chaining or provide default value to handle undefined
+//   if (selectedArea.value) {
+//     centerOnArea(selectedArea.value);
+//   }
+// };
 
-const prevArea = () => {
-  const currentIndex = selectedAreaIndex.value;
-  const newIndex = (currentIndex - 1 + areaNames.value.length) % areaNames.value.length;
-  selectedArea.value = areaNames.value[newIndex];
-  // Use optional chaining or provide default value to handle undefined
-  if (selectedArea.value) {
-    centerOnArea(selectedArea.value);
-  }
-};
+// const prevArea = () => {
+//   const currentIndex = selectedAreaIndex.value;
+//   const newIndex = (currentIndex - 1 + areaNames.value.length) % areaNames.value.length;
+//   selectedArea.value = areaNames.value[newIndex];
+//   // Use optional chaining or provide default value to handle undefined
+//   if (selectedArea.value) {
+//     centerOnArea(selectedArea.value);
+//   }
+// };
 
 // New: Compute selected area's background color (assumes each area may have a 'color' property)
-const selectedAreaColor = computed(() => {
-  const area = areas.find((a: any) => a.name === selectedArea.value);
-  return area?.fill || '#eee';
-});
+// const selectedAreaColor = computed(() => {
+//   const area = areas.find((a: SvgObject) => a.name === selectedArea.value);
+//   return area?.fill || '#eee';
+// });
 
 // New: Computed property for transparent background color (50% opacity)
-const selectedAreaBackground = computed(() => {
-  let hex = selectedAreaColor.value;
-  if (hex && hex.startsWith('#')) {
-    if (hex.length === 4) {
-      hex = '#' + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3];
-    }
-    const r = parseInt(hex.slice(1, 3), 16);
-    const g = parseInt(hex.slice(3, 5), 16);
-    const b = parseInt(hex.slice(5, 7), 16);
-    return `rgba(${r}, ${g}, ${b}, 0.5)`;
-  }
-  return hex;
-});
+// const selectedAreaBackground = computed(() => {
+//   let hex = selectedAreaColor.value;
+//   if (hex && hex.startsWith('#')) {
+//     if (hex.length === 4) {
+//       hex = '#' + hex[1] + hex[1] + hex[2] + hex[2] + hex[3] + hex[3];
+//     }
+//     const r = parseInt(hex.slice(1, 3), 16);
+//     const g = parseInt(hex.slice(3, 5), 16);
+//     const b = parseInt(hex.slice(5, 7), 16);
+//     return `rgba(${r}, ${g}, ${b}, 0.5)`;
+//   }
+//   return hex;
+// });
 
 // Pan-Zoom Integration
 const mapSvg = ref<SVGSVGElement | null>(null);
 const mapContainer = ref<HTMLElement | null>(null);
-let panZoomInstance: any = null;
+let panZoomInstance: ReturnType<typeof Panzoom> | null = null;
 
 onMounted(() => {
-  if (mapSvg.value) {
+  if (mapSvg.value && mapContainer.value) {
+    // Setup interaction handlers for both the container and SVG to capture all events
+    interactionHandler.setupEventListeners(mapContainer.value);
+    interactionHandler.setupEventListeners(mapSvg.value);
     // Detect if the device is mobile or desktop
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
@@ -247,6 +294,42 @@ onMounted(() => {
     
     panZoomInstance = Panzoom(mapSvg.value, zoomConfig);
     
+    // Track panzoom events to prevent clicks during actual pan/zoom
+    mapSvg.value.addEventListener('panzoomstart', () => {
+      console.log('Panzoom start - setting isPanZooming to true');
+      isPanZooming.value = true;
+      hadPanMovement.value = false; // Reset movement flag
+    });
+    
+    mapSvg.value.addEventListener('panzoompan', () => {
+      console.log('Panzoom pan - actual movement detected');
+      hadPanMovement.value = true;
+    });
+    
+    mapSvg.value.addEventListener('panzoomzoom', () => {
+      console.log('Panzoom zoom - actual movement detected');
+      hadPanMovement.value = true;
+    });
+    
+    mapSvg.value.addEventListener('panzoomend', () => {
+      console.log('Panzoom end - hadPanMovement:', hadPanMovement.value);
+      
+      if (hadPanMovement.value) {
+        // Only block clicks if there was actual pan/zoom movement
+        console.log('Had movement - will block clicks for a short time');
+        setTimeout(() => {
+          isPanZooming.value = false;
+          hadPanMovement.value = false;
+          console.log('Reset isPanZooming to false after movement');
+        }, 200);
+      } else {
+        // No movement, this was just a click - allow it immediately
+        console.log('No movement - allowing clicks immediately');
+        isPanZooming.value = false;
+        hadPanMovement.value = false;
+      }
+    });
+    
     // Add wheel event handling
     mapSvg.value.parentElement?.addEventListener('wheel', panZoomInstance.zoomWithWheel);
 
@@ -255,11 +338,11 @@ onMounted(() => {
     
    
     if (parent) {
-      const parentRect = parent.getBoundingClientRect();
-      const svgRect = mapSvg.value.getBoundingClientRect();
+      // const parentRect = parent.getBoundingClientRect();
+      // const svgRect = mapSvg.value.getBoundingClientRect();
       // Calculate offset so that the SVG is centered in the parent.
-      const offsetX = (parentRect.width - svgRect.width) / 2;
-      const offsetY = (parentRect.height - svgRect.height) / 2;
+      // const offsetX = (parentRect.width - svgRect.width) / 2;
+      // const offsetY = (parentRect.height - svgRect.height) / 2;
 
        viewBoxCenter.value = {
         x: 1280,
@@ -279,6 +362,15 @@ onBeforeUnmount(() => {
   if (panZoomInstance) {
     mapSvg.value?.parentElement?.removeEventListener('wheel', panZoomInstance.zoomWithWheel);
     panZoomInstance.destroy();
+  }
+  
+  // Clean up interaction handlers
+  if (mapContainer.value) {
+    interactionHandler.removeEventListeners(mapContainer.value);
+  }
+  if (mapSvg.value) {
+    interactionHandler.removeEventListeners(mapSvg.value);
+    // Note: panzoom event listeners are automatically cleaned up when panzoom is destroyed
   }
 });
 
@@ -318,7 +410,7 @@ const searchResults = computed(() => {
 });
 
 // Handle search result selection
-const selectSearchResult = (route: any) => {
+const selectSearchResult = (route: typeof routesData[0]) => {
   if (route.blockNumber) {
     // Find the corresponding crag
     const selectedCragObject = [...crags].find(c => 
@@ -356,16 +448,22 @@ onBeforeUnmount(() => {
 
 // Add quick navigation function
 const quickNavigate = () => {
-  const selectedCragObj = selectedCrag.value || (window as any).selectedCrag; // Simplified logic
+  const selectedCragObj = selectedCrag.value;
   if (selectedCragObj) {
-    panZoomInstance?.zoom(1, { animate: true });
+    // panZoomInstance?.zoom(1, { animate: true });
     focusOn(selectedCragObj);
-    panZoomInstance?.zoom(panZoomScale.value, { animate: true });
+    // panZoomInstance?.zoom(panZoomScale.value, { animate: true });
   }
 };
 
 
 function focusOn(crag: SvgObject) {
+  // Skip focusing if there are no routes to show
+  if (!shouldShowTooltip.value) {
+    console.log('Skipping focus because no routes will be shown');
+    return;
+  }
+
   const svg = mapSvg.value!;
   const pz  = panZoomInstance;
   if (!svg || !pz) return;
@@ -395,7 +493,8 @@ function focusOn(crag: SvgObject) {
   const panX = viewCx / S - gpt.x;
   const panY = viewCy / S - gpt.y;
 
-  pz.pan(panX, panY-25, { animate: true, duration: 400 });
+  pz.pan(panX, panY - 25, { animate: true });
+  panZoomInstance?.zoom(panZoomScale.value, { animate: true });
 }
 
 // Function to determine if a crag is selected
@@ -409,15 +508,25 @@ const hasVisibleRoutes = computed(() => {
   if (!selectedCrag.value) return false;
   
   const allRoutes = getRoutesByCrag(selectedCrag.value.name, selectedCrag.value.sector || '');
+  console.log('hasVisibleRoutes check - all routes:', allRoutes.length);
+  console.log('hasVisibleRoutes check - filtered out:', filteredOutRoutes.value.length);
   
-  // Fix: Use the length of the array instead of subtracting the array itself
-  return allRoutes.length - filteredOutRoutes.value.length > 0;
+  // Ensure we're working with lengths and not trying to subtract arrays
+  const visibleRoutesCount = allRoutes.length - filteredOutRoutes.value.length;
+  console.log('hasVisibleRoutes result:', visibleRoutesCount > 0);
+  
+  return visibleRoutesCount > 0;
 });
 
 const shouldShowTooltip = computed(() => {
-  return showTooltip.value && selectedCrag.value && hasVisibleRoutes.value;
+  const result = showTooltip.value && selectedCrag.value && hasVisibleRoutes.value;
+  console.log('shouldShowTooltip =', result, {
+    showTooltip: showTooltip.value,
+    selectedCrag: !!selectedCrag.value,
+    hasVisibleRoutes: hasVisibleRoutes.value
+  });
+  return result;
 });
-
 </script>
 
 <template>
@@ -576,7 +685,7 @@ const shouldShowTooltip = computed(() => {
 
     <div v-if="shouldShowTooltip" class="fixed-tooltip">
         <RouteTooltip
-          :selected-crag="selectedCrag"
+          :selected-crag="selectedCrag!"
           :crag-routes="cragRoutes"
           :filtered-out-routes="filteredOutRoutes"
           @close="hideTooltip"
@@ -629,6 +738,7 @@ const shouldShowTooltip = computed(() => {
   min-width: 0; /* Remove min-width constraint */
   object-fit: cover; /* Cover available space */
   background-color: rgba(143, 136, 135, 0.106);
+  cursor: default !important;
 }
 
 /* Position AreaCarousel at the top of the page */

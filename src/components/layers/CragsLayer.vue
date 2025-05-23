@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { SvgObject } from '@/types/SvgObject';
-import { ref, computed } from 'vue';
+import { computed } from 'vue';
+import { getDifficultyValue } from '@/utils/difficulty';
 
 // Add the new difficulty filter props
 const props = defineProps({
@@ -27,7 +28,13 @@ const props = defineProps({
   },
   // Add routes data as a new prop
   routes: {
-    type: Array,
+    type: Array as () => Array<{
+      blockNumber: string;
+      area: string;
+      difficulty: string;
+      name: string;
+      starscount: number;
+    }>,
     default: () => []
   },
   // New prop to check if a crag is selected
@@ -39,31 +46,27 @@ const props = defineProps({
 
 const emit = defineEmits(['select-area', 'hover', 'select-crag']);
 
-const selectArea = (crag: SvgObject, event: MouseEvent) => {
-  emit('select-area', crag.name);
+const selectArea = (crag: SvgObject) => {
+  console.log('selectArea called for crag:', crag.name, 'visible:', isCragVisible(crag));
+  
+  // Only allow selection of crags that have visible routes
+  if (!isCragVisible(crag)) {
+    console.log('Crag click ignored - no visible routes:', crag.name);
+    return;
+  }
+  
+  console.log('Crag clicked:', crag.name);
+  emit('select-area', crag.sector);
   emit('select-crag', crag);
 };
 
-const setHoveredArea = (name: string | null) => {
-  emit('hover', name);
-};
-
-// Map difficulty to a numeric value for filtering
-const difficultyMap: { [key: string]: number } = {
-  '1A': 1, '1A+': 2, '1B': 3, '1B+': 4, '1C': 5, '1C+': 6,
-  '2A': 7, '2A+': 8, '2B': 9, '2B+': 10, '2C': 11, '2C+': 12,
-  '3A': 13, '3A+': 14, '3B': 15, '3B+': 16, '3C': 17, '3C+': 18,
-  '4A': 19, '4A+': 20, '4B': 21, '4B+': 22, '4C': 23, '4C+': 24,
-  '5A': 25, '5A+': 26, '5B': 27, '5B+': 28, '5C': 29, '5C+': 30,
-  '6A': 31, '6A+': 32, '6B': 33, '6B+': 34, '6C': 35, '6C+': 36,
-  '7A': 37, '7A+': 38, '7B': 39, '7B+': 40, '7C': 41, '7C+': 42,
-  '8A': 43, '8A+': 44, '8B': 45, '8B+': 46, '8C': 47, '8C+': 48,
-  '9A': 49, '9A+': 50, '9B': 51, '9B+': 52, '9C': 53
-};
+// const setHoveredArea = (name: string | null) => {
+//   emit('hover', name);
+// };
 
 // Get numeric values for min and max difficulty
-const minDifficultyValue = computed(() => difficultyMap[props.minDifficulty] || 1);
-const maxDifficultyValue = computed(() => difficultyMap[props.maxDifficulty] || 53);
+const minDifficultyValue = computed(() => getDifficultyValue(props.minDifficulty));
+const maxDifficultyValue = computed(() => getDifficultyValue(props.maxDifficulty));
 
 // Function to check if a crag should be visible based on routes difficulty
 const isCragVisible = (crag: SvgObject) => {
@@ -71,7 +74,7 @@ const isCragVisible = (crag: SvgObject) => {
   if (!crag.name || !crag.sector) return true;
   
   // Find all routes that match this crag
-  const cragRoutes = props.routes.filter((route: any) => 
+  const cragRoutes = props.routes.filter(route => 
     route.blockNumber === crag.name && 
     route.area === crag.sector && 
     route.difficulty && 
@@ -79,12 +82,11 @@ const isCragVisible = (crag: SvgObject) => {
   );
   
   // If no routes found, always show the crag
-  if (cragRoutes.length === 0) return true;
+  if (cragRoutes.length === 0) return false;
   
   // Check if any route's difficulty falls within the filtered range
-  return cragRoutes.some((route: any) => {
-    const normalizedDifficulty = route.difficulty.split(/[/\-]/)[0].toUpperCase().replace(/\s/g, '');
-    const routeDifficultyValue = difficultyMap[normalizedDifficulty] || 0;
+  return cragRoutes.some(route => {
+    const routeDifficultyValue = getDifficultyValue(route.difficulty);
     
     // Route is visible if its difficulty is within the filter range
     return routeDifficultyValue >= minDifficultyValue.value && 
@@ -103,14 +105,12 @@ const getCragTitleOpacity = (crag: SvgObject) => {
 
 // Function to get additional name based on routes data
 const getAdditionalName = (crag: SvgObject) => {
-  // Add type assertion to specify the expected properties
-  const matchingRoute = props.routes.find((route: any) => 
+  const matchingRoute = props.routes.find(route => 
     route.area === crag.sector &&
     route.blockNumber === crag.name &&
     route.starscount > 2
-  ) as { name: string } | undefined;
+  );
   
-  // Now TypeScript knows matchingRoute has a name property when it exists
   return matchingRoute ? matchingRoute.name : null;
 };
 
@@ -183,9 +183,8 @@ const isCragTooSmall = (crag: SvgObject) => {
       :opacity="getCragOpacity(crag)"
       stroke="#222"
       stroke-width="0.7"
-      @click="(event) => selectArea(crag, event)"
-      @mouseover="setHoveredArea(crag.name)"
-      @mouseleave="setHoveredArea(null)"
+      cursor="pointer"
+      @click="() => selectArea(crag)"
     />
     
     <!-- Crag labels - also apply opacity and use safe center function -->
@@ -195,22 +194,23 @@ const isCragTooSmall = (crag: SvgObject) => {
         v-if="isCragTooSmall(crag)"
         :cx="safeGetPathCenter(crag).x"
         :cy="safeGetPathCenter(crag).y - 1"
-        @click="(event) => selectArea(crag, event)"
+        @click="() => selectArea(crag)"
         r="4"
         fill="rgba(0, 0, 0, 0.3)"
+        cursor="pointer"
         :opacity="getCragTitleOpacity(crag)"
       />
       
       <text
         :x="safeGetPathCenter(crag).x"
         :y="safeGetPathCenter(crag).y"
-        @click="(event) => selectArea(crag, event)"
+        @click="() => selectArea(crag)"
         text-anchor="middle"
         alignment-baseline="middle"
         font-size="6"
         fill="#fff"
         font-weight="bold"
-        pointer-events="none"
+        cursor="pointer"
         style="user-select: none;"
         :opacity="getCragOpacity(crag)"
       >
@@ -236,7 +236,7 @@ const isCragTooSmall = (crag: SvgObject) => {
         rx="2"
         fill="rgba(80, 80, 80, 0.8)"
         :opacity="getCragTitleOpacity(crag)"
-        @click="(event) => selectArea(crag, event)"
+        @click="() => selectArea(crag)"
       />
       <!-- Additional name text with click handler -->
       <text
@@ -247,9 +247,9 @@ const isCragTooSmall = (crag: SvgObject) => {
         font-size="3"
         fill="#fff"
         font-weight="normal"
-        style="user-select: none; cursor: pointer;"
+        style="user-select: none;"
         :opacity="getCragTitleOpacity(crag)"
-        @click="(event) => selectArea(crag, event)"
+        @click="() => selectArea(crag)"
       >{{ getAdditionalName(crag) }}</text>
     </g>
   </g>
@@ -262,7 +262,7 @@ const isCragTooSmall = (crag: SvgObject) => {
   padding: 6px;
   border-radius: 8px;
   font-size: 10px;
-  pointer-events: auto;
+
   width: 100%;
   height: 100%;
   max-height: 400px;

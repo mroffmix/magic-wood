@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const props = defineProps({
+defineProps({
   areaNames: {
     type: Array as () => string[],
     required: true
