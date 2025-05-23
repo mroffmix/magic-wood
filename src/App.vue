@@ -47,7 +47,7 @@ const showStarredCrags = ref(false);
 
 // Handle route selection from modal
 const handleRouteSelection = (route: { blockNumber: string; area: string; [key: string]: unknown }) => {
-  console.log('Selected route:', route);
+  // console.log('Selected route:', route);
   
   // Find the corresponding crag for this route
   const correspondingCrag = [...crags, ...e_crags].find(crag => 
@@ -55,32 +55,32 @@ const handleRouteSelection = (route: { blockNumber: string; area: string; [key: 
   );
   
   if (correspondingCrag) {
-    console.log('Found corresponding crag:', correspondingCrag);
+    // console.log('Found corresponding crag:', correspondingCrag);
     handleSelectCrag(correspondingCrag, true); // Bypass filter for route selection
   } else {
-    console.log('No corresponding crag found for route:', route);
+    // console.log('No corresponding crag found for route:', route);
   }
 };
 
 
 const getRoutesByCrag = (cragName: string, cragSector: string) => {
-  console.log('Looking for routes with cragName:', cragName);
-  console.log('Looking for routes with cragSector:', cragSector);
+  // console.log('Looking for routes with cragName:', cragName);
+  // console.log('Looking for routes with cragSector:', cragSector);
   
   // Debug the routes data a bit
-  console.log('Total routes in database:', routesData.length);
+  // console.log('Total routes in database:', routesData.length);
   
   // Get routes by sector first
   const sectorRoutes = routesData.filter(route => route.area === cragSector);
-  console.log('Routes matching sector:', sectorRoutes.length);
+  // console.log('Routes matching sector:', sectorRoutes.length);
   
   // Then filter by block name
   const blockRoutes = sectorRoutes.filter(route => route.blockNumber === cragName);
-  console.log('Routes matching both sector and block:', blockRoutes.length);
+  // console.log('Routes matching both sector and block:', blockRoutes.length);
   
   // Finally filter by difficulty
   const validRoutes = blockRoutes.filter(route => route.difficulty && route.difficulty.trim() !== '');
-  console.log('Final filtered routes with valid difficulty:', validRoutes);
+  // console.log('Final filtered routes with valid difficulty:', validRoutes);
   
   return validRoutes;
 };
@@ -134,7 +134,7 @@ const handleSelectCrag = (crag: SvgObject, bypassFilter = false) => {
   const timeSinceDrag = state.lastDragEndTime > 0 ? Date.now() - state.lastDragEndTime : 'N/A';
   
   // Debug interaction state
-  console.log('handleSelectCrag called, interaction state:', {
+   console.log('handleSelectCrag called, interaction state:', {
     ...state,
     timeSinceDragEnd: timeSinceDrag,
     isPanZooming: isPanZooming.value,
@@ -143,28 +143,28 @@ const handleSelectCrag = (crag: SvgObject, bypassFilter = false) => {
   
   // Check if we're currently pan/zooming with movement or if it just ended with movement
   if (isPanZooming.value && hadPanMovement.value) {
-    console.log('Click ignored - pan/zooming with movement');
+    // console.log('Click ignored - pan/zooming with movement');
     return;
   }
   
   // Check if this is a valid click (not a drag)
   if (!interactionHandler.isValidClick()) {
-    console.log('Click ignored - invalid click, state:', {
+     console.log('Click ignored - invalid click, state:', {
       ...state,
       timeSinceDragEnd: timeSinceDrag
     });
     return;
   }
   
-  console.log('handleSelectCrag called for:', crag.name, crag.sector);
+  // console.log('handleSelectCrag called for:', crag.name, crag.sector);
   
   // Get routes for this crag before proceeding
   const allRoutes = getRoutesByCrag(crag.name, crag.sector || '');
-  console.log('All routes count:', allRoutes.length);
+  // console.log('All routes count:', allRoutes.length);
   
   // Check if there are any routes before continuing
   if (allRoutes.length === 0) {
-    console.log('No routes found for this crag, skipping tooltip');
+    // console.log('No routes found for this crag, skipping tooltip');
     return;
   }
   
@@ -181,7 +181,7 @@ const handleSelectCrag = (crag: SvgObject, bypassFilter = false) => {
     });
     
     if (visibleRoutes.length === 0) {
-      console.log('No visible routes found for this crag with current filter, skipping tooltip');
+      // console.log('No visible routes found for this crag with current filter, skipping tooltip');
       return;
     }
   }
@@ -206,6 +206,52 @@ const mapSvg = ref<SVGSVGElement | null>(null);
 const mapContainer = ref<HTMLElement | null>(null);
 let panZoomInstance: ReturnType<typeof Panzoom> | null = null;
 
+// Calculate and apply boundary constraints
+const applyBoundaryConstraints = () => {
+  if (!panZoomInstance || !mapContainer.value || !mapSvg.value) return;
+  
+  const container = mapContainer.value;
+  const containerRect = container.getBoundingClientRect();
+  const svgViewBox = { width: 1280, height: 800 }; // SVG viewBox dimensions
+  
+  const scale = panZoomInstance.getScale();
+  const scaledWidth = svgViewBox.width * scale;
+  const scaledHeight = svgViewBox.height * scale;
+  
+  // Allow some margin (20% of container size) so map doesn't get stuck at edges
+  const marginX = containerRect.width * 0.2;
+  const marginY = containerRect.height * 0.2;
+  
+  // Calculate bounds that keep most of the map visible
+  const minX = Math.min(-marginX, containerRect.width - scaledWidth + marginX);
+  const maxX = Math.max(marginX, scaledWidth - containerRect.width - marginX);
+  const minY = Math.min(-marginY, containerRect.height - scaledHeight + marginY);
+  const maxY = Math.max(marginY, scaledHeight - containerRect.height - marginY);
+  
+  // Get current pan position
+  const pan = panZoomInstance.getPan();
+  let newX = pan.x;
+  let newY = pan.y;
+  
+  // Constrain to boundaries
+  if (newX < minX) newX = minX;
+  if (newX > maxX) newX = maxX;
+  if (newY < minY) newY = minY;
+  if (newY > maxY) newY = maxY;
+  
+  // Apply constraints if needed
+  if (newX !== pan.x || newY !== pan.y) {
+    panZoomInstance.pan(newX, newY, { animate: false });
+  }
+};
+
+// Handle window resize to recalculate boundaries
+const handleResize = () => {
+  if (panZoomInstance) {
+    requestAnimationFrame(applyBoundaryConstraints);
+  }
+};
+
 onMounted(() => {
   if (mapSvg.value && mapContainer.value) {
     // Setup interaction handlers for both the container and SVG to capture all events
@@ -217,54 +263,61 @@ onMounted(() => {
     // Set different zoom scales based on device type
     panZoomScale.value = isMobile ? 8 : 5;
     
+
     // Different zoom settings for mobile and desktop
     const zoomConfig = isMobile ? 
       {
         maxScale: 20,
         minScale: 1.0,
         step: 5,
-        startScale: 2.5
+        startScale: 2.5,
+        contain: 'outside' // Basic containment
       } : 
       {
         maxScale: 8,    // Lower max zoom for desktop
         minScale: 1.0,     // Lower min zoom for desktop
         step: 0.1,       // More precise zoom step for desktop
-        startScale: 1.5  // Less initial zoom for desktop
+        startScale: 1.5,  // Less initial zoom for desktop
+        contain: 'outside' // Basic containment
       };
     
     panZoomInstance = Panzoom(mapSvg.value, zoomConfig);
     
     // Track panzoom events to prevent clicks during actual pan/zoom
     mapSvg.value.addEventListener('panzoomstart', () => {
-      console.log('Panzoom start - setting isPanZooming to true');
+      // console.log('Panzoom start - setting isPanZooming to true');
       isPanZooming.value = true;
       hadPanMovement.value = false; // Reset movement flag
     });
     
     mapSvg.value.addEventListener('panzoompan', () => {
-      console.log('Panzoom pan - actual movement detected');
+      // console.log('Panzoom pan - actual movement detected');
       hadPanMovement.value = true;
+      // Apply boundary constraints during panning
+      requestAnimationFrame(applyBoundaryConstraints);
     });
     
     mapSvg.value.addEventListener('panzoomzoom', () => {
-      console.log('Panzoom zoom - actual movement detected');
+      // console.log('Panzoom zoom - actual movement detected');
       hadPanMovement.value = true;
+      // Apply boundary constraints after zooming
+      requestAnimationFrame(applyBoundaryConstraints);
     });
     
     mapSvg.value.addEventListener('panzoomend', () => {
-      console.log('Panzoom end - hadPanMovement:', hadPanMovement.value);
+      // console.log('Panzoom end - hadPanMovement:', hadPanMovement.value);
       
       if (hadPanMovement.value) {
         // Only block clicks if there was actual pan/zoom movement
-        console.log('Had movement - will block clicks for a short time');
+        // console.log('Had movement - will block clicks for a short time');
         setTimeout(() => {
           isPanZooming.value = false;
           hadPanMovement.value = false;
-          console.log('Reset isPanZooming to false after movement');
+          // console.log('Reset isPanZooming to false after movement');
         }, 200);
       } else {
         // No movement, this was just a click - allow it immediately
-        console.log('No movement - allowing clicks immediately');
+        // console.log('No movement - allowing clicks immediately');
         isPanZooming.value = false;
         hadPanMovement.value = false;
       }
@@ -272,6 +325,13 @@ onMounted(() => {
     
     // Add wheel event handling
     mapSvg.value.parentElement?.addEventListener('wheel', panZoomInstance.zoomWithWheel);
+    
+    window.addEventListener('resize', handleResize);
+    
+    // Apply initial boundary constraints after setup
+    setTimeout(() => {
+      applyBoundaryConstraints();
+    }, 100);
 
     // Center the panZoom instance using the parent's dimensions.
     const parent = mapSvg.value.parentElement;
@@ -303,6 +363,9 @@ onBeforeUnmount(() => {
     mapSvg.value?.parentElement?.removeEventListener('wheel', panZoomInstance.zoomWithWheel);
     panZoomInstance.destroy();
   }
+  
+  // Remove resize event listener
+  window.removeEventListener('resize', handleResize);
   
   // Clean up interaction handlers
   if (mapContainer.value) {
@@ -400,7 +463,7 @@ const quickNavigate = () => {
 function focusOn(crag: SvgObject, bypassTooltipCheck = false) {
   // Skip focusing if there are no routes to show (unless bypassing for search/route selection)
   if (!bypassTooltipCheck && !shouldShowTooltip.value) {
-    console.log('Skipping focus because no routes will be shown');
+    // console.log('Skipping focus because no routes will be shown');
     return;
   }
 
@@ -409,9 +472,9 @@ function focusOn(crag: SvgObject, bypassTooltipCheck = false) {
   if (!svg || !pz) return;
 
   /* 1-2. элемент + масштаб */
-  console.log('crag', crag.name + '_' + crag.sector);
+  // console.log('crag', crag.name + '_' + crag.sector);
   const el = svg.getElementById(crag.name + '_' + crag.sector) as SVGGraphicsElement | null;
-  console.log('el', el);
+  // console.log('el', el);
   if (!el) return;
   const zoomTo = 1;
   if (zoomTo !== undefined) pz.zoom(zoomTo, { animate: false });
@@ -448,19 +511,19 @@ const hasVisibleRoutes = computed(() => {
   if (!selectedCrag.value) return false;
   
   const allRoutes = getRoutesByCrag(selectedCrag.value.name, selectedCrag.value.sector || '');
-  console.log('hasVisibleRoutes check - all routes:', allRoutes.length);
-  console.log('hasVisibleRoutes check - filtered out:', filteredOutRoutes.value.length);
+  // console.log('hasVisibleRoutes check - all routes:', allRoutes.length);
+  // console.log('hasVisibleRoutes check - filtered out:', filteredOutRoutes.value.length);
   
   // Ensure we're working with lengths and not trying to subtract arrays
   const visibleRoutesCount = allRoutes.length - filteredOutRoutes.value.length;
-  console.log('hasVisibleRoutes result:', visibleRoutesCount > 0);
+  // console.log('hasVisibleRoutes result:', visibleRoutesCount > 0);
   
   return visibleRoutesCount > 0;
 });
 
 const shouldShowTooltip = computed(() => {
   const result = showTooltip.value && selectedCrag.value && hasVisibleRoutes.value;
-  console.log('shouldShowTooltip =', result, {
+   console.log('shouldShowTooltip =', result, {
     showTooltip: showTooltip.value,
     selectedCrag: !!selectedCrag.value,
     hasVisibleRoutes: hasVisibleRoutes.value
@@ -474,54 +537,60 @@ const shouldShowTooltip = computed(() => {
   <div class="app-container">
     <!-- Add search bar above the carousel with tooltip-like styling -->
     <div class="search-container" ref="searchContainer">
-      <input
-        type="text"
-        v-model="searchQuery"
-        placeholder="Search routes, blocks, or areas..."
-        @focus="isSearchActive = true"
-        class="search-input"
-      />
+      <!-- Search input group -->
+      <div class="search-input-group">
+        <input
+          type="text"
+          v-model="searchQuery"
+          placeholder="Search routes, blocks, or areas..."
+          @focus="isSearchActive = true"
+          class="search-input"
+        />
+        
+        <!-- Clear search button -->
+        <button 
+          v-if="searchQuery.length > 0"
+          @click="searchQuery = ''; isSearchActive = false"
+          class="clear-search-button"
+          aria-label="Clear search"
+          type="button"
+        >
+          ×
+        </button>
+      </div>
       
-      <!-- Clear search button -->
-      <button 
-        v-if="searchQuery.length > 0"
-        @click="searchQuery = ''; isSearchActive = false"
-        class="clear-search-button"
-        aria-label="Clear search"
-        type="button"
-      >
-        ×
-      </button>
-      
-      <!-- Quick Navigation Button -->
-      <button 
-        @click="quickNavigate"
-        class="quick-nav-button"
-        aria-label="Quick navigation"
-        type="button"
-      >
-        <span class="map-icon">📍</span>
-      </button>
-      
-      <!-- Filtered Routes Button -->
-      <button 
-        @click="showFilteredRoutesModal = true"
-        class="filtered-routes-button"
-        aria-label="Show filtered routes"
-        type="button"
-      >
-        <span class="list-icon">📋</span>
-      </button>
-      
-      <!-- Starred Crags Toggle Button -->
-      <button 
-        @click="showStarredCrags = !showStarredCrags"
-        :class="['starred-crags-button', { active: showStarredCrags }]"
-        aria-label="Toggle starred crags"
-        type="button"
-      >
-        <span class="star-icon">⭐</span>
-      </button>
+      <!-- Action buttons group -->
+      <div class="search-actions-group">
+        <!-- Quick Navigation Button -->
+        <button 
+          @click="quickNavigate"
+          class="quick-nav-button"
+          aria-label="Quick navigation"
+          type="button"
+        >
+          <span class="map-icon">📍</span>
+        </button>
+        
+        <!-- Filtered Routes Button -->
+        <button 
+          @click="showFilteredRoutesModal = true"
+          class="filtered-routes-button"
+          aria-label="Show filtered routes"
+          type="button"
+        >
+          <span class="list-icon">📋</span>
+        </button>
+        
+        <!-- Starred Crags Toggle Button -->
+        <button 
+          @click="showStarredCrags = !showStarredCrags"
+          :class="['starred-crags-button', { active: showStarredCrags }]"
+          aria-label="Toggle starred crags"
+          type="button"
+        >
+          <span class="star-icon">⭐</span>
+        </button>
+      </div>
       
       <!-- Search results dropdown with tooltip-like styling -->
       <div v-if="isSearchActive && searchResults.length > 0" class="search-results">
@@ -742,7 +811,7 @@ const shouldShowTooltip = computed(() => {
 
 .fixed-tooltip {
   position: fixed;
-  bottom: 50px; 
+  bottom: 90px; 
   left: 50%;
   transform: translateX(-50%);
   width: 95%; /* Slightly wider */
@@ -768,24 +837,37 @@ const shouldShowTooltip = computed(() => {
   z-index: 150; /* Above carousel */
   padding: 10px;
   background-color: rgba(91, 86, 86, 0.969);
-  position: relative; /* Add position relative for absolute positioning of button */
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.search-input-group {
+  position: relative;
+  flex: 1;
 }
 
 .search-input {
   width: 100%;
-  padding: 8px 12px;
-  /* border: 1px solid rgba(255, 255, 255, 0.2); */
+  padding: 8px 40px 8px 12px; /* Add right padding for clear button */
   border-radius: 8px;
   font-size: 14px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: white;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
 }
 
-/* Clear search button styles */
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* Clear search button styles - positioned within input group */
 .clear-search-button {
   position: absolute;
-  right: 20px;
-  top: 18px;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
   background: rgba(255, 255, 255, 0.2);
   border: none;
   border-radius: 50%;
@@ -798,7 +880,6 @@ const shouldShowTooltip = computed(() => {
   cursor: pointer;
   font-size: 16px;
   font-weight: bold;
-  z-index: 152;
   transition: background-color 0.2s ease;
 }
 
@@ -811,96 +892,85 @@ const shouldShowTooltip = computed(() => {
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
 }
 
+.search-actions-group {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 480px) {
+  .search-container {
+    padding: 8px;
+    gap: 8px;
+  }
+  
+  .search-input {
+    font-size: 16px; /* Prevent zoom on iOS */
+    padding: 10px 36px 10px 12px;
+  }
+  
+  .clear-search-button {
+    width: 28px;
+    height: 28px;
+    right: 6px;
+  }
+  
+  .quick-nav-button,
+  .filtered-routes-button,
+  .starred-crags-button {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+  }
+  
+  .search-actions-group {
+    gap: 6px;
+  }
+}
+
 /* Quick navigation button styles */
-.quick-nav-button {
-  position: absolute;
-  right: 60px; /* Position to the left of clear button */
-  top: 18px;
+.quick-nav-button,
+.filtered-routes-button,
+.starred-crags-button {
   background: rgba(255, 255, 255, 0.2);
   border: none;
   border-radius: 50%;
   color: white;
-  width: 24px;
-  height: 24px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  font-size: 12px;
-  z-index: 152;
+  font-size: 14px;
   transition: background-color 0.2s ease;
 }
 
-.quick-nav-button:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.quick-nav-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
-}
 
 .map-icon {
   display: inline-block;
   transform: translateY(-1px); /* Slight adjustment for visual alignment */
 }
 
-/* Filtered routes button styles */
-.filtered-routes-button {
-  position: absolute;
-  right: 100px; /* Position to the left of quick nav button */
-  top: 18px;
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 50%;
-  color: white;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 12px;
-  z-index: 152;
-  transition: background-color 0.2s ease;
-}
-
-.filtered-routes-button:hover {
-  background: rgba(255, 255, 255, 0.3);
-}
-
-.filtered-routes-button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
-}
 
 .list-icon {
   display: inline-block;
   transform: translateY(-1px); /* Slight adjustment for visual alignment */
 }
 
-/* Starred crags button styles */
-.starred-crags-button {
-  position: absolute;
-  right: 140px; /* Position to the left of filtered routes button */
-  top: 18px;
-  background: rgba(255, 255, 255, 0.2);
-  border: none;
-  border-radius: 50%;
-  color: white;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-size: 12px;
-  z-index: 152;
-  transition: all 0.2s ease;
-}
-
+/* Action button hover and focus states */
+.quick-nav-button:hover,
+.filtered-routes-button:hover,
 .starred-crags-button:hover {
   background: rgba(255, 255, 255, 0.3);
+}
+
+.quick-nav-button:focus,
+.filtered-routes-button:focus,
+.starred-crags-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
 }
 
 .starred-crags-button.active {
