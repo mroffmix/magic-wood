@@ -550,23 +550,39 @@ function focusOn(crag: SvgObject, bypassTooltipCheck = false) {
   /* 3. Reset to scale 1 first for accurate calculations */
   pz.zoom(1, { animate: false });
   
-  /* 4. Get center of element bbox in SVG coordinates */
+  /* 4. Get element center coordinates */
   const bbox = el.getBBox();
-  const pt = svg.createSVGPoint();
-  pt.x = bbox.x + bbox.width / 2;
-  pt.y = bbox.y + bbox.height / 2;
-  const gpt = pt.matrixTransform(el.getCTM()!);
+  const elementCenterX = bbox.x + bbox.width / 2;
+  const elementCenterY = bbox.y + bbox.height / 2;
 
-  /* 5. Get center of container */
+  /* 5. Get container dimensions */
   const parent = svg.parentElement as HTMLElement;
-  const viewCx = parent.clientWidth / 2;
-  const viewCy = parent.clientHeight / 2;
+  const containerCenterX = parent.clientWidth / 2;
+  const containerCenterY = parent.clientHeight / 2;
 
-  /* 6. Calculate pan to center the element */
-  const panX = viewCx - gpt.x;
-  const panY = viewCy - gpt.y;
+  /* 6. Calculate pan differently for Firefox */
+  let panX, panY;
+  
+  if (navigator.userAgent.includes('Firefox')) {
+    // Firefox-specific calculation using SVG viewBox scaling
+    const viewBox = svg.viewBox.baseVal;
+    const scaleX = parent.clientWidth / viewBox.width;
+    const scaleY = parent.clientHeight / viewBox.height;
+    
+    panX = containerCenterX - (elementCenterX * scaleX);
+    panY = containerCenterY - (elementCenterY * scaleY);
+  } else {
+    // Standard calculation for other browsers
+    const pt = svg.createSVGPoint();
+    pt.x = elementCenterX;
+    pt.y = elementCenterY;
+    const gpt = pt.matrixTransform(el.getCTM()!);
+    
+    panX = containerCenterX - gpt.x;
+    panY = containerCenterY - gpt.y;
+  }
 
-  /* 7. Apply pan first, then zoom */
+  /* 7. Apply pan and zoom */
   pz.pan(panX, panY, { animate: true });
   pz.zoom(panZoomScale.value, { animate: true });
   isZoomedIn = true; // Set zoomed in state
