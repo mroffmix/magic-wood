@@ -262,27 +262,10 @@ onMounted(() => {
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
     
     // Set different zoom scales based on device type
-    panZoomScale.value = isMobile ? 5 : 4;
+    panZoomScale.value = isMobile ? 10 : 4;
     
 
-    // Different zoom settings for mobile and desktop
-    const zoomConfig = isMobile ? 
-      {
-        maxScale: 20,
-        minScale: 1.0,
-        step: 5,
-        startScale: 2.5
-        // Remove contain option to allow focusing on edge elements
-      } : 
-      {
-        maxScale: 8,    // Lower max zoom for desktop
-        minScale: 1.0,     // Lower min zoom for desktop
-        step: 0.1,       // More precise zoom step for desktop
-        startScale: 1.5  // Less initial zoom for desktop
-        // Remove contain option to allow focusing on edge elements
-      };
-    
-    panZoomInstance = Panzoom(mapSvg.value, zoomConfig);
+    panZoomInstance = Panzoom(mapSvg.value, zoomConfig.value);
     
     // Track panzoom events to prevent clicks during actual pan/zoom
     mapSvg.value.addEventListener('panzoomstart', () => {
@@ -342,6 +325,11 @@ onMounted(() => {
     // Add wheel event handling
     mapSvg.value.parentElement?.addEventListener('wheel', panZoomInstance.zoomWithWheel);
     
+    // Add double tap handling for mobile devices
+    if (isMobile) {
+      mapSvg.value.addEventListener('touchend', handleDoubleTap, { passive: false });
+    }
+    
     window.addEventListener('resize', handleResize);
     
     // Apply initial boundary constraints after setup
@@ -382,6 +370,12 @@ onBeforeUnmount(() => {
   
   // Remove resize event listener
   window.removeEventListener('resize', handleResize);
+  
+  // Remove double tap event listener
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  if (isMobile && mapSvg.value) {
+    mapSvg.value.removeEventListener('touchend', handleDoubleTap);
+  }
   
   // Clean up interaction handlers
   if (mapContainer.value) {
@@ -465,14 +459,73 @@ onBeforeUnmount(() => {
   document.removeEventListener('click', closeSearchDropdown);
 });
 
+// Zoom configuration based on device type
+const zoomConfig = computed(() => {
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  return isMobile ? 
+    {
+      maxScale: 20,
+      minScale: 1.0,
+      step: 5,
+      startScale: 3.5,
+      touchAction: 'manipulation',
+      doubleClickZoom: true
+    } : 
+    {
+      maxScale: 8,
+      minScale: 1.0,
+      step: 0.1,
+      startScale: 1.5,
+      touchAction: 'manipulation',
+      doubleClickZoom: true
+    };
+});
+
 // Add quick navigation function
 const quickNavigate = () => {
   const selectedCragObj = selectedCrag.value;
   if (selectedCragObj) {
     // panZoomInstance?.zoom(1, { animate: true });
     focusOn(selectedCragObj);
-    // panZoomInstance?.zoom(panZoomScale.value, { animate: true });
+    
   }
+};
+
+// Reset zoom to default values
+const resetZoom = () => {
+  if (!panZoomInstance) return;
+  
+  // Reset to initial position and scale from config
+  panZoomInstance.zoom(zoomConfig.value.startScale, { animate: true });
+  panZoomInstance.pan(0, 0, { animate: true });
+};
+
+// Double tap handling for mobile zoom
+let lastTouchEnd = 0;
+let isZoomedIn = false;
+const handleDoubleTap = (event: TouchEvent) => {
+  // if (!panZoomInstance || !mapSvg.value) return;
+  
+  // const now = Date.now();
+  // if (now - lastTouchEnd <= 300) {
+  //   event.preventDefault();
+    
+  //   const touch = event.changedTouches[0];
+    
+  //   // Toggle between zoomed in and default scale
+  //   if (!isZoomedIn) {
+  //     // Zoom in to 2x the start scale
+  //     const targetScale = zoomConfig.value.startScale * 2;
+  //     panZoomInstance.zoomToPoint(targetScale, { clientX: touch.clientX, clientY: touch.clientY }, { animate: true });
+  //     panZoomInstance.zoom(panZoomScale.value, { animate: true });
+  //     isZoomedIn = true;
+  //   } else {
+  //     // Zoom out to default scale
+  //     panZoomInstance.zoom(zoomConfig.value.startScale, { animate: true });
+  //     isZoomedIn = false;
+  //   }
+  // }
+  // lastTouchEnd = now;
 };
 
 
@@ -496,7 +549,7 @@ function focusOn(crag: SvgObject, bypassTooltipCheck = false) {
 
   /* 3. Reset to scale 1 first for accurate calculations */
   pz.zoom(1, { animate: false });
-
+  
   /* 4. Get center of element bbox in SVG coordinates */
   const bbox = el.getBBox();
   const pt = svg.createSVGPoint();
@@ -511,12 +564,12 @@ function focusOn(crag: SvgObject, bypassTooltipCheck = false) {
 
   /* 6. Calculate pan to center the element */
   const panX = viewCx - gpt.x;
-  const panY = (viewCy - 25) - gpt.y;
+  const panY = viewCy - gpt.y;
 
   /* 7. Apply pan first, then zoom */
   pz.pan(panX, panY, { animate: true });
   pz.zoom(panZoomScale.value, { animate: true });
-
+  isZoomedIn = true; // Set zoomed in state
   /* 8. Reset programmatic flag after a delay to allow animations to complete */
   setTimeout(() => {
     isProgrammaticMove.value = false;
@@ -585,14 +638,14 @@ const shouldShowTooltip = computed(() => {
       <!-- Action buttons group -->
       <div class="search-actions-group">
         <!-- Quick Navigation Button -->
-        <button 
+        <!-- <button 
           @click="quickNavigate"
           class="quick-nav-button"
           aria-label="Quick navigation"
           type="button"
         >
           <span class="map-icon">📍</span>
-        </button>
+        </button> -->
         
         <!-- Filtered Routes Button -->
         <button 
@@ -601,7 +654,7 @@ const shouldShowTooltip = computed(() => {
           aria-label="Show filtered routes"
           type="button"
         >
-          <span class="list-icon">📋</span>
+          <font-awesome-icon :icon="['fas', 'list']" class="list-icon" />
         </button>
         
         <!-- Starred Crags Toggle Button -->
@@ -611,7 +664,7 @@ const shouldShowTooltip = computed(() => {
           aria-label="Toggle starred crags"
           type="button"
         >
-          <span class="star-icon">⭐</span>
+          <font-awesome-icon :icon="['fas', 'star']" class="star-icon" />
         </button>
       </div>
       
@@ -736,6 +789,16 @@ const shouldShowTooltip = computed(() => {
       />
     </div>
 
+    <!-- Reset zoom button positioned at bottom right -->
+    <button 
+      @click="resetZoom"
+      class="reset-zoom-button"
+      aria-label="Reset zoom to default"
+      type="button"
+    >
+      <font-awesome-icon :icon="['fas', 'crosshairs']" />
+    </button>
+
     <div v-if="shouldShowTooltip" class="fixed-tooltip">
         <RouteTooltip
           :selected-crag="selectedCrag!"
@@ -766,6 +829,7 @@ const shouldShowTooltip = computed(() => {
   height: 100vh;
   position: relative;
   overflow: hidden;
+  touch-action: pan-y; /* Allow vertical panning for page scrolling but prevent zoom */
 }
 
 /* Map takes all available space between fixed elements */
@@ -790,8 +854,7 @@ const shouldShowTooltip = computed(() => {
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  touch-action: manipulation;
-
+  touch-action: none; /* Disable all default touch behaviors for map area */
 }
 
 .map-wrapper svg {
@@ -802,6 +865,7 @@ const shouldShowTooltip = computed(() => {
   object-fit: cover; /* Cover available space */
   background-color: rgba(143, 136, 135, 0.106);
   cursor: default !important;
+  touch-action: none; /* Ensure no default touch behaviors on SVG */
 }
 
 /* Position AreaCarousel at the top of the page */
@@ -979,7 +1043,6 @@ const shouldShowTooltip = computed(() => {
 
 .list-icon {
   display: inline-block;
-  transform: translateY(-1px); /* Slight adjustment for visual alignment */
 }
 
 /* Action button hover and focus states */
@@ -1009,7 +1072,6 @@ const shouldShowTooltip = computed(() => {
 
 .star-icon {
   display: inline-block;
-  transform: translateY(-1px); /* Slight adjustment for visual alignment */
 }
 
 /* Search results dropdown styles */
@@ -1095,6 +1157,52 @@ const shouldShowTooltip = computed(() => {
 /* Update map position to account for search bar */
 #map {
   top: 55px; /* Additional space for search bar */
+}
+
+/* Reset zoom button styles */
+.reset-zoom-button {
+  position: fixed;
+  bottom: 60px;
+  right: 20px;
+  background: rgba(91, 86, 86, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  color: white;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 20px;
+  transition: all 0.2s ease;
+  z-index: 10;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.reset-zoom-button:hover {
+  background: rgba(91, 86, 86, 1);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.reset-zoom-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+.reset-zoom-button:active {
+  transform: scale(0.95);
+}
+
+/* Mobile responsive styles for reset button */
+@media (max-width: 480px) {
+  .reset-zoom-button {
+    bottom: 80px; /* Position above difficulty filter on mobile */
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+  }
 }
 </style>
 

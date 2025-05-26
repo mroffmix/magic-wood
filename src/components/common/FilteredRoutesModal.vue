@@ -95,7 +95,11 @@ const sortedGroupKeys = computed(() => {
 // Handle route selection
 const selectRoute = (route: Route) => {
   emit('select-route', route);
-  closeModal();
+  
+  // Only close modal on mobile (below 768px)
+  if (window.innerWidth < 768) {
+    closeModal();
+  }
 };
 
 // Count total routes
@@ -132,22 +136,6 @@ const starredRoutesCount = computed(() => {
   return filteredRoutes.value.filter(route => route.starscount > 0).length;
 });
 
-// Helper function to check if this is the first route in a block
-const isFirstRouteInBlock = (routes: Route[], index: number) => {
-  if (index === 0) return true;
-  return routes[index].blockNumber !== routes[index - 1].blockNumber;
-};
-
-// Helper function to check if a block has multiple routes
-const hasMultipleRoutesInBlock = (routes: Route[], blockNumber: string) => {
-  return routes.filter(route => route.blockNumber === blockNumber).length > 1;
-};
-
-// Helper function to check if we should show block header
-const shouldShowBlockHeader = (routes: Route[], index: number) => {
-  if (!isFirstRouteInBlock(routes, index)) return false;
-  return hasMultipleRoutesInBlock(routes, routes[index].blockNumber);
-};
 
 // Helper function to get unique block count for an area
 const getBlockCount = (routes: Route[]) => {
@@ -190,45 +178,25 @@ const getBlockCount = (routes: Route[]) => {
             </div>
             
             <div v-if="isAreaExpanded(groupKey)" class="routes-list">
-              <template v-for="(route, index) in groupedRoutes[groupKey]" :key="route.id">
-                <!-- Block header only for blocks with multiple routes -->
-                <div 
-                  v-if="shouldShowBlockHeader(groupedRoutes[groupKey], index)" 
-                  class="block-header"
-                >
-                  <span class="block-icon">🪨</span>
-                  <span class="block-name">{{ route.blockNumber }}</span>
-                </div>
-                
-                <!-- Route item -->
-                <div 
-                  class="route-item"
-                  :class="{ 
-                    'first-in-block': isFirstRouteInBlock(groupedRoutes[groupKey], index),
-                    'single-route-block': !hasMultipleRoutesInBlock(groupedRoutes[groupKey], route.blockNumber)
-                  }"
-                  @click="selectRoute(route)"
-                >
-                  <div class="route-info">
-                    <div class="route-name">
-                      <!-- Show block name before route name for single routes -->
-                      <span 
-                        v-if="!hasMultipleRoutesInBlock(groupedRoutes[groupKey], route.blockNumber)" 
-                        class="route-block-prefix"
-                      >
-                        {{ route.blockNumber }} -
-                      </span>
-                      {{ route.name }}
-                    </div>
-                  </div>
-                  <div class="route-stars">
-                    <span v-for="i in route.starscount" :key="i" class="star">★</span>
-                  </div>
-                  <div class="difficulty-container">
-                    <DifficultyLabel :difficulty="route.difficulty" />
+              <div 
+                v-for="route in groupedRoutes[groupKey]" 
+                :key="route.id"
+                class="route-item"
+                @click="selectRoute(route)"
+              >
+                <div class="route-info">
+                  <div class="route-name">
+                    <span class="route-block-prefix">{{ route.blockNumber }} -</span>
+                    {{ route.name }}
                   </div>
                 </div>
-              </template>
+                <div class="route-stars">
+                  <span v-for="i in route.starscount" :key="i" class="star">★</span>
+                </div>
+                <div class="difficulty-container">
+                  <DifficultyLabel :difficulty="route.difficulty" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -411,31 +379,6 @@ h3 {
   gap: 2px;
 }
 
-.block-header {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 6px 12px;
-  margin-top: 8px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-left: 3px solid rgba(255, 255, 255, 0.3);
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.block-header:first-child {
-  margin-top: 0;
-}
-
-.block-icon {
-  font-size: 12px;
-}
-
-.block-name {
-  font-weight: 600;
-}
 
 .route-item {
   display: grid;
@@ -446,17 +389,6 @@ h3 {
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.2s;
-  margin-left: 12px;
-  border-left: 2px solid rgba(255, 255, 255, 0.1);
-}
-
-.route-item.first-in-block {
-  margin-top: 4px;
-}
-
-.route-item.single-route-block {
-  margin-left: 0;
-  border-left: none;
 }
 
 .route-block-prefix {
@@ -508,8 +440,23 @@ h3 {
 
 /* Desktop-specific adjustments */
 @media (min-width: 768px) {
+  .modal-overlay {
+    justify-content: flex-start;
+    align-items: stretch;
+    padding: 0;
+    background-color: transparent;
+    pointer-events: none;
+  }
+  
   .modal-content {
-    max-width: 700px;
+    max-width: 400px;
+    width: 400px;
+    max-height: 100vh;
+    height: 100vh;
+    border-radius: 0;
+    margin: 0;
+    pointer-events: auto;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.5);
   }
   
   .modal-header {
@@ -545,10 +492,6 @@ h3 {
     font-size: 16px;
   }
   
-  .block-header {
-    font-size: 15px;
-    padding: 8px 12px;
-  }
   
   .route-block-prefix {
     font-size: 14px;
@@ -601,14 +544,6 @@ h3 {
     font-size: 13px;
   }
   
-  .block-header {
-    font-size: 13px;
-    padding: 6px 10px;
-  }
-  
-  .block-icon {
-    font-size: 10px;
-  }
   
   .route-block-prefix {
     font-size: 11px;
