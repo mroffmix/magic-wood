@@ -311,7 +311,7 @@ h3 {
 .modal-body {
   flex: 1;
   overflow-y: auto;
-  padding: 0;
+  padding: 0 0 60px 0; /* Add bottom padding for difficulty filter */
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -446,6 +446,7 @@ h3 {
     padding: 0;
     background-color: transparent;
     pointer-events: none;
+    z-index: 85; /* Between map and tooltip, but below difficulty filter */
   }
   
   .modal-content {
@@ -457,6 +458,10 @@ h3 {
     margin: 0;
     pointer-events: auto;
     box-shadow: 2px 0 15px rgba(0, 0, 0, 0.5);
+  }
+  
+  .modal-body {
+    padding-bottom: 80px; /* More padding on desktop for better spacing */
   }
   
   .modal-header {

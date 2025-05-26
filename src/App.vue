@@ -612,8 +612,31 @@ const shouldShowTooltip = computed(() => {
   <!-- Begin wrapping all content in a container that uses vertical stacking -->
   <div class="app-container">
     <!-- Add search bar above the carousel with tooltip-like styling -->
-    <div class="search-container" ref="searchContainer">
-      <!-- Search input group -->
+    <div class="search-container" :class="{ 'with-modal': showFilteredRoutesModal }" ref="searchContainer">
+      <!-- Action buttons group (moved to left) -->
+      <div class="search-actions-group">
+        <!-- Filtered Routes Button -->
+        <button 
+          @click="showFilteredRoutesModal = !showFilteredRoutesModal"
+          class="filtered-routes-button"
+          aria-label="Toggle filtered routes"
+          type="button"
+        >
+          <font-awesome-icon :icon="['fas', 'list']" class="list-icon" />
+        </button>
+        
+        <!-- Starred Crags Toggle Button -->
+        <button 
+          @click="showStarredCrags = !showStarredCrags"
+          :class="['starred-crags-button', { active: showStarredCrags }]"
+          aria-label="Toggle starred crags"
+          type="button"
+        >
+          <font-awesome-icon :icon="['fas', 'star']" class="star-icon" />
+        </button>
+      </div>
+      
+      <!-- Search input group (moved to right) -->
       <div class="search-input-group">
         <input
           type="text"
@@ -632,39 +655,6 @@ const shouldShowTooltip = computed(() => {
           type="button"
         >
           ×
-        </button>
-      </div>
-      
-      <!-- Action buttons group -->
-      <div class="search-actions-group">
-        <!-- Quick Navigation Button -->
-        <!-- <button 
-          @click="quickNavigate"
-          class="quick-nav-button"
-          aria-label="Quick navigation"
-          type="button"
-        >
-          <span class="map-icon">📍</span>
-        </button> -->
-        
-        <!-- Filtered Routes Button -->
-        <button 
-          @click="showFilteredRoutesModal = true"
-          class="filtered-routes-button"
-          aria-label="Show filtered routes"
-          type="button"
-        >
-          <font-awesome-icon :icon="['fas', 'list']" class="list-icon" />
-        </button>
-        
-        <!-- Starred Crags Toggle Button -->
-        <button 
-          @click="showStarredCrags = !showStarredCrags"
-          :class="['starred-crags-button', { active: showStarredCrags }]"
-          aria-label="Toggle starred crags"
-          type="button"
-        >
-          <font-awesome-icon :icon="['fas', 'star']" class="star-icon" />
         </button>
       </div>
       
@@ -799,7 +789,7 @@ const shouldShowTooltip = computed(() => {
       <font-awesome-icon :icon="['fas', 'crosshairs']" />
     </button>
 
-    <div v-if="shouldShowTooltip" class="fixed-tooltip">
+    <div v-if="shouldShowTooltip" class="fixed-tooltip" :class="{ 'with-modal': showFilteredRoutesModal }">
         <RouteTooltip
           :selected-crag="selectedCrag!"
           :crag-routes="cragRoutes"
@@ -905,6 +895,7 @@ const shouldShowTooltip = computed(() => {
   max-width: 450px; /* Increased from 400px */
   z-index: 90;
   margin-bottom: 20px;
+  transition: all 0.3s ease;
 }
 
 /* Desktop-specific adjustments for the tooltip */
@@ -912,6 +903,16 @@ const shouldShowTooltip = computed(() => {
   .fixed-tooltip {
     max-width: 550px; /* Larger tooltip on desktop */
     bottom: 70px; /* Position it higher on desktop */
+  }
+  
+  /* Adjust tooltip position when modal is open */
+  .fixed-tooltip.with-modal {
+    left: 50%;
+    right: auto;
+    transform: translateX(calc(-50% + 200px)); /* Center in remaining space */
+    max-width: min(calc(100vw - 440px), 500px); /* Limited width with screen bounds */
+    width: 90%; /* Use most of available space */
+    min-width: 280px; /* Ensure minimum readable width */
   }
 }
 
@@ -927,6 +928,18 @@ const shouldShowTooltip = computed(() => {
   display: flex;
   gap: 10px;
   align-items: center;
+}
+
+/* Desktop: Adjust search container when modal is open */
+@media (min-width: 768px) {
+  .search-container {
+    transition: left 0.3s ease;
+  }
+  
+  /* Add class to shift search bar when modal is open */
+  .search-container.with-modal {
+    left: 400px;
+  }
 }
 
 .search-input-group {
@@ -1085,8 +1098,6 @@ const shouldShowTooltip = computed(() => {
   border-radius: 0 0 8px 8px;
   max-height: 300px;
   overflow-y: auto;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Match tooltip shadow */
-  border: 1px solid rgba(255, 255, 255, 0.2); /* Match tooltip border */
   z-index: 151;
   scrollbar-width: none; /* Hide scrollbar for Firefox */
   -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
