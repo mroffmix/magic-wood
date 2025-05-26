@@ -51,13 +51,19 @@ const props = defineProps({
 
 const emit = defineEmits(['select-area', 'hover', 'select-crag']);
 
-const selectArea = (crag: SvgObject) => {
+const selectArea = (crag: SvgObject, event?: Event) => {
   console.log('selectArea called for crag:', crag.name, 'visible:', isCragVisible(crag));
   
   // Only allow selection of crags that have visible routes
   if (!isCragVisible(crag)) {
     console.log('Crag click ignored - no visible routes:', crag.name);
     return;
+  }
+  
+  // Prevent event propagation to avoid conflicts with pan/zoom
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
   }
   
   console.log('Crag clicked:', crag.name);
@@ -212,7 +218,8 @@ const isCragTooSmall = (crag: SvgObject) => {
       stroke="#222"
       stroke-width="0.7"
       cursor="pointer"
-      @click="() => selectArea(crag)"
+      @click="(event) => selectArea(crag, event)"
+      @touchend="(event) => selectArea(crag, event)"
     />
     
     <!-- Crag labels - also apply opacity and use safe center function -->
@@ -222,7 +229,8 @@ const isCragTooSmall = (crag: SvgObject) => {
         v-if="isCragTooSmall(crag)"
         :cx="safeGetPathCenter(crag).x"
         :cy="safeGetPathCenter(crag).y - 1"
-        @click="() => selectArea(crag)"
+        @click="(event) => selectArea(crag, event)"
+        @touchend="(event) => selectArea(crag, event)"
         r="4"
         fill="rgba(0, 0, 0, 0.3)"
         cursor="pointer"
@@ -232,7 +240,8 @@ const isCragTooSmall = (crag: SvgObject) => {
       <text
         :x="safeGetPathCenter(crag).x"
         :y="safeGetPathCenter(crag).y"
-        @click="() => selectArea(crag)"
+        @click="(event) => selectArea(crag, event)"
+        @touchend="(event) => selectArea(crag, event)"
         text-anchor="middle"
         alignment-baseline="middle"
         font-size="6"
@@ -264,7 +273,8 @@ const isCragTooSmall = (crag: SvgObject) => {
         rx="2"
         fill="rgba(80, 80, 80, 0.8)"
         :opacity="getCragTitleOpacity(crag)"
-        @click="() => selectArea(crag)"
+        @click="(event) => selectArea(crag, event)"
+        @touchend="(event) => selectArea(crag, event)"
       />
       <!-- Additional name text with click handler -->
       <text
@@ -277,7 +287,8 @@ const isCragTooSmall = (crag: SvgObject) => {
         font-weight="normal"
         style="user-select: none;"
         :opacity="getCragTitleOpacity(crag)"
-        @click="() => selectArea(crag)"
+        @click="(event) => selectArea(crag, event)"
+        @touchend="(event) => selectArea(crag, event)"
       >{{ getAdditionalName(crag) }}</text>
     </g>
     
@@ -290,7 +301,8 @@ const isCragTooSmall = (crag: SvgObject) => {
         fill="rgba(255, 215, 0, 0.9)"
         stroke="rgba(255, 255, 255, 0.8)"
         stroke-width="0.5"
-        @click="() => selectArea(crag)"
+        @click="(event) => selectArea(crag, event)"
+        @touchend="(event) => selectArea(crag, event)"
       />
       <text
         :x="safeGetPathCenter(crag).x + 6"
