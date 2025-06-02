@@ -465,7 +465,7 @@ const zoomConfig = computed(() => {
   return isMobile ? 
     {
       maxScale: 20,
-      minScale: 1.0,
+      minScale: 3.0,
       step: 5,
       startScale: 3.5,
       touchAction: 'manipulation',
