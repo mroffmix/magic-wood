@@ -465,7 +465,7 @@ const zoomConfig = computed(() => {
   return isMobile ? 
     {
       maxScale: 20,
-      minScale: 3.0,
+      minScale: 2.5,
       step: 5,
       startScale: 3.5,
       touchAction: 'manipulation',
@@ -497,7 +497,7 @@ const resetZoom = () => {
   
   // Reset to initial position and scale from config
   panZoomInstance.zoom(zoomConfig.value.startScale, { animate: true });
-  panZoomInstance.pan(0, 0, { animate: true });
+  panZoomInstance.pan(50, -50, { animate: true });
 };
 
 // Double tap handling for mobile zoom
@@ -756,33 +756,6 @@ const shouldShowTooltip = computed(() => {
 
           <!-- Debug point -->
           
-          <circle 
-            v-if="debugCenter" 
-            :cx="debugCenter.x" 
-            :cy="debugCenter.y" 
-            r="1" 
-            fill="red" 
-            stroke-width="2"
-          />
-
-          <circle 
-            v-if="viewBoxCenter" 
-            :cx="viewBoxCenter.x" 
-            :cy="viewBoxCenter.y" 
-            r="4" 
-            fill="blue" 
-            stroke-width="4"
-          />
-
-          <circle 
-            v-if="targetCenter" 
-            :cx="targetCenter.x" 
-            :cy="targetCenter.y" 
-            r="4" 
-            fill="green" 
-            stroke-width="4"
-          />
-
         </svg>
       </div>
     </div>
