@@ -622,6 +622,30 @@ const shouldShowTooltip = computed(() => {
   });
   return result;
 });
+
+// Save for offline functionality
+const saveForOffline = () => {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.ready.then((registration) => {
+      if (registration.active) {
+        registration.active.postMessage({ type: 'CACHE_UPDATE' });
+        
+        // Show user feedback
+        const button = document.querySelector('.save-offline-button');
+        if (button) {
+          const originalContent = button.innerHTML;
+          button.innerHTML = '<font-awesome-icon icon="check" class="check-icon" />';
+          button.classList.add('saved');
+          
+          setTimeout(() => {
+            button.innerHTML = originalContent;
+            button.classList.remove('saved');
+          }, 2000);
+        }
+      }
+    });
+  }
+};
 </script>
 
 <template>
@@ -649,6 +673,16 @@ const shouldShowTooltip = computed(() => {
           type="button"
         >
           <font-awesome-icon :icon="['fas', 'star']" class="star-icon" />
+        </button>
+        
+        <!-- Save Offline Button -->
+        <button 
+          @click="saveForOffline"
+          class="save-offline-button"
+          aria-label="Save for offline use"
+          type="button"
+        >
+          <font-awesome-icon :icon="['fas', 'download']" class="download-icon" />
         </button>
       </div>
       
@@ -1007,7 +1041,8 @@ const shouldShowTooltip = computed(() => {
   
   .quick-nav-button,
   .filtered-routes-button,
-  .starred-crags-button {
+  .starred-crags-button,
+  .save-offline-button {
     width: 36px;
     height: 36px;
     font-size: 16px;
@@ -1074,6 +1109,40 @@ const shouldShowTooltip = computed(() => {
 
 .star-icon {
   display: inline-block;
+}
+
+.download-icon {
+  display: inline-block;
+}
+
+/* Save offline button specific styles */
+.save-offline-button {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.save-offline-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.save-offline-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4);
+}
+
+.save-offline-button.saved {
+  background: rgba(0, 255, 0, 0.3);
+  color: #00ff00;
 }
 
 /* Search results dropdown styles */
