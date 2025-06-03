@@ -47,7 +47,7 @@
     class="offline-indicator"
   >
     <font-awesome-icon :icon="['fas', 'wifi']" class="offline-icon" />
-    <span>Offline Mode</span>
+    <span>Offline</span>
   </div>
 </template>
 
@@ -270,10 +270,10 @@ onUnmounted(() => {
 
 .offline-indicator {
   position: fixed;
-  top: 55px;
+  top: 65px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255, 152, 0, 0.9);
+  background: rgba(255, 152, 0, 0.6);
   color: white;
   padding: 6px 12px;
   border-radius: 16px;

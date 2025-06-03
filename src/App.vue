@@ -1124,6 +1124,7 @@ const showCacheUpdateError = () => {
 };
 </script>
 
+
 <template>
   <!-- Begin wrapping all content in a container that uses vertical stacking -->
   <div class="app-container">
@@ -1195,7 +1196,7 @@ const showCacheUpdateError = () => {
               
               <div class="cache-hint">
                 {{ isNewVersionAvailable 
-                  ? 'New version available - click reload to update' 
+                  ? 'New version available - click clear and load new version' 
                   : 'Choose an action below' 
                 }}
               </div>

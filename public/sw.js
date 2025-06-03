@@ -1,5 +1,5 @@
 const CACHE_NAME = 'magic-wood-v2';
-const VERSION = '1.0.1'; // Update this when you want to notify users of new version
+const VERSION = '1.0.2'; // Update this when you want to notify users of new version
 const urlsToCache = [
   '/',
   '/index.html',
