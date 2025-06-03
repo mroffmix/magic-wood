@@ -14,6 +14,7 @@ import RouteTooltip from '@/components/common/RouteTooltip.vue';
 import DifficultyFilter from '@/components/filters/DifficultyFilter.vue';
 import DifficultyLabel from '@/components/common/DifficultyLabel.vue';
 import FilteredRoutesModal from '@/components/common/FilteredRoutesModal.vue';
+import OfflineTooltips from '@/components/common/OfflineTooltips.vue';
 import routesData from '@/routes-data/filled_routes.json';
 import type { SvgObject } from '@/types/SvgObject';
 import { getDifficultyValue } from '@/utils/difficulty';
@@ -45,6 +46,11 @@ const showFilteredRoutesModal = ref(false);
 
 // Starred crags visibility state
 const showStarredCrags = ref(false);
+
+// Cache state
+const hasCachedContent = ref(false);
+const cacheTimestamp = ref<string | null>(null);
+const showCacheTooltip = ref(false);
 
 // Handle route selection from modal
 const handleRouteSelection = (route: { blockNumber: string; area: string; [key: string]: unknown }) => {
@@ -144,18 +150,25 @@ const handleSelectCrag = (crag: SvgObject, bypassFilter = false) => {
   
   // Check if we're currently pan/zooming with movement or if it just ended with movement
   if (isPanZooming.value && hadPanMovement.value) {
-    // console.log('Click ignored - pan/zooming with movement');
+    console.log('Click ignored - pan/zooming with movement');
     return;
   }
   
+  console.log('Pan/zoom check passed');
+  
   // Check if this is a valid click (not a drag)
-  if (!interactionHandler.isValidClick()) {
+  const isValid = interactionHandler.isValidClick();
+  console.log('isValidClick result:', isValid);
+  
+  if (!isValid) {
      console.log('Click ignored - invalid click, state:', {
       ...state,
       timeSinceDragEnd: timeSinceDrag
     });
     return;
   }
+  
+  console.log('Valid click detected, continuing...');
   
   // console.log('handleSelectCrag called for:', crag.name, crag.sector);
   
@@ -165,9 +178,11 @@ const handleSelectCrag = (crag: SvgObject, bypassFilter = false) => {
   
   // Check if there are any routes before continuing
   if (allRoutes.length === 0) {
-    // console.log('No routes found for this crag, skipping tooltip');
+    console.log('No routes found for this crag, skipping tooltip');
     return;
   }
+  
+  console.log('Routes found:', allRoutes.length);
   
   // Check if there are any visible routes (matching current filter)
   // Skip this check if called from search (bypassFilter = true)
@@ -182,9 +197,11 @@ const handleSelectCrag = (crag: SvgObject, bypassFilter = false) => {
     });
     
     if (visibleRoutes.length === 0) {
-      // console.log('No visible routes found for this crag with current filter, skipping tooltip');
+      console.log('No visible routes found for this crag with current filter, skipping tooltip');
       return;
     }
+    
+    console.log('Visible routes found:', visibleRoutes.length);
   }
   
   selectedCrag.value = crag;
@@ -254,6 +271,9 @@ const handleResize = () => {
 };
 
 onMounted(() => {
+  // Check for cached content on app load
+  checkCachedContent();
+  
   if (mapSvg.value && mapContainer.value) {
     // Setup interaction handlers for both the container and SVG to capture all events
     interactionHandler.setupEventListeners(mapContainer.value);
@@ -529,26 +549,82 @@ const handleDoubleTap = (event: TouchEvent) => {
 };
 
 
-function focusOn(crag: SvgObject, bypassTooltipCheck = false) {
+function focusOn(crag: SvgObject, bypassTooltipCheck = false, retryCount = 0) {
+  const maxRetries = 10; // Maximum retry attempts
+  
   // Skip focusing if there are no routes to show (unless bypassing for search/route selection)
   if (!bypassTooltipCheck && !shouldShowTooltip.value) {
-    // console.log('Skipping focus because no routes will be shown');
     return;
   }
 
-  const svg = mapSvg.value!;
+  const svg = mapSvg.value;
   const pz = panZoomInstance;
-  if (!svg || !pz) return;
+  
+  // Add comprehensive initialization checks with retry limit
+  if (!svg || !pz) {
+    if (retryCount >= maxRetries) {
+      console.error('focusOn failed after maximum retries: SVG or panzoom instance not ready');
+      return;
+    }
+    console.warn(`focusOn attempt ${retryCount + 1}: SVG or panzoom instance not ready, retrying...`, {
+      svg: !!svg,
+      pz: !!pz
+    });
+    setTimeout(() => focusOn(crag, bypassTooltipCheck, retryCount + 1), 100);
+    return;
+  }
+  
+  // Ensure parent element is available
+  if (!svg.parentElement) {
+    if (retryCount >= maxRetries) {
+      console.error('focusOn failed after maximum retries: SVG parent element not ready');
+      return;
+    }
+    console.warn(`focusOn attempt ${retryCount + 1}: SVG parent element not ready, retrying...`);
+    setTimeout(() => focusOn(crag, bypassTooltipCheck, retryCount + 1), 100);
+    return;
+  }
 
-  /* 1. Find the target element */
-  const el = svg.getElementById(crag.name + '_' + crag.sector) as SVGGraphicsElement | null;
-  if (!el) return;
+  // Detect mobile Firefox or Samsung Browser
+  const isFirefox = navigator.userAgent.includes('Firefox');
+  const isSamsungBrowser = navigator.userAgent.includes('SamsungBrowser');
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const isMobileFirefox = (isFirefox || isSamsungBrowser) && isMobile;
+
+  /* 1. Find the target element - use area for mobile Firefox, crag otherwise */
+  let el: SVGGraphicsElement | null = null;
+  
+  if (isMobileFirefox) {
+    // Focus on the area instead of the crag for mobile Firefox
+    const area = areas.find(area => area.name === crag.sector);
+    if (area) {
+      el = svg.getElementById(area.name) as SVGGraphicsElement | null;
+    }
+  }
+  
+  // Fallback to crag if area not found or not mobile Firefox
+  if (!el) {
+    el = svg.getElementById(crag.name + '_' + crag.sector) as SVGGraphicsElement | null;
+  }
+  
+  // Check if target element exists with retry mechanism
+  if (!el) {
+    if (retryCount >= maxRetries) {
+      console.error(`focusOn failed after maximum retries: Target element not found for crag ${crag.name}_${crag.sector}`);
+      return;
+    }
+    console.warn(`focusOn attempt ${retryCount + 1}: Target element not found for crag ${crag.name}_${crag.sector}, retrying...`);
+    setTimeout(() => focusOn(crag, bypassTooltipCheck, retryCount + 1), 100);
+    return;
+  }
 
   /* 2. Mark as programmatic movement to prevent tooltip hiding */
   isProgrammaticMove.value = true;
 
   /* 3. Reset to scale 1 first for accurate calculations */
-  pz.zoom(1, { animate: false });
+  if (!isMobileFirefox) {
+    pz.zoom(1, { animate: false });
+  }
   
   /* 4. Get element center coordinates */
   const bbox = el.getBBox();
@@ -563,22 +639,41 @@ function focusOn(crag: SvgObject, bypassTooltipCheck = false) {
   /* 6. Calculate pan with browser-specific handling */
   let panX, panY;
   
-  const isFirefox = navigator.userAgent.includes('Firefox');
-  const isAndroid = /Android/i.test(navigator.userAgent);
-  const isAndroidFirefox = isFirefox && isAndroid;
-  
-  if (isFirefox) {
+  if (isMobileFirefox) {
+    // For mobile Firefox/Samsung Browser, try panzoom's focal point method
+    console.log('Mobile Firefox detected - using focal point approach');
+    
+    // Try using panzoom's zoomToPoint which handles coordinates internally
+    const currentScale = pz.getScale();
+    console.log('Current scale:', currentScale);
+    
+    // Reset to a known state first
+    pz.zoom(1, { animate: false });
+    
+    // Get element's current screen position
+    const elRect = el.getBoundingClientRect();
+    const elCenterScreenX = elRect.left + elRect.width / 2;
+    const elCenterScreenY = elRect.top + elRect.height / 2;
+    
+    // Use the element's current screen position as the focal point
+    const focalPoint = {
+      clientX: elCenterScreenX,
+      clientY: elCenterScreenY
+    };
+    
+    console.log('Element screen center:', elCenterScreenX, elCenterScreenY);
+    console.log('Focal point:', focalPoint);
+    
+    // Use zoomToPoint to properly handle the coordinate transformation
+    pz.zoomToPoint(zoomConfig.value.startScale, focalPoint, { animate: true });
+    
+    // Skip the manual pan calculation, zoomToPoint handles it
+    return;
+  } else if (isFirefox) {
     // Firefox-specific calculation using SVG viewBox scaling
     const viewBox = svg.viewBox.baseVal;
     let scaleX = parent.clientWidth / viewBox.width;
     let scaleY = parent.clientHeight / viewBox.height;
-    
-    // Additional adjustment for Android Firefox
-    if (isAndroidFirefox) {
-      const devicePixelRatio = window.devicePixelRatio || 1;
-      scaleX *= devicePixelRatio;
-      scaleY *= devicePixelRatio;
-    }
     
     panX = containerCenterX - (elementCenterX * scaleX);
     panY = containerCenterY - (elementCenterY * scaleY);
@@ -595,8 +690,14 @@ function focusOn(crag: SvgObject, bypassTooltipCheck = false) {
 
   /* 7. Apply pan and zoom */
   pz.pan(panX, panY, { animate: true });
-  pz.zoom(panZoomScale.value, { animate: true });
-  isZoomedIn = true; // Set zoomed in state
+  
+  // For mobile Firefox: set default zoom, for others: zoom in
+  if (isMobileFirefox) {
+    pz.zoom(zoomConfig.value.startScale, { animate: true });
+  } else {
+    pz.zoom(panZoomScale.value, { animate: true });
+    isZoomedIn = true; // Set zoomed in state
+  }
   /* 8. Reset programmatic flag after a delay to allow animations to complete */
   setTimeout(() => {
     isProgrammaticMove.value = false;
@@ -634,46 +735,206 @@ const shouldShowTooltip = computed(() => {
   return result;
 });
 
-// Save for offline functionality
-const saveForOffline = async () => {
-  if ('serviceWorker' in navigator && 'caches' in window) {
+// Check for cached content
+const checkCachedContent = async () => {
+  if ('caches' in window) {
     try {
-      // Pre-cache all critical resources
       const cache = await caches.open('magic-wood-v2');
       
-      // Cache current page and essential resources
-      const resourcesToCache = [
-        window.location.pathname,
-        '/',
-        '/index.html',
-        '/favicon.ico',
-        '/magic-wood.png'
-      ];
-      
-      await cache.addAll(resourcesToCache);
-      
-      // Trigger service worker cache update
-      const registration = await navigator.serviceWorker.ready;
-      if (registration.active) {
-        registration.active.postMessage({ type: 'CACHE_UPDATE' });
+      // Check if we have cached timestamp
+      const timestampResponse = await cache.match('CACHE_TIMESTAMP');
+      if (timestampResponse) {
+        cacheTimestamp.value = await timestampResponse.text();
+        hasCachedContent.value = true;
+        console.log('Found cached content from:', cacheTimestamp.value);
+        return;
       }
       
-      // Show user feedback
-      const button = document.querySelector('.save-offline-button');
-      if (button) {
-        const originalContent = button.innerHTML;
-        button.innerHTML = '<font-awesome-icon icon="check" class="check-icon" />';
-        button.classList.add('saved');
-        
-        setTimeout(() => {
-          button.innerHTML = originalContent;
-          button.classList.remove('saved');
-        }, 2000);
+      // Fallback: check if any resources are cached
+      const cachedUrls = await cache.keys();
+      if (cachedUrls.length > 0) {
+        hasCachedContent.value = true;
+        console.log('Found cached resources:', cachedUrls.length);
       }
     } catch (error) {
-      console.error('Failed to save for offline:', error);
+      console.warn('Failed to check cached content:', error);
     }
   }
+};
+
+// Format cache date for display
+const formatCacheDate = (timestamp: string | null) => {
+  if (!timestamp) return 'Unknown date';
+  
+  const date = new Date(timestamp);
+  const now = new Date();
+  const diffMs = now.getTime() - date.getTime();
+  const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+  const diffDays = Math.floor(diffHours / 24);
+  
+  if (diffDays > 0) {
+    return `${diffDays} day${diffDays > 1 ? 's' : ''} ago`;
+  } else if (diffHours > 0) {
+    return `${diffHours} hour${diffHours > 1 ? 's' : ''} ago`;
+  } else {
+    return 'Recently cached';
+  }
+};
+
+// Save for offline functionality or reload
+const saveForOffline = async () => {
+  console.log('Save/reload button clicked');
+  
+  // If we already have cached content, reload the page
+  if (hasCachedContent.value) {
+    console.log('Reloading page to get latest version');
+    window.location.reload();
+    return;
+  }
+  
+  if (!('serviceWorker' in navigator)) {
+    console.error('Service worker not supported');
+    showCacheUpdateError();
+    return;
+  }
+  
+  if (!('caches' in window)) {
+    console.error('Cache API not supported');
+    showCacheUpdateError();
+    return;
+  }
+  
+  try {
+    console.log('Starting save offline process...');
+    
+    // Open cache
+    console.log('Opening cache: magic-wood-v2');
+    const cache = await caches.open('magic-wood-v2');
+    console.log('Cache opened successfully');
+    
+    // Get current URL info
+    const currentUrl = window.location.href;
+    const currentPathname = window.location.pathname;
+    console.log('Current URL:', currentUrl);
+    console.log('Current pathname:', currentPathname);
+    
+    // Cache resources individually to avoid duplicates
+    const staticResources = [
+      '/favicon.ico',
+      '/magic-wood.png'
+    ];
+    
+    // Determine the correct page URL to cache
+    const currentPage = window.location.pathname === '/' ? '/' : '/index.html';
+    
+    // Build the final list and ensure no duplicates
+    const resourcesToCache = [currentPage, ...staticResources];
+    const uniqueResources = [...new Set(resourcesToCache)];
+    
+    console.log('Current page:', currentPage);
+    console.log('Resources to cache:', resourcesToCache);
+    console.log('Unique resources after deduplication:', uniqueResources);
+    
+    for (const resource of uniqueResources) {
+      try {
+        console.log(`Caching resource: ${resource}`);
+        await cache.add(resource);
+        console.log(`Successfully cached: ${resource}`);
+      } catch (error) {
+        console.warn(`Failed to cache ${resource}:`, error);
+        // Continue with other resources
+      }
+    }
+    
+    // Store timestamp
+    console.log('Storing timestamp...');
+    const timestamp = new Date().toISOString();
+    const timestampResponse = new Response(timestamp, {
+      headers: { 'Content-Type': 'text/plain' }
+    });
+    await cache.put('CACHE_TIMESTAMP', timestampResponse);
+    console.log('Timestamp stored successfully:', timestamp);
+    
+    // Update cache state
+    cacheTimestamp.value = timestamp;
+    hasCachedContent.value = true;
+    
+    // Show user feedback with timestamp
+    console.log('Showing success feedback');
+    const button = document.querySelector('.save-offline-button');
+    if (button) {
+      const originalContent = button.innerHTML;
+      button.innerHTML = '<font-awesome-icon icon="check" class="check-icon" />';
+      button.classList.add('saved');
+      
+      // Show additional feedback
+      showCacheUpdateNotification(timestamp);
+      
+      setTimeout(() => {
+        button.innerHTML = originalContent;
+        button.classList.remove('saved');
+      }, 2000);
+    }
+    
+  } catch (error) {
+    console.error('Failed to save for offline - detailed error:', error);
+    if (error instanceof Error) {
+      console.error('Error name:', error.name);
+      console.error('Error message:', error.message);
+      console.error('Error stack:', error.stack);
+    }
+    showCacheUpdateError();
+  }
+};
+
+// Show cache update notification
+const showCacheUpdateNotification = (timestamp: string) => {
+  const notification = document.createElement('div');
+  notification.className = 'cache-notification';
+  notification.innerHTML = `
+    <div class="cache-notification-content">
+      <strong>Saved for offline!</strong><br>
+      <small>Cached at ${new Date(timestamp).toLocaleString()}</small>
+    </div>
+  `;
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.classList.add('show');
+  }, 100);
+  
+  setTimeout(() => {
+    notification.classList.remove('show');
+    setTimeout(() => {
+      document.body.removeChild(notification);
+    }, 300);
+  }, 3000);
+};
+
+// Show cache update error
+const showCacheUpdateError = () => {
+  const notification = document.createElement('div');
+  notification.className = 'cache-notification error';
+  notification.innerHTML = `
+    <div class="cache-notification-content">
+      <strong>Failed to save offline</strong><br>
+      <small>Please try again</small>
+    </div>
+  `;
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.classList.add('show');
+  }, 100);
+  
+  setTimeout(() => {
+    notification.classList.remove('show');
+    setTimeout(() => {
+      document.body.removeChild(notification);
+    }, 300);
+  }, 3000);
 };
 </script>
 
@@ -704,15 +965,32 @@ const saveForOffline = async () => {
           <font-awesome-icon :icon="['fas', 'star']" class="star-icon" />
         </button>
         
-        <!-- Save Offline Button -->
+        <!-- Save Offline / Reload Button -->
         <button 
           @click="saveForOffline"
-          class="save-offline-button"
-          aria-label="Save for offline use"
+          @mouseenter="showCacheTooltip = true"
+          @mouseleave="showCacheTooltip = false"
+          :class="['save-offline-button', { 'has-cache': hasCachedContent }]"
+          :aria-label="hasCachedContent ? 'Reload to get latest version' : 'Save for offline use'"
           type="button"
         >
-          <font-awesome-icon :icon="['fas', 'download']" class="download-icon" />
+          <font-awesome-icon 
+            :icon="hasCachedContent ? ['fas', 'rotate-right'] : ['fas', 'download']" 
+            :class="hasCachedContent ? 'reload-icon' : 'download-icon'" 
+          />
         </button>
+        
+        <!-- Cache Tooltip -->
+        <div 
+          v-if="showCacheTooltip && hasCachedContent" 
+          class="cache-tooltip"
+        >
+          <div class="cache-tooltip-content">
+            <strong>Using offline version</strong>
+            <div class="cache-date">Cached {{ formatCacheDate(cacheTimestamp) }}</div>
+            <div class="cache-hint">Click to reload and get latest version</div>
+          </div>
+        </div>
       </div>
       
       <!-- Search input group (moved to right) -->
@@ -859,6 +1137,9 @@ const saveForOffline = async () => {
         @close="showFilteredRoutesModal = false"
         @select-route="handleRouteSelection"
       />
+      
+      <!-- Offline Tooltips -->
+      <OfflineTooltips />
   </div>
   <!-- End app-container -->
 </template>
@@ -1140,7 +1421,7 @@ const saveForOffline = async () => {
   display: inline-block;
 }
 
-.download-icon {
+.download-icon, .reload-icon {
   display: inline-block;
 }
 
@@ -1172,6 +1453,66 @@ const saveForOffline = async () => {
 .save-offline-button.saved {
   background: rgba(0, 255, 0, 0.3);
   color: #00ff00;
+}
+
+.save-offline-button.has-cache {
+  background: rgba(255, 193, 7, 0.3);
+  color: #ffc107;
+  border: 1px solid rgba(255, 193, 7, 0.5);
+}
+
+.save-offline-button.has-cache:hover {
+  background: rgba(255, 193, 7, 0.4);
+  color: #ffc107;
+}
+
+/* Cache tooltip styles */
+.cache-tooltip {
+  position: fixed;
+  top: 45px;
+  right: 20px;
+  background: rgba(91, 86, 86, 0.95);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 250;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  max-width: 280px;
+  pointer-events: none;
+}
+
+.cache-tooltip-content {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.cache-tooltip-content strong {
+  display: block;
+  margin-bottom: 4px;
+  color: #ffc107;
+}
+
+.cache-date {
+  color: #ccc;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.cache-hint {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 11px;
+  font-style: italic;
+}
+
+@media (max-width: 480px) {
+  .cache-tooltip {
+    top: 60px;
+    left: 10px;
+    right: 10px;
+    max-width: none;
+  }
 }
 
 /* Search results dropdown styles */
@@ -1300,6 +1641,57 @@ const saveForOffline = async () => {
     width: 44px;
     height: 44px;
     font-size: 18px;
+  }
+}
+
+/* Cache notification styles */
+:global(.cache-notification) {
+  position: fixed;
+  top: 100px;
+  right: 20px;
+  background: rgba(76, 175, 80, 0.95);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 300;
+  backdrop-filter: blur(10px);
+  transform: translateX(100%);
+  opacity: 0;
+  transition: all 0.3s ease;
+  max-width: 280px;
+}
+
+:global(.cache-notification.error) {
+  background: rgba(244, 67, 54, 0.95);
+}
+
+:global(.cache-notification.show) {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+:global(.cache-notification-content) {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+:global(.cache-notification-content strong) {
+  display: block;
+  margin-bottom: 4px;
+}
+
+:global(.cache-notification-content small) {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 12px;
+}
+
+@media (max-width: 480px) {
+  :global(.cache-notification) {
+    top: 80px;
+    left: 10px;
+    right: 10px;
+    max-width: none;
   }
 }
 </style>

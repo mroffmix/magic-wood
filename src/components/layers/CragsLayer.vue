@@ -52,12 +52,23 @@ const props = defineProps({
 const emit = defineEmits(['select-area', 'hover', 'select-crag']);
 
 const selectArea = (crag: SvgObject, event?: Event) => {
+  
   console.log('selectArea called for crag:', crag.name, 'visible:', isCragVisible(crag));
   
-  // Only allow selection of crags that have visible routes
-  if (!isCragVisible(crag)) {
-    console.log('Crag click ignored - no visible routes:', crag.name);
+  // Detect mobile Firefox/Samsung Browser
+  const isFirefox = navigator.userAgent.includes('Firefox');
+  const isSamsungBrowser = navigator.userAgent.includes('SamsungBrowser');
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  const isMobileFirefox = (isFirefox || isSamsungBrowser) && isMobile;
+  console.log('CRAG LAYER  isMobileFirefox:', isMobileFirefox);
+  // Only allow selection of crags that have visible routes, except for mobile Firefox where we focus on areas
+  if (!isCragVisible(crag) && !isMobileFirefox) {
+    console.log('CRAG LAYER Crag click ignored - no visible routes:', crag.name);
     return;
+  }
+  
+  if (isMobileFirefox && !isCragVisible(crag)) {
+    console.log('Mobile Firefox - allowing crag selection for area focus:', crag.name);
   }
   
   // Prevent event propagation to avoid conflicts with pan/zoom
