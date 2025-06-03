@@ -54,6 +54,7 @@ const showCacheTooltip = ref(false);
 const cachedVersion = ref<string | null>(null);
 const isNewVersionAvailable = ref(false);
 const isServiceWorkerRegistered = ref(false);
+const isOnline = ref(navigator.onLine);
 const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
 // Handle route selection from modal
@@ -275,6 +276,14 @@ const handleResize = () => {
 };
 
 onMounted(() => {
+  // Add online/offline event listeners
+  window.addEventListener('online', () => {
+    isOnline.value = true;
+  });
+  window.addEventListener('offline', () => {
+    isOnline.value = false;
+  });
+  
   // Check if service worker is already registered
   if ('serviceWorker' in navigator) {
     navigator.serviceWorker.getRegistrations().then(registrations => {
@@ -412,6 +421,14 @@ onBeforeUnmount(() => {
   
   // Remove resize event listener
   window.removeEventListener('resize', handleResize);
+  
+  // Remove online/offline event listeners
+  window.removeEventListener('online', () => {
+    isOnline.value = true;
+  });
+  window.removeEventListener('offline', () => {
+    isOnline.value = false;
+  });
   
   // Remove double tap event listener
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -1151,75 +1168,6 @@ const showCacheUpdateError = () => {
         >
           <font-awesome-icon :icon="['fas', 'star']" class="star-icon" />
         </button>
-        
-        <!-- Save Offline / Reload Button -->
-        <div class="save-button-container">
-          <button 
-            @click="handleButtonClick"
-            :class="['save-offline-button', { 'has-cache': hasCachedContent, 'has-new-version': isNewVersionAvailable }]"
-            :aria-label="hasCachedContent ? 'Show cache options' : 'Save for offline use'"
-            type="button"
-          >
-            <font-awesome-icon 
-              :icon="hasCachedContent ? ['fas', 'rotate-right'] : ['fas', 'download']" 
-              :class="hasCachedContent ? 'reload-icon' : 'download-icon'" 
-            />
-          </button>
-          
-          <!-- NEW indicator when new version is available -->
-          <div v-if="isNewVersionAvailable" class="new-version-badge">NEW</div>
-          
-          <!-- Cache Tooltip - Only visible when cache exists -->
-          <div 
-            v-if="showCacheTooltip && hasCachedContent" 
-            class="cache-tooltip"
-            :class="{ 'mobile-persistent': isMobile }"
-          >
-            <div class="cache-tooltip-content">
-              <div class="cache-header">
-                <strong>
-                  Using offline version
-                  <span v-if="isNewVersionAvailable" class="new-badge">NEW AVAILABLE</span>
-                </strong>
-                <button 
-                  @click="showCacheTooltip = false"
-                  class="cache-close-btn"
-                  aria-label="Close cache info"
-                >×</button>
-              </div>
-              
-              <div class="cache-version" v-if="cachedVersion">
-                Version: {{ cachedVersion }}
-              </div>
-              
-              <div class="cache-date">Cached {{ formatCacheDate(cacheTimestamp) }}</div>
-              
-              <div class="cache-hint">
-                {{ isNewVersionAvailable 
-                  ? 'New version available - click clear and load new version' 
-                  : 'Choose an action below' 
-                }}
-              </div>
-              
-              <div class="cache-actions">
-                <button 
-                  @click="reloadForLatest"
-                  class="reload-cache-btn"
-                  type="button"
-                >
-                  Reload
-                </button>
-                <button 
-                  @click="clearAllCache"
-                  class="clear-cache-btn"
-                  type="button"
-                >
-                  Clear
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       
       <!-- Search input group (moved to right) -->
@@ -1242,6 +1190,77 @@ const showCacheUpdateError = () => {
         >
           ×
         </button>
+      </div>
+      
+      <!-- Save Offline / Reload Button (moved to right after search) -->
+      <div class="save-button-container">
+        <button 
+          @click="handleButtonClick"
+          :class="['save-offline-button', { 'has-cache': hasCachedContent, 'has-new-version': isNewVersionAvailable }]"
+          :aria-label="hasCachedContent ? 'Show cache options' : 'Save for offline use'"
+          type="button"
+        >
+          <font-awesome-icon 
+            :icon="hasCachedContent ? ['fas', 'rotate-right'] : ['fas', 'download']" 
+            :class="hasCachedContent ? 'reload-icon' : 'download-icon'" 
+          />
+        </button>
+        
+        <!-- NEW indicator when new version is available -->
+        <div v-if="isNewVersionAvailable" class="new-version-badge">NEW</div>
+        
+        <!-- Cache Tooltip - Only visible when cache exists -->
+        <div 
+          v-if="showCacheTooltip && hasCachedContent" 
+          class="cache-tooltip"
+          :class="{ 'mobile-persistent': isMobile }"
+        >
+          <div class="cache-tooltip-content">
+            <div class="cache-header">
+              <strong>
+                Using offline version
+                <span v-if="isNewVersionAvailable" class="new-badge">NEW AVAILABLE</span>
+              </strong>
+              <button 
+                @click="showCacheTooltip = false"
+                class="cache-close-btn"
+                aria-label="Close cache info"
+              >×</button>
+            </div>
+            
+            <div class="cache-version" v-if="cachedVersion">
+              Version: {{ cachedVersion }}
+            </div>
+            
+            <div class="cache-date">Cached {{ formatCacheDate(cacheTimestamp) }}</div>
+            
+            <div class="cache-hint">
+              {{ isNewVersionAvailable 
+                ? 'New version available - click clear and load new version' 
+                : 'Choose an action below' 
+              }}
+            </div>
+            
+            <div class="cache-actions">
+              <button 
+                @click="reloadForLatest"
+                class="reload-cache-btn"
+                :disabled="!isOnline"
+                type="button"
+              >
+                Reload
+              </button>
+              <button 
+                @click="clearAllCache"
+                class="clear-cache-btn"
+                :disabled="!isOnline"
+                type="button"
+              >
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
       
       <!-- Search results dropdown with tooltip-like styling -->
@@ -1681,18 +1700,18 @@ const showCacheUpdateError = () => {
 
 .save-offline-button.saved {
   background: rgba(0, 255, 0, 0.3);
-  color: #00ff00;
+  color: #00ff0083;
 }
 
 .save-offline-button.has-cache {
-  background: rgba(255, 193, 7, 0.3);
-  color: #ffc107;
-  border: 1px solid rgba(255, 193, 7, 0.5);
+  background: rgba(7, 255, 40, 0.128);
+  color: #f3f8f3;
+  border: 1px solid rgba(40, 255, 7, 0.2);
 }
 
 .save-offline-button.has-cache:hover {
-  background: rgba(255, 193, 7, 0.4);
-  color: #ffc107;
+  background: rgba(98, 255, 7, 0.2);
+  color: #f3f8f3;
 }
 
 .save-offline-button.has-new-version {
@@ -1733,7 +1752,7 @@ const showCacheUpdateError = () => {
 /* Cache tooltip styles */
 .cache-tooltip {
   position: fixed;
-  top: 45px;
+  top: 65px;
   right: 20px;
   background: rgba(91, 86, 86, 0.95);
   color: white;
@@ -1818,7 +1837,8 @@ const showCacheUpdateError = () => {
 .reload-cache-btn {
   background: rgba(33, 150, 243, 0.2);
   border: 1px solid rgba(33, 150, 243, 0.4);
-  color: #2196f3;
+  color: white;
+  font-weight: bold;
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 11px;
@@ -1837,10 +1857,24 @@ const showCacheUpdateError = () => {
   box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.3);
 }
 
+.reload-cache-btn:disabled {
+  background: rgba(128, 128, 128, 0.2);
+  border-color: rgba(128, 128, 128, 0.4);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.reload-cache-btn:disabled:hover {
+  background: rgba(128, 128, 128, 0.2);
+  border-color: rgba(128, 128, 128, 0.4);
+}
+
 .clear-cache-btn {
   background: rgba(244, 67, 54, 0.2);
   border: 1px solid rgba(244, 67, 54, 0.4);
-  color: #f44336;
+  color: white;
+  font-weight: bold;
   padding: 4px 8px;
   border-radius: 4px;
   font-size: 11px;
@@ -1857,6 +1891,19 @@ const showCacheUpdateError = () => {
 .clear-cache-btn:focus {
   outline: none;
   box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.3);
+}
+
+.clear-cache-btn:disabled {
+  background: rgba(128, 128, 128, 0.2);
+  border-color: rgba(128, 128, 128, 0.4);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.clear-cache-btn:disabled:hover {
+  background: rgba(128, 128, 128, 0.2);
+  border-color: rgba(128, 128, 128, 0.4);
 }
 
 .cache-date {
@@ -2031,9 +2078,9 @@ const showCacheUpdateError = () => {
 /* Cache notification styles */
 :global(.cache-notification) {
   position: fixed;
-  top: 100px;
-  right: 20px;
-  background: rgba(76, 175, 80, 0.95);
+  top: 65px;
+  right: 10px;
+  background: rgba(91, 86, 86, 0.95);
   color: white;
   padding: 12px 16px;
   border-radius: 8px;
@@ -2047,11 +2094,11 @@ const showCacheUpdateError = () => {
 }
 
 :global(.cache-notification.error) {
-  background: rgba(244, 67, 54, 0.95);
+  background: rgba(91, 86, 86, 0.95);
 }
 
 :global(.cache-notification.clear-success) {
-  background: rgba(33, 150, 243, 0.95);
+  background: rgba(91, 86, 86, 0.95);
 }
 
 :global(.cache-notification.show) {
