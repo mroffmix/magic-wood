@@ -635,26 +635,44 @@ const shouldShowTooltip = computed(() => {
 });
 
 // Save for offline functionality
-const saveForOffline = () => {
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.ready.then((registration) => {
+const saveForOffline = async () => {
+  if ('serviceWorker' in navigator && 'caches' in window) {
+    try {
+      // Pre-cache all critical resources
+      const cache = await caches.open('magic-wood-v2');
+      
+      // Cache current page and essential resources
+      const resourcesToCache = [
+        window.location.pathname,
+        '/',
+        '/index.html',
+        '/favicon.ico',
+        '/magic-wood.png'
+      ];
+      
+      await cache.addAll(resourcesToCache);
+      
+      // Trigger service worker cache update
+      const registration = await navigator.serviceWorker.ready;
       if (registration.active) {
         registration.active.postMessage({ type: 'CACHE_UPDATE' });
-        
-        // Show user feedback
-        const button = document.querySelector('.save-offline-button');
-        if (button) {
-          const originalContent = button.innerHTML;
-          button.innerHTML = '<font-awesome-icon icon="check" class="check-icon" />';
-          button.classList.add('saved');
-          
-          setTimeout(() => {
-            button.innerHTML = originalContent;
-            button.classList.remove('saved');
-          }, 2000);
-        }
       }
-    });
+      
+      // Show user feedback
+      const button = document.querySelector('.save-offline-button');
+      if (button) {
+        const originalContent = button.innerHTML;
+        button.innerHTML = '<font-awesome-icon icon="check" class="check-icon" />';
+        button.classList.add('saved');
+        
+        setTimeout(() => {
+          button.innerHTML = originalContent;
+          button.classList.remove('saved');
+        }, 2000);
+      }
+    } catch (error) {
+      console.error('Failed to save for offline:', error);
+    }
   }
 };
 </script>

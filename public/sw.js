@@ -1,18 +1,10 @@
-const CACHE_NAME = 'magic-wood-v1';
+const CACHE_NAME = 'magic-wood-v2';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/src/main.ts',
-  '/src/App.vue',
-  '/src/assets/main.css',
-  '/src/assets/base.css',
-  '/public/favicon.ico',
-  '/public/magic-wood.png',
-  '/src/assets/map/Sectors.svg',
-  '/src/routes-data/filled_routes.json',
-  '/src/routes-data/filled_routes_full.json',
-  '/src/routes-data/mapping.json',
-  '/src/routes-data/routes.json'
+  '/favicon.ico',
+  '/magic-wood.png',
+  // Built assets will be cached dynamically
 ];
 
 // Install event - cache resources
@@ -23,26 +15,50 @@ self.addEventListener('install', (event) => {
         return cache.addAll(urlsToCache);
       })
   );
+  // Take control immediately
+  self.skipWaiting();
 });
 
-// Fetch event - serve from cache when offline
+// Fetch event - cache-first strategy for offline support
 self.addEventListener('fetch', (event) => {
   event.respondWith(
     caches.match(event.request)
-      .then((response) => {
-        // Return cached version or fetch from network
-        return response || fetch(event.request);
-      })
-      .catch(() => {
-        // If both cache and network fail, return the main page for navigation requests
-        if (event.request.mode === 'navigate') {
-          return caches.match('/');
+      .then((cachedResponse) => {
+        if (cachedResponse) {
+          return cachedResponse;
         }
+        
+        // Try to fetch from network and cache the response
+        return fetch(event.request)
+          .then((response) => {
+            // Don't cache non-successful responses
+            if (!response || response.status !== 200 || response.type !== 'basic') {
+              return response;
+            }
+            
+            // Clone the response before caching
+            const responseToCache = response.clone();
+            
+            caches.open(CACHE_NAME)
+              .then((cache) => {
+                cache.put(event.request, responseToCache);
+              });
+            
+            return response;
+          })
+          .catch(() => {
+            // Network failed, try to return cached fallback
+            if (event.request.mode === 'navigate') {
+              return caches.match('/index.html') || caches.match('/');
+            }
+            // For other requests, just fail gracefully
+            return new Response('Offline', { status: 503, statusText: 'Service Unavailable' });
+          });
       })
   );
 });
 
-// Activate event - clean up old caches
+// Activate event - clean up old caches and take control
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((cacheNames) => {
@@ -53,6 +69,9 @@ self.addEventListener('activate', (event) => {
           }
         })
       );
+    }).then(() => {
+      // Take control of all clients immediately
+      return self.clients.claim();
     })
   );
 });
@@ -62,6 +81,7 @@ self.addEventListener('message', (event) => {
   if (event.data && event.data.type === 'CACHE_UPDATE') {
     event.waitUntil(
       caches.open(CACHE_NAME).then((cache) => {
+        // Cache the basic resources and let dynamic caching handle the rest
         return cache.addAll(urlsToCache);
       })
     );
