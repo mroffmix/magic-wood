@@ -51,6 +51,10 @@ const showStarredCrags = ref(false);
 const hasCachedContent = ref(false);
 const cacheTimestamp = ref<string | null>(null);
 const showCacheTooltip = ref(false);
+const cachedVersion = ref<string | null>(null);
+const isNewVersionAvailable = ref(false);
+const isServiceWorkerRegistered = ref(false);
+const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
 
 // Handle route selection from modal
 const handleRouteSelection = (route: { blockNumber: string; area: string; [key: string]: unknown }) => {
@@ -271,8 +275,26 @@ const handleResize = () => {
 };
 
 onMounted(() => {
-  // Check for cached content on app load
-  checkCachedContent();
+  // Check if service worker is already registered
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(registrations => {
+      if (registrations.length > 0) {
+        isServiceWorkerRegistered.value = true;
+        console.log('Service worker already registered');
+      }
+    });
+  }
+  
+  // Check if cache was recently cleared
+  const cacheCleared = localStorage.getItem('cache-cleared');
+  if (cacheCleared) {
+    console.log('Cache was recently cleared - staying online');
+    localStorage.removeItem('cache-cleared');
+    // Don't check for cached content, stay online
+  } else {
+    // Check for cached content on app load
+    checkCachedContent();
+  }
   
   if (mapSvg.value && mapContainer.value) {
     // Setup interaction handlers for both the container and SVG to capture all events
@@ -735,7 +757,23 @@ const shouldShowTooltip = computed(() => {
   return result;
 });
 
-// Check for cached content
+// Register service worker manually
+const registerServiceWorker = async () => {
+  if ('serviceWorker' in navigator && !isServiceWorkerRegistered.value) {
+    try {
+      const registration = await navigator.serviceWorker.register('/sw.js');
+      console.log('SW registered:', registration);
+      isServiceWorkerRegistered.value = true;
+      return registration;
+    } catch (error) {
+      console.error('SW registration failed:', error);
+      throw error;
+    }
+  }
+  return null;
+};
+
+// Check for cached content and version
 const checkCachedContent = async () => {
   if ('caches' in window) {
     try {
@@ -746,9 +784,17 @@ const checkCachedContent = async () => {
       if (timestampResponse) {
         cacheTimestamp.value = await timestampResponse.text();
         hasCachedContent.value = true;
-        console.log('Found cached content from:', cacheTimestamp.value);
-        return;
       }
+      
+      // Check cached version
+      const versionResponse = await cache.match('APP_VERSION');
+      if (versionResponse) {
+        cachedVersion.value = await versionResponse.text();
+        console.log('Found cached version:', cachedVersion.value);
+      }
+      
+      // Check if new version is available by trying to fetch latest version
+      await checkForNewVersion();
       
       // Fallback: check if any resources are cached
       const cachedUrls = await cache.keys();
@@ -756,9 +802,78 @@ const checkCachedContent = async () => {
         hasCachedContent.value = true;
         console.log('Found cached resources:', cachedUrls.length);
       }
+      
+      // Don't auto-show tooltip on page load anymore
+      // Tooltip will only show when user clicks the button
+      
     } catch (error) {
       console.warn('Failed to check cached content:', error);
     }
+  }
+};
+
+// Check for new version availability
+const checkForNewVersion = async () => {
+  if (!navigator.onLine) {
+    console.log('Offline - cannot check for new version');
+    return;
+  }
+  
+  try {
+    // Try to fetch the service worker to get the latest version
+    const response = await fetch('/sw.js', { cache: 'no-cache' });
+    if (response.ok) {
+      const swContent = await response.text();
+      const versionMatch = swContent.match(/const VERSION = ['"`]([^'"`]+)['"`]/);
+      if (versionMatch && versionMatch[1]) {
+        const latestVersion = versionMatch[1];
+        if (cachedVersion.value && cachedVersion.value !== latestVersion) {
+          isNewVersionAvailable.value = true;
+          console.log('New version available:', latestVersion, 'vs cached:', cachedVersion.value);
+        }
+      }
+    }
+  } catch (error) {
+    console.warn('Failed to check for new version:', error);
+  }
+};
+
+// Clear all cache
+const clearAllCache = async () => {
+  try {
+    if ('caches' in window) {
+      // Set flag to prevent automatic re-caching
+      localStorage.setItem('cache-cleared', 'true');
+      
+      const cacheNames = await caches.keys();
+      await Promise.all(cacheNames.map(cacheName => caches.delete(cacheName)));
+      console.log('All caches cleared');
+      
+      // Also unregister service worker to ensure clean state
+      if ('serviceWorker' in navigator) {
+        const registrations = await navigator.serviceWorker.getRegistrations();
+        await Promise.all(registrations.map(registration => registration.unregister()));
+        console.log('Service workers unregistered');
+      }
+      
+      // Reset state
+      hasCachedContent.value = false;
+      cacheTimestamp.value = null;
+      cachedVersion.value = null;
+      isNewVersionAvailable.value = false;
+      showCacheTooltip.value = false;
+      
+      // Show success notification
+      showCacheClearNotification();
+      
+      // Hard reload to bypass all caches after a brief delay
+      setTimeout(() => {
+        window.location.reload(); // Reload to get fresh content
+      }, 1500);
+    }
+  } catch (error) {
+    console.error('Failed to clear cache:', error);
+    showCacheUpdateError();
   }
 };
 
@@ -781,6 +896,23 @@ const formatCacheDate = (timestamp: string | null) => {
   }
 };
 
+// Handle button click - different behavior for cached/uncached states
+const handleButtonClick = () => {
+  if (hasCachedContent.value) {
+    // If there's cached content, show tooltip with options
+    showCacheTooltip.value = !showCacheTooltip.value;
+  } else {
+    // No cached content - save immediately
+    saveForOffline();
+  }
+};
+
+// Reload to get latest version
+const reloadForLatest = () => {
+  console.log('Reloading to get latest version');
+  window.location.reload();
+};
+
 // Save for offline functionality or reload
 const saveForOffline = async () => {
   console.log('Save/reload button clicked');
@@ -800,6 +932,15 @@ const saveForOffline = async () => {
   
   if (!('caches' in window)) {
     console.error('Cache API not supported');
+    showCacheUpdateError();
+    return;
+  }
+  
+  // Register service worker first if not already registered
+  try {
+    await registerServiceWorker();
+  } catch (error) {
+    console.error('Failed to register service worker:', error);
     showCacheUpdateError();
     return;
   }
@@ -846,18 +987,38 @@ const saveForOffline = async () => {
       }
     }
     
-    // Store timestamp
-    console.log('Storing timestamp...');
+    // Store timestamp and version
+    console.log('Storing timestamp and version...');
     const timestamp = new Date().toISOString();
     const timestampResponse = new Response(timestamp, {
       headers: { 'Content-Type': 'text/plain' }
     });
     await cache.put('CACHE_TIMESTAMP', timestampResponse);
+    
+    // Get and store current version from service worker
+    try {
+      const swResponse = await fetch('/sw.js', { cache: 'no-cache' });
+      const swContent = await swResponse.text();
+      const versionMatch = swContent.match(/const VERSION = ['"`]([^'"`]+)['"`]/);
+      if (versionMatch && versionMatch[1]) {
+        const currentVersion = versionMatch[1];
+        const versionResponse = new Response(currentVersion, {
+          headers: { 'Content-Type': 'text/plain' }
+        });
+        await cache.put('APP_VERSION', versionResponse);
+        cachedVersion.value = currentVersion;
+        console.log('Version stored successfully:', currentVersion);
+      }
+    } catch (error) {
+      console.warn('Failed to store version:', error);
+    }
+    
     console.log('Timestamp stored successfully:', timestamp);
     
     // Update cache state
     cacheTimestamp.value = timestamp;
     hasCachedContent.value = true;
+    isNewVersionAvailable.value = false; // Reset since we just cached the latest
     
     // Show user feedback with timestamp
     console.log('Showing success feedback');
@@ -910,6 +1071,31 @@ const showCacheUpdateNotification = (timestamp: string) => {
       document.body.removeChild(notification);
     }, 300);
   }, 3000);
+};
+
+// Show cache clear notification
+const showCacheClearNotification = () => {
+  const notification = document.createElement('div');
+  notification.className = 'cache-notification clear-success';
+  notification.innerHTML = `
+    <div class="cache-notification-content">
+      <strong>Cache cleared!</strong><br>
+      <small>Now using online version</small>
+    </div>
+  `;
+  
+  document.body.appendChild(notification);
+  
+  setTimeout(() => {
+    notification.classList.add('show');
+  }, 100);
+  
+  setTimeout(() => {
+    notification.classList.remove('show');
+    setTimeout(() => {
+      document.body.removeChild(notification);
+    }, 300);
+  }, 4000);
 };
 
 // Show cache update error
@@ -966,29 +1152,71 @@ const showCacheUpdateError = () => {
         </button>
         
         <!-- Save Offline / Reload Button -->
-        <button 
-          @click="saveForOffline"
-          @mouseenter="showCacheTooltip = true"
-          @mouseleave="showCacheTooltip = false"
-          :class="['save-offline-button', { 'has-cache': hasCachedContent }]"
-          :aria-label="hasCachedContent ? 'Reload to get latest version' : 'Save for offline use'"
-          type="button"
-        >
-          <font-awesome-icon 
-            :icon="hasCachedContent ? ['fas', 'rotate-right'] : ['fas', 'download']" 
-            :class="hasCachedContent ? 'reload-icon' : 'download-icon'" 
-          />
-        </button>
-        
-        <!-- Cache Tooltip -->
-        <div 
-          v-if="showCacheTooltip && hasCachedContent" 
-          class="cache-tooltip"
-        >
-          <div class="cache-tooltip-content">
-            <strong>Using offline version</strong>
-            <div class="cache-date">Cached {{ formatCacheDate(cacheTimestamp) }}</div>
-            <div class="cache-hint">Click to reload and get latest version</div>
+        <div class="save-button-container">
+          <button 
+            @click="handleButtonClick"
+            :class="['save-offline-button', { 'has-cache': hasCachedContent, 'has-new-version': isNewVersionAvailable }]"
+            :aria-label="hasCachedContent ? 'Show cache options' : 'Save for offline use'"
+            type="button"
+          >
+            <font-awesome-icon 
+              :icon="hasCachedContent ? ['fas', 'rotate-right'] : ['fas', 'download']" 
+              :class="hasCachedContent ? 'reload-icon' : 'download-icon'" 
+            />
+          </button>
+          
+          <!-- NEW indicator when new version is available -->
+          <div v-if="isNewVersionAvailable" class="new-version-badge">NEW</div>
+          
+          <!-- Cache Tooltip - Only visible when cache exists -->
+          <div 
+            v-if="showCacheTooltip && hasCachedContent" 
+            class="cache-tooltip"
+            :class="{ 'mobile-persistent': isMobile }"
+          >
+            <div class="cache-tooltip-content">
+              <div class="cache-header">
+                <strong>
+                  Using offline version
+                  <span v-if="isNewVersionAvailable" class="new-badge">NEW AVAILABLE</span>
+                </strong>
+                <button 
+                  @click="showCacheTooltip = false"
+                  class="cache-close-btn"
+                  aria-label="Close cache info"
+                >×</button>
+              </div>
+              
+              <div class="cache-version" v-if="cachedVersion">
+                Version: {{ cachedVersion }}
+              </div>
+              
+              <div class="cache-date">Cached {{ formatCacheDate(cacheTimestamp) }}</div>
+              
+              <div class="cache-hint">
+                {{ isNewVersionAvailable 
+                  ? 'New version available - click reload to update' 
+                  : 'Choose an action below' 
+                }}
+              </div>
+              
+              <div class="cache-actions">
+                <button 
+                  @click="reloadForLatest"
+                  class="reload-cache-btn"
+                  type="button"
+                >
+                  Reload
+                </button>
+                <button 
+                  @click="clearAllCache"
+                  class="clear-cache-btn"
+                  type="button"
+                >
+                  Clear
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -1466,6 +1694,41 @@ const showCacheUpdateError = () => {
   color: #ffc107;
 }
 
+.save-offline-button.has-new-version {
+  background: rgba(255, 87, 51, 0.4);
+  color: #ff5733;
+  border: 1px solid rgba(255, 87, 51, 0.6);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 87, 51, 0.4); }
+  70% { box-shadow: 0 0 0 6px rgba(255, 87, 51, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 87, 51, 0); }
+}
+
+/* Save button container for positioning NEW badge */
+.save-button-container {
+  position: relative;
+  display: inline-block;
+}
+
+/* NEW version badge */
+.new-version-badge {
+  position: absolute;
+  top: -4px;
+  right: -6px;
+  background: #ff5733;
+  color: white;
+  font-size: 8px;
+  font-weight: bold;
+  padding: 1px 4px;
+  border-radius: 4px;
+  line-height: 1;
+  pointer-events: none;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
 /* Cache tooltip styles */
 .cache-tooltip {
   position: fixed;
@@ -1480,7 +1743,7 @@ const showCacheUpdateError = () => {
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
   max-width: 280px;
-  pointer-events: none;
+  pointer-events: auto;
 }
 
 .cache-tooltip-content {
@@ -1488,10 +1751,111 @@ const showCacheUpdateError = () => {
   line-height: 1.4;
 }
 
-.cache-tooltip-content strong {
-  display: block;
+.cache-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-bottom: 4px;
+}
+
+.cache-tooltip-content strong {
   color: #ffc107;
+  margin: 0;
+}
+
+.cache-close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2px;
+  margin-left: 8px;
+}
+
+.cache-close-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.cache-version {
+  color: #ccc;
+  font-size: 11px;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+.new-badge {
+  background: #ff5733;
+  color: white;
+  font-size: 9px;
+  font-weight: bold;
+  padding: 1px 4px;
+  border-radius: 3px;
+  margin-left: 6px;
+  animation: blink 1.5s infinite;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0.5; }
+}
+
+.cache-actions {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  gap: 8px;
+}
+
+.reload-cache-btn {
+  background: rgba(33, 150, 243, 0.2);
+  border: 1px solid rgba(33, 150, 243, 0.4);
+  color: #2196f3;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.reload-cache-btn:hover {
+  background: rgba(33, 150, 243, 0.3);
+  border-color: rgba(33, 150, 243, 0.6);
+}
+
+.reload-cache-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(33, 150, 243, 0.3);
+}
+
+.clear-cache-btn {
+  background: rgba(244, 67, 54, 0.2);
+  border: 1px solid rgba(244, 67, 54, 0.4);
+  color: #f44336;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+}
+
+.clear-cache-btn:hover {
+  background: rgba(244, 67, 54, 0.3);
+  border-color: rgba(244, 67, 54, 0.6);
+}
+
+.clear-cache-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(244, 67, 54, 0.3);
 }
 
 .cache-date {
@@ -1506,8 +1870,27 @@ const showCacheUpdateError = () => {
   font-style: italic;
 }
 
+.cache-info {
+  color: #ccc;
+  font-size: 11px;
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+/* Mobile persistent tooltip */
+.cache-tooltip.mobile-persistent {
+  position: fixed;
+  top: 60px;
+  left: 10px;
+  right: 10px;
+  max-width: none;
+  animation: slideInFromTop 0.3s ease-out;
+  z-index: 200;
+  pointer-events: auto;
+}
+
 @media (max-width: 480px) {
-  .cache-tooltip {
+  .cache-tooltip:not(.mobile-persistent) {
     top: 60px;
     left: 10px;
     right: 10px;
@@ -1664,6 +2047,10 @@ const showCacheUpdateError = () => {
 
 :global(.cache-notification.error) {
   background: rgba(244, 67, 54, 0.95);
+}
+
+:global(.cache-notification.clear-success) {
+  background: rgba(33, 150, 243, 0.95);
 }
 
 :global(.cache-notification.show) {
