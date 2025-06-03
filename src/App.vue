@@ -560,14 +560,25 @@ function focusOn(crag: SvgObject, bypassTooltipCheck = false) {
   const containerCenterX = parent.clientWidth / 2;
   const containerCenterY = parent.clientHeight / 2;
 
-  /* 6. Calculate pan differently for Firefox */
+  /* 6. Calculate pan with browser-specific handling */
   let panX, panY;
   
-  if (navigator.userAgent.includes('Firefox')) {
+  const isFirefox = navigator.userAgent.includes('Firefox');
+  const isAndroid = /Android/i.test(navigator.userAgent);
+  const isAndroidFirefox = isFirefox && isAndroid;
+  
+  if (isFirefox) {
     // Firefox-specific calculation using SVG viewBox scaling
     const viewBox = svg.viewBox.baseVal;
-    const scaleX = parent.clientWidth / viewBox.width;
-    const scaleY = parent.clientHeight / viewBox.height;
+    let scaleX = parent.clientWidth / viewBox.width;
+    let scaleY = parent.clientHeight / viewBox.height;
+    
+    // Additional adjustment for Android Firefox
+    if (isAndroidFirefox) {
+      const devicePixelRatio = window.devicePixelRatio || 1;
+      scaleX *= devicePixelRatio;
+      scaleY *= devicePixelRatio;
+    }
     
     panX = containerCenterX - (elementCenterX * scaleX);
     panY = containerCenterY - (elementCenterY * scaleY);
