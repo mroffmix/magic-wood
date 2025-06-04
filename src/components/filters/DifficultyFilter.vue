@@ -160,11 +160,12 @@ watch(maxSliderValue, (newValue) => {
 
 // Compute styles for the range slider track (colored section)
 const rangeTrackStyle = computed(() => {
-  const min = minSliderValue.value;
-  const max = maxSliderValue.value;
+  // Clamp values to ensure they're within the valid range
+  const min = Math.max(MIN_VALUE, Math.min(MAX_VALUE, minSliderValue.value));
+  const max = Math.max(MIN_VALUE, Math.min(MAX_VALUE, maxSliderValue.value));
   const range = MAX_VALUE - MIN_VALUE;
-  const left = ((min - MIN_VALUE) / range) * 100;
-  const width = ((max - min) / range) * 100;
+  const left = Math.max(0, ((min - MIN_VALUE) / range) * 100);
+  const width = Math.max(0, Math.min(100, ((max - min) / range) * 100));
   
   return {
     left: `${left}%`,
@@ -542,6 +543,7 @@ onMounted(() => {
   position: relative;
   flex: 1;
   height: 40px; /* Reduced from 60px */
+  margin: 0 10px; /* Add margin to prevent thumb from covering labels */
 }
 
 .slider-track {
