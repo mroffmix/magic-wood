@@ -79,8 +79,9 @@ const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 // Check if PWA is installed
 const checkPWAInstallation = () => {
   // Check if app is running in standalone mode (added to home screen)
-  isPWAInstalled.value = window.matchMedia('(display-mode: standalone)').matches || 
-                        (window.navigator as any).standalone === true;
+  isPWAInstalled.value =
+    window.matchMedia('(display-mode: standalone)').matches ||
+    (navigator as Navigator & { standalone?: boolean }).standalone === true;
 };
 
 // Format cache date
