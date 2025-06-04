@@ -6,11 +6,11 @@ import DifficultyLabel from '@/components/common/DifficultyLabel.vue';
 const props = defineProps({
   minDifficulty: {
     type: String,
-    default: '2B'
+    default: '5C'
   },
   maxDifficulty: {
     type: String,
-    default: '8C'
+    default: '8C+'
   }
 });
 
@@ -39,11 +39,14 @@ const handleMaxLabelClick = () => {
   showMinSelect.value = false; // Close other select
 };
 
-// Get compact grade options (main numbers only: 2, 3, 4, 5, 6, 7, 8)
+// Get compact grade options (main numbers only: 5, 6, 7, 8)
+// 5 represents "≤5C" so we use numeric value of 5C as the base
 const getCompactGradeOptions = () => {
-  const mainGrades = [];
-  for (let grade = 2; grade <= 8; grade++) {
-    const baseGrade = `${grade}A`; // Use base grade (e.g., 2A, 3A, etc.)
+  const mainGrades = [] as Array<{ display: string; value: string; numericValue: number }>;
+
+  for (let grade = 5; grade <= 8; grade++) {
+    const baseGrade = grade === 5 ? '5C' : `${grade}A`;
+
     if (difficultyMap[baseGrade]) {
       mainGrades.push({
         display: grade.toString(),
@@ -52,6 +55,7 @@ const getCompactGradeOptions = () => {
       });
     }
   }
+
   return mainGrades;
 };
 
@@ -73,12 +77,14 @@ const validMaxOptions = computed(() => {
 
 // Handle select option clicks
 const selectMinDifficulty = (gradeOption: { display: string; value: string; numericValue: number }) => {
-  minSliderValue.value = gradeOption.numericValue;
+  // Clamp to MIN_VALUE to avoid going outside slider range
+  minSliderValue.value = Math.max(gradeOption.numericValue, MIN_VALUE);
   showMinSelect.value = false;
 };
 
 const selectMaxDifficulty = (gradeOption: { display: string; value: string; numericValue: number }) => {
-  maxSliderValue.value = gradeOption.numericValue;
+  // Clamp to MAX_VALUE for safety
+  maxSliderValue.value = Math.min(gradeOption.numericValue, MAX_VALUE);
   showMaxSelect.value = false;
 };
 
@@ -88,23 +94,28 @@ const closeSelects = () => {
   showMaxSelect.value = false;
 };
 
+const formatDisplay = (diff: string) => (diff === '5C' ? '≤5C' : diff);
+const displayMinDifficulty = computed(() => formatDisplay(minDifficultyValue.value));
+const displayMaxDifficulty = computed(() => formatDisplay(maxDifficultyValue.value));
+
 // Display range text for compact view
 const rangeDisplayText = computed(() => {
   if (minSliderValue.value === maxSliderValue.value) {
-    return minDifficultyValue.value;
+    return displayMinDifficulty.value;
   }
-  return `${minDifficultyValue.value}–${maxDifficultyValue.value}`;
+  return `${displayMinDifficulty.value}–${displayMaxDifficulty.value}`;
 });
 
 // Filter difficulty options to only show the range needed for the filter
+// Start from 5C and include grades up to 8C+
 const filterDifficultyOptions = difficultyOptions.filter(option => {
   const value = difficultyMap[option];
-  return value >= 9 && value <= 48; // 2B to 8C
+  return value >= difficultyMap['5C'] && value <= difficultyMap['8C+'];
 });
 
-// Constants for slider range
-const MIN_VALUE = 9; // 2B
-const MAX_VALUE = 48; // 8C
+// Constants for slider range (5C and less up to 8C+)
+const MIN_VALUE = difficultyMap['5C'];
+const MAX_VALUE = difficultyMap['8C+'];
 
 // Numeric values for the sliders
 const minSliderValue = ref(difficultyMap[props.minDifficulty] || MIN_VALUE);
@@ -112,25 +123,31 @@ const maxSliderValue = ref(difficultyMap[props.maxDifficulty] || MAX_VALUE);
 
 // Convert slider values to difficulties
 const minDifficultyValue = computed(() => {
-  return filterDifficultyOptions.find(d => difficultyMap[d] === minSliderValue.value) || '2B';
+  return (
+    filterDifficultyOptions.find(d => difficultyMap[d] === minSliderValue.value) ||
+    '5C'
+  );
 });
 
 const maxDifficultyValue = computed(() => {
-  return filterDifficultyOptions.find(d => difficultyMap[d] === maxSliderValue.value) || '8C';
+  return (
+    filterDifficultyOptions.find(d => difficultyMap[d] === maxSliderValue.value) ||
+    '8C+'
+  );
 });
 
 
 // Watch for changes and emit events
 watch(minSliderValue, (newValue) => {
-  // Ensure min doesn't exceed max
   if (newValue > maxSliderValue.value) {
     maxSliderValue.value = newValue;
   }
-  emit('update:minDifficulty', minDifficultyValue.value);
+  const emitValue =
+    newValue === MIN_VALUE ? '1A' : minDifficultyValue.value;
+  emit('update:minDifficulty', emitValue);
 });
 
 watch(maxSliderValue, (newValue) => {
-  // Ensure max isn't below min
   if (newValue < minSliderValue.value) {
     minSliderValue.value = newValue;
   }
@@ -272,7 +289,10 @@ onMounted(() => {
         <div class="slider-row">
           <!-- Min difficulty label on the left -->
           <div class="difficulty-label-container" @click.stop="handleMinLabelClick">
-            <DifficultyLabel :difficulty="minDifficultyValue" />
+            <DifficultyLabel
+              :difficulty="minDifficultyValue"
+              :displayText="displayMinDifficulty"
+            />
             
             <!-- Min difficulty select dropdown -->
             <div v-if="showMinSelect" class="difficulty-select-dropdown">
@@ -327,7 +347,10 @@ onMounted(() => {
           
           <!-- Max difficulty label on the right -->
           <div class="difficulty-label-container" @click.stop="handleMaxLabelClick">
-            <DifficultyLabel :difficulty="maxDifficultyValue" />
+            <DifficultyLabel
+              :difficulty="maxDifficultyValue"
+              :displayText="displayMaxDifficulty"
+            />
             
             <!-- Max difficulty select dropdown -->
             <div v-if="showMaxSelect" class="difficulty-select-dropdown difficulty-select-dropdown-right">
