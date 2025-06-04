@@ -6,6 +6,10 @@ const props = defineProps({
   difficulty: {
     type: String,
     required: true
+  },
+  displayText: {
+    type: String,
+    default: ''
   }
 });
 
@@ -26,11 +30,11 @@ const textColor = computed(() => {
 </script>
 
 <template>
-  <div class="difficulty-label" :style="{ 
-    backgroundColor: backgroundColor,
-    color: textColor
-  }">
-    {{ difficulty }}
+  <div
+    class="difficulty-label"
+    :style="{ backgroundColor: backgroundColor, color: textColor }"
+  >
+    {{ props.displayText || props.difficulty }}
   </div>
 </template>
 

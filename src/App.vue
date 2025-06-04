@@ -447,8 +447,8 @@ onBeforeUnmount(() => {
 });
 
 // Add difficulty filter state with localStorage persistence
-const minDifficulty = ref(localStorage.getItem('minDifficulty') || '2B');
-const maxDifficulty = ref(localStorage.getItem('maxDifficulty') || '8C');
+const minDifficulty = ref(localStorage.getItem('minDifficulty') || '5C');
+const maxDifficulty = ref(localStorage.getItem('maxDifficulty') || '8C+');
 
 // Watch for changes and update localStorage
 watch(minDifficulty, (newValue) => {
