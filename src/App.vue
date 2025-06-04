@@ -220,9 +220,7 @@ const hideTooltip = () => {
 };
 
 // Add debug reference for the center point
-const debugCenter = ref<{ x: number, y: number } | null>(null);
 const viewBoxCenter = ref<{ x: number, y: number } | null>(null);
-const targetCenter = ref<{x: number, y: number} | null>(null);
 
 // Pan-Zoom Integration
 const mapSvg = ref<SVGSVGElement | null>(null);
@@ -275,14 +273,19 @@ const handleResize = () => {
   }
 };
 
+// Store event listener references for proper cleanup
+const handleOnline = () => {
+  isOnline.value = true;
+};
+
+const handleOffline = () => {
+  isOnline.value = false;
+};
+
 onMounted(() => {
   // Add online/offline event listeners
-  window.addEventListener('online', () => {
-    isOnline.value = true;
-  });
-  window.addEventListener('offline', () => {
-    isOnline.value = false;
-  });
+  window.addEventListener('online', handleOnline);
+  window.addEventListener('offline', handleOffline);
   
   // Check if service worker is already registered
   if ('serviceWorker' in navigator) {
@@ -423,12 +426,8 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', handleResize);
   
   // Remove online/offline event listeners
-  window.removeEventListener('online', () => {
-    isOnline.value = true;
-  });
-  window.removeEventListener('offline', () => {
-    isOnline.value = false;
-  });
+  window.removeEventListener('online', handleOnline);
+  window.removeEventListener('offline', handleOffline);
   
   // Remove double tap event listener
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -540,15 +539,14 @@ const zoomConfig = computed(() => {
     };
 });
 
-// Add quick navigation function
-const quickNavigate = () => {
-  const selectedCragObj = selectedCrag.value;
-  if (selectedCragObj) {
-    // panZoomInstance?.zoom(1, { animate: true });
-    focusOn(selectedCragObj);
-    
-  }
-};
+// Add quick navigation function (commented out for now)
+// const quickNavigate = () => {
+//   const selectedCragObj = selectedCrag.value;
+//   if (selectedCragObj) {
+//     panZoomInstance?.zoom(1, { animate: true });
+//     focusOn(selectedCragObj);
+//   }
+// };
 
 // Reset zoom to default values
 const resetZoom = () => {
@@ -560,9 +558,7 @@ const resetZoom = () => {
 };
 
 // Double tap handling for mobile zoom
-let lastTouchEnd = 0;
-let isZoomedIn = false;
-const handleDoubleTap = (event: TouchEvent) => {
+const handleDoubleTap = () => {
   // if (!panZoomInstance || !mapSvg.value) return;
   
   // const now = Date.now();
@@ -711,8 +707,8 @@ function focusOn(crag: SvgObject, bypassTooltipCheck = false, retryCount = 0) {
   } else if (isFirefox) {
     // Firefox-specific calculation using SVG viewBox scaling
     const viewBox = svg.viewBox.baseVal;
-    let scaleX = parent.clientWidth / viewBox.width;
-    let scaleY = parent.clientHeight / viewBox.height;
+    const scaleX = parent.clientWidth / viewBox.width;
+    const scaleY = parent.clientHeight / viewBox.height;
     
     panX = containerCenterX - (elementCenterX * scaleX);
     panY = containerCenterY - (elementCenterY * scaleY);
@@ -735,7 +731,6 @@ function focusOn(crag: SvgObject, bypassTooltipCheck = false, retryCount = 0) {
     pz.zoom(zoomConfig.value.startScale, { animate: true });
   } else {
     pz.zoom(panZoomScale.value, { animate: true });
-    isZoomedIn = true; // Set zoomed in state
   }
   /* 8. Reset programmatic flag after a delay to allow animations to complete */
   setTimeout(() => {
