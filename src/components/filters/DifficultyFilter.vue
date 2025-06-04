@@ -40,10 +40,13 @@ const handleMaxLabelClick = () => {
 };
 
 // Get compact grade options (main numbers only: 5, 6, 7, 8)
+// 5 represents "≤5C" so we use numeric value of 5C as the base
 const getCompactGradeOptions = () => {
-  const mainGrades = [];
+  const mainGrades = [] as Array<{ display: string; value: string; numericValue: number }>;
+
   for (let grade = 5; grade <= 8; grade++) {
-    const baseGrade = `${grade}A`; // Use base grade (e.g., 2A, 3A, etc.)
+    const baseGrade = grade === 5 ? '5C' : `${grade}A`;
+
     if (difficultyMap[baseGrade]) {
       mainGrades.push({
         display: grade.toString(),
@@ -52,6 +55,7 @@ const getCompactGradeOptions = () => {
       });
     }
   }
+
   return mainGrades;
 };
 
@@ -73,12 +77,14 @@ const validMaxOptions = computed(() => {
 
 // Handle select option clicks
 const selectMinDifficulty = (gradeOption: { display: string; value: string; numericValue: number }) => {
-  minSliderValue.value = gradeOption.numericValue;
+  // Clamp to MIN_VALUE to avoid going outside slider range
+  minSliderValue.value = Math.max(gradeOption.numericValue, MIN_VALUE);
   showMinSelect.value = false;
 };
 
 const selectMaxDifficulty = (gradeOption: { display: string; value: string; numericValue: number }) => {
-  maxSliderValue.value = gradeOption.numericValue;
+  // Clamp to MAX_VALUE for safety
+  maxSliderValue.value = Math.min(gradeOption.numericValue, MAX_VALUE);
   showMaxSelect.value = false;
 };
 
