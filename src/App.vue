@@ -1464,13 +1464,13 @@ const showCacheUpdateError = () => {
 
 .fixed-tooltip {
   position: fixed;
-  bottom: 50px; 
+  bottom: 120px; 
   left: 50%;
   transform: translateX(-50%);
   width: 95%; /* Slightly wider */
   max-width: 450px; /* Increased from 400px */
   z-index: 90;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   transition: all 0.3s ease;
 }
 
@@ -1478,7 +1478,7 @@ const showCacheUpdateError = () => {
 @media (min-width: 768px) {
   .fixed-tooltip {
     max-width: 550px; /* Larger tooltip on desktop */
-    bottom: 70px; /* Position it higher on desktop */
+    bottom: 130px; /* Position it higher on desktop */
   }
   
   /* Adjust tooltip position when modal is open */
@@ -2027,7 +2027,7 @@ const showCacheUpdateError = () => {
 /* Reset zoom button styles */
 .reset-zoom-button {
   position: fixed;
-  bottom: 60px;
+  bottom: 130px;
   right: 20px;
   background: rgba(91, 86, 86, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -2041,7 +2041,7 @@ const showCacheUpdateError = () => {
   cursor: pointer;
   font-size: 20px;
   transition: all 0.2s ease;
-  z-index: 10;
+  z-index: 105;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
@@ -2063,7 +2063,7 @@ const showCacheUpdateError = () => {
 /* Mobile responsive styles for reset button */
 @media (max-width: 480px) {
   .reset-zoom-button {
-    bottom: 80px; /* Position above difficulty filter on mobile */
+    bottom: 140px; /* Position above difficulty filter on mobile */
     width: 44px;
     height: 44px;
     font-size: 18px;
@@ -2137,5 +2137,31 @@ body {
 
 html {
   height: 100%;
+}
+
+/* PWA Status Bar Styling for Standalone Mode */
+@media (display-mode: standalone) {
+  body {
+    /* Add padding for status bar on iOS in standalone mode */
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .app-container {
+    /* Ensure app container accounts for status bar */
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  /* Status bar background overlay for iOS */
+  .app-container::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: env(safe-area-inset-top);
+    background-color: rgba(91, 86, 86, 0.9);
+    z-index: 9999;
+    pointer-events: none;
+  }
 }
 </style>

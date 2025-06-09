@@ -267,8 +267,8 @@ onMounted(() => {
 <template>
   <div class="difficulty-filter-container">
     <!-- Compact view when filter is hidden -->
-    <div v-if="!isFilterVisible" class="difficulty-filter-compact" @click="toggleFilterVisibility">
-      <div class="compact-display">
+    <div v-if="!isFilterVisible" class="difficulty-filter-compact">
+      <div class="compact-display" @click="toggleFilterVisibility">
         <div class="compact-left">
           <span class="compact-label">Difficulty:</span>
           <span 
@@ -283,14 +283,17 @@ onMounted(() => {
             {{ rangeDisplayText }}
           </span>
         </div>
+      </div>
+      <div class="expand-icon-container" @click.stop="toggleFilterVisibility">
         <span class="expand-icon">▲</span>
       </div>
     </div>
 
     <!-- Full slider view when filter is visible -->
-    <div v-if="isFilterVisible" class="difficulty-filter" @click="closeSelects">
-      <!-- Horizontal layout with slider and collapse button -->
-      <div class="filter-content-row">
+    <div v-if="isFilterVisible" class="difficulty-filter">
+      <div class="filter-content" @click="closeSelects">
+        <!-- Horizontal layout with slider -->
+        <div class="filter-content-row">
         <div class="slider-row">
           <!-- Min difficulty label on the left -->
           <div class="difficulty-label-container" @click.stop="handleMinLabelClick">
@@ -370,15 +373,11 @@ onMounted(() => {
             </div>
           </div>
           
-          <!-- Collapse button on the right -->
-          <button 
-            @click.stop="toggleFilterVisibility"
-            class="collapse-button"
-            aria-label="Hide difficulty filter"
-          >
-            ▼
-          </button>
         </div>
+        </div>
+      </div>
+      <div class="collapse-icon-container" @click.stop="toggleFilterVisibility">
+        <span class="collapse-icon">▼</span>
       </div>
     </div>
   </div>
@@ -396,9 +395,14 @@ onMounted(() => {
 .difficulty-filter {
   background-color: rgba(50, 50, 50, 0.8);
   border-radius: 8px 8px 0 0;
-  padding: 12px 15px;
   width: 100%;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+  padding-top: 24px;
+}
+
+.filter-content {
+  padding: 0 15px 12px 15px;
 }
 
 .filter-content-row {
@@ -411,11 +415,16 @@ onMounted(() => {
 .difficulty-filter-compact {
   background-color: rgba(50, 50, 50, 0.8);
   border-radius: 8px 8px 0 0;
-  padding: 8px 15px;
   width: 100%;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
-  cursor: pointer;
+  position: relative;
   transition: background-color 0.2s ease;
+  padding-top: 24px;
+}
+
+.compact-display {
+  padding: 0 15px 8px 15px;
+  cursor: pointer;
 }
 
 .difficulty-filter-compact:hover {
@@ -429,6 +438,7 @@ onMounted(() => {
   gap: 8px;
   font-size: 14px;
   width: 100%;
+  position: relative;
 }
 
 .compact-left {
@@ -453,32 +463,52 @@ onMounted(() => {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.expand-icon {
-  color: rgba(255, 255, 255, 0.6);
-  font-size: 12px;
-  flex-shrink: 0; /* Don't shrink the icon */
-  margin-left: 8px;
-}
-
-.collapse-button {
-  background: rgba(255, 255, 255, 0.1);
-  border: none;
-  border-radius: 4px;
-  color: rgba(255, 255, 255, 0.6);
-  width: 20px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.expand-icon-container {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 2px 8px;
   cursor: pointer;
-  font-size: 10px;
   transition: background-color 0.2s ease;
-  flex-shrink: 0; /* Don't shrink the button */
+  z-index: 10;
 }
 
-.collapse-button:hover {
-  background: rgba(255, 255, 255, 0.2);
+.expand-icon-container:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.expand-icon {
   color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
+}
+
+.collapse-icon-container {
+  position: absolute;
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 2px 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  z-index: 10;
+}
+
+.collapse-icon-container:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.collapse-icon {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+  font-weight: bold;
+  display: block;
 }
 
 .slider-row {
@@ -638,10 +668,12 @@ onMounted(() => {
 @media (max-width: 768px) {
   .difficulty-filter {
     padding: 10px 12px;
+    min-height: 100px;
   }
   
   .difficulty-filter-compact {
     padding: 6px 12px;
+    min-height: 100px;
   }
   
   .dual-slider-container {
