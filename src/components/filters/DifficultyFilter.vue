@@ -15,7 +15,7 @@ const props = defineProps({
   }
 });
 
-const emit = defineEmits(['update:minDifficulty', 'update:maxDifficulty']);
+const emit = defineEmits(['update:minDifficulty', 'update:maxDifficulty', 'filterVisibilityChange']);
 
 // State for filter visibility - start compact to save space
 const isFilterVisible = ref(false);
@@ -37,6 +37,7 @@ const checkPWAStandalone = () => {
 // Toggle filter visibility
 const toggleFilterVisibility = () => {
   isFilterVisible.value = !isFilterVisible.value;
+  emit('filterVisibilityChange', isFilterVisible.value);
 };
 
 // Handle difficulty label clicks
@@ -281,20 +282,20 @@ onMounted(() => {
 <template>
   <div class="difficulty-filter-container">
     <!-- Collapse/Expand icon above the panel -->
-    <div class="toggle-icon-container" @click.stop="toggleFilterVisibility">
+    <div v-if="isFilterVisible" class="toggle-icon-container" @click.stop="toggleFilterVisibility">
       <font-awesome-icon v-if="isFilterVisible" :icon="['fas', 'chevron-down']" class="toggle-icon" />
-      <font-awesome-icon v-else :icon="['fas', 'chevron-up']" class="toggle-icon" />
+      <!-- <font-awesome-icon v-else :icon="['fas', 'chevron-up']" class="toggle-icon" /> -->
     </div>
 
     <!-- Compact view when filter is hidden -->
     <div v-if="!isFilterVisible" class="difficulty-filter-compact" :class="{ 'pwa-standalone': isPWAStandalone }">
       <div class="compact-display" @click="toggleFilterVisibility">
-        <div class="compact-left">
-          <span class="compact-label">Difficulty:</span>
+        <div class="compact-center">
+          <!-- <span class="compact-label">Difficulty:</span> -->
           <span 
             class="compact-value"
             :style="{ 
-              backgroundColor: minSliderValue === maxSliderValue 
+              background: minSliderValue === maxSliderValue 
                 ? getDifficultyColor(minSliderValue) 
                 : `linear-gradient(to right, ${getDifficultyColor(minSliderValue)}, ${getDifficultyColor(maxSliderValue)})`,
               color: '#fff'
@@ -426,24 +427,16 @@ onMounted(() => {
 }
 
 .difficulty-filter-compact {
-  background-color: rgba(50, 50, 50, 0.8);
+  background-color: transparent;
   border-radius: 8px 8px 0 0;
   width: 100%;
-  box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
   position: relative;
-  transition: background-color 0.2s ease;
+  /* transition: background-color 0.2s ease; */
 }
 
 .compact-display {
-  padding: 12px 15px 8px 15px;
+  padding: 4px 5px 4px 5px;
   cursor: pointer;
-}
-
-.difficulty-filter-compact:hover {
-  background-color: rgba(60, 55, 55, 0.8);
-}
-
-.compact-display {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -451,11 +444,17 @@ onMounted(() => {
   font-size: 14px;
   width: 100%;
   position: relative;
+  background-color: transparent;
 }
 
-.compact-left {
+/* .difficulty-filter-compact:hover {
+  background-color: rgba(60, 55, 55, 0.8);
+} */
+
+.compact-center {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   flex: 1;
   min-width: 0; /* Allow shrinking */
@@ -468,11 +467,11 @@ onMounted(() => {
 }
 
 .compact-value {
-  padding: 4px 12px;
-  border-radius: 12px;
+  padding: 2px;
+  border-radius: 12px; 
   font-weight: bold;
-  font-size: 14px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  /* box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); */
 }
 
 .toggle-icon-container {
@@ -659,7 +658,7 @@ onMounted(() => {
   }
   
   .difficulty-filter-compact {
-    padding: 6px 12px;
+    padding: 0px 2px;
   }
 
   /* Only apply min-height when in PWA standalone mode (fullscreen) */

@@ -47,6 +47,9 @@ const showFilteredRoutesModal = ref(false);
 // Starred crags visibility state
 const showStarredCrags = ref(false);
 
+// Difficulty filter visibility state
+const isFilterExpanded = ref(false);
+
 // Cache state
 const hasCachedContent = ref(false);
 const cacheTimestamp = ref<string | null>(null);
@@ -457,6 +460,11 @@ watch(minDifficulty, (newValue) => {
 watch(maxDifficulty, (newValue) => {
   localStorage.setItem('maxDifficulty', newValue);
 });
+
+// Handle difficulty filter visibility changes
+const handleFilterVisibilityChange = (isVisible: boolean) => {
+  isFilterExpanded.value = isVisible;
+};
 
 // Add search functionality
 const searchQuery = ref('');
@@ -1349,6 +1357,7 @@ const showCacheUpdateError = () => {
       <DifficultyFilter
         v-model:minDifficulty="minDifficulty"
         v-model:maxDifficulty="maxDifficulty"
+        @filterVisibilityChange="handleFilterVisibilityChange"
       />
     </div>
 
@@ -1358,18 +1367,21 @@ const showCacheUpdateError = () => {
       class="reset-zoom-button"
       aria-label="Reset zoom to default"
       type="button"
+      :style="{ bottom: isFilterExpanded ? '110px' : '50px' }"
     >
       <font-awesome-icon :icon="['fas', 'crosshairs']" />
     </button>
 
-    <div v-if="shouldShowTooltip" class="fixed-tooltip" :class="{ 'with-modal': showFilteredRoutesModal }">
-        <RouteTooltip
-          :selected-crag="selectedCrag!"
-          :crag-routes="cragRoutes"
-          :filtered-out-routes="filteredOutRoutes"
-          @close="hideTooltip"
-        />
-      </div>
+    <Transition name="slide-up">
+      <div v-if="shouldShowTooltip" class="fixed-tooltip" :class="{ 'with-modal': showFilteredRoutesModal }" :style="{ bottom: isFilterExpanded ? '110px' : '50px' }">
+          <RouteTooltip
+            :selected-crag="selectedCrag!"
+            :crag-routes="cragRoutes"
+            :filtered-out-routes="filteredOutRoutes"
+            @close="hideTooltip"
+          />
+        </div>
+    </Transition>
       
       <!-- Filtered Routes Modal -->
       <FilteredRoutesModal
@@ -1406,7 +1418,7 @@ const showCacheUpdateError = () => {
   flex-direction: column;
   position: absolute; /* Use absolute positioning */
   top: 45px; /* Top position after the carousel */
-  bottom: 40px; /* Bottom position before the filter */
+  bottom: 0px; /* Bottom position before the filter */
   left: 0;
   right: 0;
   overflow: hidden;
@@ -1464,7 +1476,6 @@ const showCacheUpdateError = () => {
 
 .fixed-tooltip {
   position: fixed;
-  bottom: 120px; 
   left: 50%;
   transform: translateX(-50%);
   width: 95%; /* Slightly wider */
@@ -1478,7 +1489,6 @@ const showCacheUpdateError = () => {
 @media (min-width: 768px) {
   .fixed-tooltip {
     max-width: 550px; /* Larger tooltip on desktop */
-    bottom: 130px; /* Position it higher on desktop */
   }
   
   /* Adjust tooltip position when modal is open */
@@ -1490,6 +1500,28 @@ const showCacheUpdateError = () => {
     width: 90%; /* Use most of available space */
     min-width: 280px; /* Ensure minimum readable width */
   }
+}
+
+/* Slide up animation for tooltip */
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.3s ease;
+}
+
+.slide-up-enter-from {
+  transform: translateX(-50%) translateY(100%);
+  opacity: 0;
+}
+
+.slide-up-leave-to {
+  transform: translateX(-50%) translateY(100%);
+  opacity: 0;
+}
+
+.slide-up-enter-to,
+.slide-up-leave-from {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
 }
 
 /* Search Component Styles that match tooltip */
@@ -2027,7 +2059,6 @@ const showCacheUpdateError = () => {
 /* Reset zoom button styles */
 .reset-zoom-button {
   position: fixed;
-  bottom: 130px;
   right: 20px;
   background: rgba(91, 86, 86, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -2063,7 +2094,6 @@ const showCacheUpdateError = () => {
 /* Mobile responsive styles for reset button */
 @media (max-width: 480px) {
   .reset-zoom-button {
-    bottom: 140px; /* Position above difficulty filter on mobile */
     width: 44px;
     height: 44px;
     font-size: 18px;
