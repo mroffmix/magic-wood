@@ -439,7 +439,7 @@ onMounted(() => {
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 8px;
   font-size: 14px;
   width: 100%;
@@ -467,7 +467,7 @@ onMounted(() => {
 }
 
 .compact-value {
-  padding: 2px;
+  padding: 6px;
   border-radius: 12px; 
   font-weight: bold;
   font-size: 12px;
@@ -666,9 +666,7 @@ onMounted(() => {
     min-height: 100px;
   }
   
-  .difficulty-filter-compact.pwa-standalone {
-    min-height: 100px;
-  }
+  /* Compact view in PWA mode maintains natural sizing */
   
   .dual-slider-container {
     height: 45px; /* Slightly larger for mobile touch targets */
