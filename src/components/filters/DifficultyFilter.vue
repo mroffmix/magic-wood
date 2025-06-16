@@ -3,6 +3,7 @@ import { ref, computed, watch, onMounted } from 'vue';
 import { difficultyMap, difficultyOptions, getDifficultyColor } from '@/utils/difficulty';
 import DifficultyLabel from '@/components/common/DifficultyLabel.vue';
 
+
 const props = defineProps({
   minDifficulty: {
     type: String,
@@ -22,6 +23,16 @@ const isFilterVisible = ref(false);
 // State for select dropdowns
 const showMinSelect = ref(false);
 const showMaxSelect = ref(false);
+
+// PWA standalone mode detection
+const isPWAStandalone = ref(false);
+
+// Check if app is running in standalone mode (PWA/fullscreen)
+const checkPWAStandalone = () => {
+  isPWAStandalone.value =
+    window.matchMedia('(display-mode: standalone)').matches ||
+    (navigator as Navigator & { standalone?: boolean }).standalone === true;
+};
 
 // Toggle filter visibility
 const toggleFilterVisibility = () => {
@@ -254,6 +265,9 @@ const handleBlur = () => {
 };
 
 onMounted(() => {
+  // Check PWA standalone status
+  checkPWAStandalone();
+  
   // Normalize initial values
   if (props.minDifficulty) {
     minSliderValue.value = difficultyMap[props.minDifficulty] || MIN_VALUE;
@@ -266,8 +280,14 @@ onMounted(() => {
 
 <template>
   <div class="difficulty-filter-container">
+    <!-- Collapse/Expand icon above the panel -->
+    <div class="toggle-icon-container" @click.stop="toggleFilterVisibility">
+      <font-awesome-icon v-if="isFilterVisible" :icon="['fas', 'chevron-down']" class="toggle-icon" />
+      <font-awesome-icon v-else :icon="['fas', 'chevron-up']" class="toggle-icon" />
+    </div>
+
     <!-- Compact view when filter is hidden -->
-    <div v-if="!isFilterVisible" class="difficulty-filter-compact">
+    <div v-if="!isFilterVisible" class="difficulty-filter-compact" :class="{ 'pwa-standalone': isPWAStandalone }">
       <div class="compact-display" @click="toggleFilterVisibility">
         <div class="compact-left">
           <span class="compact-label">Difficulty:</span>
@@ -284,13 +304,10 @@ onMounted(() => {
           </span>
         </div>
       </div>
-      <div class="expand-icon-container" @click.stop="toggleFilterVisibility">
-        <span class="expand-icon">▲</span>
-      </div>
     </div>
 
     <!-- Full slider view when filter is visible -->
-    <div v-if="isFilterVisible" class="difficulty-filter">
+    <div v-if="isFilterVisible" class="difficulty-filter" :class="{ 'pwa-standalone': isPWAStandalone }">
       <div class="filter-content" @click="closeSelects">
         <!-- Horizontal layout with slider -->
         <div class="filter-content-row">
@@ -376,9 +393,6 @@ onMounted(() => {
         </div>
         </div>
       </div>
-      <div class="collapse-icon-container" @click.stop="toggleFilterVisibility">
-        <span class="collapse-icon">▼</span>
-      </div>
     </div>
   </div>
 </template>
@@ -398,11 +412,10 @@ onMounted(() => {
   width: 100%;
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
   position: relative;
-  padding-top: 24px;
 }
 
 .filter-content {
-  padding: 0 15px 12px 15px;
+  padding: 12px 15px 12px 15px;
 }
 
 .filter-content-row {
@@ -419,11 +432,10 @@ onMounted(() => {
   box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
   position: relative;
   transition: background-color 0.2s ease;
-  padding-top: 24px;
 }
 
 .compact-display {
-  padding: 0 15px 8px 15px;
+  padding: 12px 15px 8px 15px;
   cursor: pointer;
 }
 
@@ -463,48 +475,24 @@ onMounted(() => {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
-.expand-icon-container {
+.toggle-icon-container {
   position: absolute;
-  top: 4px;
+  top: -22px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  padding: 2px 8px;
+  background: rgba(50, 50, 50, 0.8);
+  border-radius: 12px 12px 0 0;
+  padding: 4px 22px;
   cursor: pointer;
   transition: background-color 0.2s ease;
   z-index: 10;
 }
 
-.expand-icon-container:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
+/* .toggle-icon-container:hover {
+  background:  rgba(0, 0, 0, 0.975);
+} */
 
-.expand-icon {
-  color: rgba(255, 255, 255, 0.8);
-  font-size: 14px;
-  font-weight: bold;
-  display: block;
-}
-
-.collapse-icon-container {
-  position: absolute;
-  top: 4px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(255, 255, 255, 0.15);
-  border-radius: 12px;
-  padding: 2px 8px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  z-index: 10;
-}
-
-.collapse-icon-container:hover {
-  background: rgba(255, 255, 255, 0.25);
-}
-
-.collapse-icon {
+.toggle-icon {
   color: rgba(255, 255, 255, 0.8);
   font-size: 14px;
   font-weight: bold;
@@ -668,11 +656,18 @@ onMounted(() => {
 @media (max-width: 768px) {
   .difficulty-filter {
     padding: 10px 12px;
-    min-height: 100px;
   }
   
   .difficulty-filter-compact {
     padding: 6px 12px;
+  }
+
+  /* Only apply min-height when in PWA standalone mode (fullscreen) */
+  .difficulty-filter.pwa-standalone {
+    min-height: 100px;
+  }
+  
+  .difficulty-filter-compact.pwa-standalone {
     min-height: 100px;
   }
   

@@ -6,10 +6,10 @@ import App from './App.vue'
 // FontAwesome imports
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { faRotateRight, faList, faStar, faCrosshairs, faDownload } from '@fortawesome/free-solid-svg-icons'
+import { faRotateRight, faList, faStar, faCrosshairs, faDownload, faChevronDown, faChevronUp} from '@fortawesome/free-solid-svg-icons'
 
 // Add icons to library
-library.add(faRotateRight, faList, faStar, faCrosshairs, faDownload)
+library.add(faRotateRight, faList, faStar, faCrosshairs, faDownload, faChevronDown, faChevronUp)
 
 const app = createApp(App)
 app.component('font-awesome-icon', FontAwesomeIcon)
